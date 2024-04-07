@@ -2,9 +2,13 @@
   "name": "@agile-project-3a/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install"
+  },
   "private": true,
   "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
     "@nx/devkit": "18.0.8",
     "@nx/eslint": "18.0.8",
     "@nx/eslint-plugin": "18.0.8",
@@ -47,7 +51,9 @@
     "eslint-plugin-playwright": "^0.15.3",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "^8.0.0",
     "jsdom": "~22.1.0",
+    "lint-staged": "^15.2.2",
     "nx": "18.0.8",
     "prettier": "^2.6.2",
     "storybook": "^7.5.3",
