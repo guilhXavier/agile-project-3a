@@ -1,0 +1,8 @@
+{
+  "name": "agile-project-fe",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "agile-project-fe/src",
+  "projectType": "application",
+  "targets": {},
+  "tags": []
+}
