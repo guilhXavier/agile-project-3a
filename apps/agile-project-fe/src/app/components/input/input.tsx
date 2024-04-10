@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export interface InputProps {}
+export interface InputProps {
+  variant: 'email';
+}
 
 const StyledInput = styled.div`
   color: pink;

@@ -1,4 +1,6 @@
-export interface ChipIn {}
+export interface ChipIn {
+  id: number;
+}
 
 export interface User {
   id: string;
