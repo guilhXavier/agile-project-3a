@@ -19,17 +19,14 @@ public class UserController {
     private final UserRepository userRepository;
 
     public UserController(UserRepository userRepository){
-        this.userRepository = userRepository;
+      this.userRepository = userRepository;
     }
 
     //Buscar user por ID
     @GetMapping("{id}")
-    public User getUserByID(@PathVariable Integer id){
-        return userRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new UserNotFoundException(id)
-                );
+    public ResponseEntity<UserRespostaDTO> getUserByID(@PathVariable Integer id){
+      User usuario = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+      return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario), HttpStatus.OK);
     }
 
     //Cadastrar user
@@ -39,41 +36,41 @@ public class UserController {
       return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
     }
 
-    //Deletar
+    //Deletar user pelo id
     @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteUserById(@PathVariable Integer id){
-        userRepository.deleteById(id);
+    public ResponseEntity deleteUserById(@PathVariable Integer id){
+      userRepository.deleteById(id);
+      return new ResponseEntity("Usuário deletado", HttpStatus.OK);
     }
 
-    //Atualizar
-    @PatchMapping("{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public User updateUser(@RequestBody User usuario, @PathVariable Integer id){
+    //Atualizar user pelo id
+    @PutMapping("{id}")
+    public ResponseEntity<UserRespostaDTO> updateUser(@RequestBody User usuario, @PathVariable Integer id){
         if(userRepository.existsById(id)){
             usuario.setId(id);
-            return userRepository.save(usuario);
-        }else{
-            return new User();
+            userRepository.save(usuario);
+            return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario), HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //Busca todos
     @GetMapping("/findAll")
-    @ResponseStatus(HttpStatus.OK)
-    public List<User> findAll(){
-        return userRepository.findAll();
+    public ResponseEntity<List<User>> findAll(){
+        List<User> userList = userRepository.findAll();
+        return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
     @PostMapping("/findByEmail")
-    @ResponseStatus(HttpStatus.OK)
-    public User findByEmail(@RequestBody User usuario){
-        return userRepository.findByEmail(usuario.getEmail());
+    public ResponseEntity<UserRespostaDTO> findByEmail(@RequestBody User usuario){
+        User user = userRepository.findByEmail(usuario.getEmail());
+        return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(user), HttpStatus.OK);
     }
 
-    @PostMapping("/findByEmailAndPass")
-    public User findByEmailAndPass(@RequestBody User usuario){
-        return userRepository.findByEmailAndPassword(usuario.getEmail(), usuario.getPassword());
+    @PostMapping("/login")
+    public ResponseEntity<UserRespostaDTO> login(@RequestBody User usuario){
+        User user = userRepository.findByEmailAndPassword(usuario.getEmail(), usuario.getPassword());
+        return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(user), HttpStatus.OK);
     }
 
 }
