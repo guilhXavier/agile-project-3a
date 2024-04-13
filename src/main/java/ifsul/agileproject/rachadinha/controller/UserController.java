@@ -1,6 +1,7 @@
 package ifsul.agileproject.rachadinha.controller;
 
 import ifsul.agileproject.rachadinha.domain.entity.User;
+import ifsul.agileproject.rachadinha.exceptions.UserNotFoundException;
 import ifsul.agileproject.rachadinha.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class UserController {
         return userRepository
                 .findById(id)
                 .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado.")
+                        new UserNotFoundException(id)
                 );
     }
 
