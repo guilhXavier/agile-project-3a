@@ -1,7 +1,7 @@
 # Rachadinha
 
 <!-- ![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge) -->
-![GitHub language count](https://img.shields.io/github/languages/count/edukatiau/rachadinha-backend?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/guilhXavier/agile-project-3a?style=for-the-badge)
 
 <img src="imagem-if.png" alt="Exemplo imagem">
 
