@@ -1,9 +1,12 @@
 package ifsul.agileproject.rachadinha.controller;
 
+import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserRespostaDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.exceptions.UserNotFoundException;
 import ifsul.agileproject.rachadinha.repository.UserRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -31,9 +34,9 @@ public class UserController {
 
     //Cadastrar user
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public User saveCliente(@RequestBody User usuario){
-        return userRepository.save(usuario);
+    public ResponseEntity<UserRespostaDTO> saveUser(@RequestBody UserDTO dto){
+      User usuario = userRepository.save(dto.transformaParaObjeto());
+      return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
     }
 
     //Deletar
