@@ -1,6 +1,5 @@
-export interface ChipIn {
-  id: number;
-}
+/* eslint-disable @typescript-eslint/no-empty-interface */
+export interface ChipIn {}
 
 export interface User {
   id: string;

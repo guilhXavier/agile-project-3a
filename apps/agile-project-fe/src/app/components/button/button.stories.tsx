@@ -12,10 +12,10 @@ export default {
   },
 };
 
-export const Primary = (args) => (
+export const Primary = ({ text = 'Default', variant = 'neutral' }) => (
   <Button
-    {...args}
-    text="Confirm"
+    variant={variant}
+    text={text}
     onClick={() => {
       console.log('here');
     }}

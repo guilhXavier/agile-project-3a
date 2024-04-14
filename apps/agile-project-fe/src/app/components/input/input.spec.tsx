@@ -4,7 +4,7 @@ import Input from './input';
 
 describe('Input', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Input />);
+    const { baseElement } = render(<Input variant={'text'} />);
     expect(baseElement).toBeTruthy();
   });
 });

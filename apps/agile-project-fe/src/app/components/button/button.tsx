@@ -2,13 +2,13 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 export interface ButtonProps {
-  variant: 'confirm' | 'cancel' | 'neutral' | 'warning';
+  variant: 'confirm' | 'cancel' | 'neutral' | 'warning' | string;
   text: string;
   onClick: () => void;
 }
 
 interface StyledButtonProps {
-  variant: 'confirm' | 'cancel' | 'neutral' | 'warning';
+  variant: 'confirm' | 'cancel' | 'neutral' | 'warning' | string;
 }
 
 const ConfirmButtonStyle = css`
@@ -21,6 +21,16 @@ const CancelButtonStyle = css`
   color: white;
 `;
 
+const WarningButtonStyle = css`
+  background-color: yellow;
+  color: black;
+`;
+
+const NeutralButtonStyle = css`
+  background-color: light-grey;
+  color: black;
+`;
+
 const StyledButton = styled.button<StyledButtonProps>`
   ${({ variant }) => {
     switch (variant) {
@@ -28,6 +38,10 @@ const StyledButton = styled.button<StyledButtonProps>`
         return ConfirmButtonStyle;
       case 'cancel':
         return CancelButtonStyle;
+      case 'warning':
+        return WarningButtonStyle;
+      default:
+        return NeutralButtonStyle;
     }
   }}
 `;
