@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export interface ButtonProps {
   variant: 'confirm' | 'cancel' | 'neutral' | 'warning';
@@ -7,10 +7,33 @@ export interface ButtonProps {
   onClick: () => void;
 }
 
-const StyledButton = styled.button`
+interface StyledButtonProps {
+  variant: 'confirm' | 'cancel' | 'neutral' | 'warning';
+}
+
+const ConfirmButtonStyle = css`
+  background-color: green;
+  color: white;
+`;
+
+const CancelButtonStyle = css`
   background-color: red;
+  color: white;
+`;
+
+const StyledButton = styled.button<StyledButtonProps>`
+  ${({ variant }) => {
+    switch (variant) {
+      case 'confirm':
+        return ConfirmButtonStyle;
+      case 'cancel':
+        return CancelButtonStyle;
+    }
+  }}
 `;
 
 export const Button: React.FC<ButtonProps> = ({ variant, text, onClick }) => (
-  <StyledButton>Test</StyledButton>
+  <StyledButton variant={variant} onClick={onClick}>
+    {text}
+  </StyledButton>
 );
