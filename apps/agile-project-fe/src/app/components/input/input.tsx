@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export interface InputProps {
@@ -6,7 +7,7 @@ export interface InputProps {
 
 const StyledInput = styled.div``;
 
-export function Input({ variant }: InputProps) {
+export const Input: React.FC<InputProps> = ({ variant }) => {
   const inputType =
     variant === 'text'
       ? 'text'
@@ -30,6 +31,6 @@ export function Input({ variant }: InputProps) {
       <input type={inputType} placeholder={inputPlaceholder} />
     </StyledInput>
   );
-}
+};
 
 export default Input;
