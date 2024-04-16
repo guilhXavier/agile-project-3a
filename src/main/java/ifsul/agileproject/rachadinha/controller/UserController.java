@@ -1,7 +1,7 @@
 package ifsul.agileproject.rachadinha.controller;
 
 import ifsul.agileproject.rachadinha.domain.entity.User;
-import ifsul.agileproject.rachadinha.repository.UserRepository;
+import ifsul.agileproject.rachadinha.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -12,43 +12,43 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     //Buscar user por ID
     @GetMapping("{id}")
     public User getUserByID(@PathVariable Integer id){
-        return userRepository
-                .findById(id)
+        return userService
+                .findUserByID(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado.")
                 );
     }
 
     //Cadastrar user
-    @PostMapping
+    @PostMapping("/cadastro")
     @ResponseStatus(HttpStatus.CREATED)
-    public User saveCliente(@RequestBody User usuario){
-        return userRepository.save(usuario);
+    public User saveUser(@RequestBody User usuario){
+        return userService.saveUser(usuario);
     }
 
     //Deletar
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteUserById(@PathVariable Integer id){
-        userRepository.deleteById(id);
+    public void deleteUserByID(@PathVariable Integer id){
+        userService.deleteUserByID(id);
     }
 
     //Atualizar
     @PatchMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User updateUser(@RequestBody User usuario, @PathVariable Integer id){
-        if(userRepository.existsById(id)){
+    public User updateUserByID(@RequestBody User usuario, @PathVariable Integer id){
+        if(userService.existsUserByID(id)){
             usuario.setId(id);
-            return userRepository.save(usuario);
+            return userService.saveUser(usuario);
         }else{
             return new User();
         }
@@ -58,18 +58,19 @@ public class UserController {
     @GetMapping("/findAll")
     @ResponseStatus(HttpStatus.OK)
     public List<User> findAll(){
-        return userRepository.findAll();
+        return userService.findAll();
     }
 
+    //Buscar usuário pelo email
     @PostMapping("/findByEmail")
     @ResponseStatus(HttpStatus.OK)
     public User findByEmail(@RequestBody User usuario){
-        return userRepository.findByEmail(usuario.getEmail());
+        return userService.findUserByEmail(usuario.getEmail());
     }
 
-    @PostMapping("/findByEmailAndPass")
-    public User findByEmailAndPass(@RequestBody User usuario){
-        return userRepository.findByEmailAndPassword(usuario.getEmail(), usuario.getPassword());
+    @PostMapping("/login")
+    public User login(@RequestBody User usuario){
+        return userService.login(usuario.getEmail(), usuario.getPassword());
     }
 
 }
