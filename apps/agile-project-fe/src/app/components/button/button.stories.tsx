@@ -1,4 +1,4 @@
-import { Button } from './button';
+import { Button, ButtonProps } from './button';
 
 export default {
   component: Button,
@@ -12,7 +12,10 @@ export default {
   },
 };
 
-export const Primary = ({ text = 'Default', variant = 'neutral' }) => (
+export const Primary = ({
+  text = 'Default',
+  variant = 'neutral',
+}: ButtonProps) => (
   <Button
     variant={variant}
     text={text}

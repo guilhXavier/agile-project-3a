@@ -2,13 +2,13 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 export interface ButtonProps {
-  variant: 'confirm' | 'cancel' | 'neutral' | 'warning' | string;
+  variant: 'confirm' | 'cancel' | 'neutral' | 'warning';
   text: string;
   onClick: () => void;
 }
 
 interface StyledButtonProps {
-  variant: 'confirm' | 'cancel' | 'neutral' | 'warning' | string;
+  variant: 'confirm' | 'cancel' | 'neutral' | 'warning';
 }
 
 const ConfirmButtonStyle = css`
