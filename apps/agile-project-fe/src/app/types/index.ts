@@ -1,5 +1,8 @@
 export interface ChipIn {
-  id: number;
+  id: string;
+  amount: number;
+  user: User;
+  event: Event;
 }
 
 export interface User {

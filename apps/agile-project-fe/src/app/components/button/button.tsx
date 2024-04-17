@@ -1,14 +1,15 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { FlattenSimpleInterpolation, css } from 'styled-components';
 
+type ButtonVariant = 'confirm' | 'cancel' | 'neutral' | 'warning';
 export interface ButtonProps {
-  variant: 'confirm' | 'cancel' | 'neutral' | 'warning';
+  variant: ButtonVariant;
   text: string;
   onClick: () => void;
 }
 
 interface StyledButtonProps {
-  variant: 'confirm' | 'cancel' | 'neutral' | 'warning';
+  variant: ButtonVariant;
 }
 
 const ConfirmButtonStyle = css`
@@ -21,15 +22,25 @@ const CancelButtonStyle = css`
   color: white;
 `;
 
+const WarningButtonStyle = css`
+  background-color: yellow;
+  color: black;
+`;
+
+const NeutralButtonStyle = css`
+  background-color: light-grey;
+  color: black;
+`;
+
+const variantConfig: Record<ButtonVariant, FlattenSimpleInterpolation> = {
+  confirm: ConfirmButtonStyle,
+  cancel: CancelButtonStyle,
+  warning: WarningButtonStyle,
+  neutral: NeutralButtonStyle,
+};
+
 const StyledButton = styled.button<StyledButtonProps>`
-  ${({ variant }) => {
-    switch (variant) {
-      case 'confirm':
-        return ConfirmButtonStyle;
-      case 'cancel':
-        return CancelButtonStyle;
-    }
-  }}
+  ${({ variant }) => variantConfig[variant]}
 `;
 
 export const Button: React.FC<ButtonProps> = ({ variant, text, onClick }) => (

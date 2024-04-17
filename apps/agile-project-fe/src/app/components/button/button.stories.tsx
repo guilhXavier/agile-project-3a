@@ -1,4 +1,4 @@
-import { Button } from './button';
+import { Button, ButtonProps } from './button';
 
 export default {
   component: Button,
@@ -12,10 +12,13 @@ export default {
   },
 };
 
-export const Primary = (args) => (
+export const Primary = ({
+  text = 'Default',
+  variant = 'neutral',
+}: ButtonProps) => (
   <Button
-    {...args}
-    text="Confirm"
+    variant={variant}
+    text={text}
     onClick={() => {
       console.log('here');
     }}
