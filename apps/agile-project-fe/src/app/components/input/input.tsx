@@ -1,34 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 
+type InputType = 'text' | 'email' | 'password';
+
 export interface InputProps {
-  variant: 'text' | 'email' | 'password';
+  variant: InputType;
 }
 
 const StyledInput = styled.div``;
 
-export const Input: React.FC<InputProps> = ({ variant }) => {
-  const inputType =
-    variant === 'text'
-      ? 'text'
-      : variant === 'email'
-      ? 'email'
-      : variant === 'password'
-      ? 'password'
-      : 'default';
+const variantConfig: Record<
+  InputType,
+  { type: InputType; placeholder: string }
+> = {
+  text: { type: 'text', placeholder: 'Digite o texto aqui' },
+  email: { type: 'email', placeholder: 'Digite o email' },
+  password: { type: 'password', placeholder: 'Digite a senha' },
+};
 
-  const inputPlaceholder =
-    variant === 'text'
-      ? 'Digite o texto aqui'
-      : variant === 'email'
-      ? 'Digite o email'
-      : variant === 'password'
-      ? 'Digite a senha'
-      : 'default';
+export const Input: React.FC<InputProps> = ({ variant }) => {
+  const { type, placeholder } = variantConfig[variant] || {
+    type: 'text',
+    placeholder: 'default',
+  };
 
   return (
     <StyledInput>
-      <input type={inputType} placeholder={inputPlaceholder} />
+      <input type={type} placeholder={placeholder} />
     </StyledInput>
   );
 };
