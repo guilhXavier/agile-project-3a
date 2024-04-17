@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type InputType = 'text' | 'email' | 'password';
+type InputVariant = 'text' | 'email' | 'password';
 
 export interface InputProps {
-  variant: InputType;
+  variant: InputVariant;
 }
 
 const StyledInput = styled.div``;
 
 const variantConfig: Record<
-  InputType,
-  { type: InputType; placeholder: string }
+  InputVariant,
+  { type: InputVariant; placeholder: string }
 > = {
   text: { type: 'text', placeholder: 'Digite o texto aqui' },
   email: { type: 'email', placeholder: 'Digite o email' },
