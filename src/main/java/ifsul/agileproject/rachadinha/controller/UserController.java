@@ -1,10 +1,12 @@
 package ifsul.agileproject.rachadinha.controller;
 
+import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserRespostaDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.service.UserService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -20,57 +22,58 @@ public class UserController {
 
     //Buscar user por ID
     @GetMapping("{id}")
-    public User getUserByID(@PathVariable Integer id){
-        return userService
-                .findUserByID(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado.")
-                );
+    public ResponseEntity<UserRespostaDTO> getUserByID(@PathVariable Integer id){
+      User usuario = userService.findUserByID(id);
+      return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario), HttpStatus.OK);
     }
 
     //Cadastrar user
     @PostMapping("/cadastro")
-    @ResponseStatus(HttpStatus.CREATED)
-    public User saveUser(@RequestBody User usuario){
-        return userService.saveUser(usuario);
+    public ResponseEntity<UserRespostaDTO> saveUser(@RequestBody UserDTO dto){
+      User usuario = userService.saveUser(dto.transformaParaObjeto());
+      return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
     }
 
-    //Deletar
+    //Deletar usuário pelo ID
     @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteUserByID(@PathVariable Integer id){
-        userService.deleteUserByID(id);
+    public ResponseEntity deleteUserByID(@PathVariable Integer id){
+      userService.deleteUserByID(id);
+      return new ResponseEntity("Usuário deletado", HttpStatus.OK);
     }
 
-    //Atualizar
+    //Atualizar usuário pelo ID
     @PatchMapping("{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public User updateUserByID(@RequestBody User usuario, @PathVariable Integer id){
-        if(userService.existsUserByID(id)){
-            usuario.setId(id);
-            return userService.saveUser(usuario);
-        }else{
-            return new User();
-        }
+    public ResponseEntity updateUser(@RequestBody UserDTO dto, @PathVariable Integer id){
+      if(userService.existsUserByID(id)){
+        User user = userService.findUserByID(id);
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+        return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(user), HttpStatus.CREATED);
+      }else{
+        return new ResponseEntity<>("Usuário não encontrado", HttpStatus.OK);
+      }
     }
 
-    //Busca todos
+    //Busca todos usuários
     @GetMapping("/findAll")
-    @ResponseStatus(HttpStatus.OK)
-    public List<User> findAll(){
-        return userService.findAll();
+    public ResponseEntity<List<User>> findAll(){
+      List<User> userList = userService.findAll();
+      return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
-    //Buscar usuário pelo email
+    //Buscar usuário pelo EMAIL
     @PostMapping("/findByEmail")
-    @ResponseStatus(HttpStatus.OK)
-    public User findByEmail(@RequestBody User usuario){
-        return userService.findUserByEmail(usuario.getEmail());
+    public ResponseEntity<UserRespostaDTO> findByEmail(@RequestBody UserDTO dto){
+      User user = userService.findUserByEmail(dto.getEmail());
+      return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(user), HttpStatus.OK);
     }
 
+    //Login do usuário com EMAIL e PASSWORD
     @PostMapping("/login")
-    public User login(@RequestBody User usuario){
-        return userService.login(usuario.getEmail(), usuario.getPassword());
+    public ResponseEntity<UserRespostaDTO> login(@RequestBody UserDTO dto){
+      User user = userService.login(dto.getEmail(), dto.getPassword());
+      return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(user), HttpStatus.OK);
     }
 
 }

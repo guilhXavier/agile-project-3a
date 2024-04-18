@@ -2,24 +2,27 @@ package ifsul.agileproject.rachadinha.service;
 
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
 
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
+
+  public UserService(UserRepository userRepository) {
+    Assert.notNull(userRepository, "UserRepository must not be null!");
+    this.userRepository = userRepository;
+  }
 
   public User saveUser(User user){
     return userRepository.save(user);
   }
 
-  public Optional<User> findUserByID(int id){
-    return userRepository.findById(id);
+  public User findUserByID(int id){
+    return userRepository.findByID(id);
   }
 
   public boolean existsUserByID(int id){
