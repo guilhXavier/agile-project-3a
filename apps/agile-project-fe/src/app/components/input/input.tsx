@@ -1,17 +1,34 @@
+import React from 'react';
 import styled from 'styled-components';
 
-export interface InputProps {}
+type InputVariant = 'text' | 'email' | 'password';
 
-const StyledInput = styled.div`
-  color: pink;
-`;
+export interface InputProps {
+  variant: InputVariant;
+}
 
-export function Input(props: InputProps) {
+const StyledInput = styled.div``;
+
+const variantConfig: Record<
+  InputVariant,
+  { type: InputVariant; placeholder: string }
+> = {
+  text: { type: 'text', placeholder: 'Digite o texto aqui' },
+  email: { type: 'email', placeholder: 'Digite o email' },
+  password: { type: 'password', placeholder: 'Digite a senha' },
+};
+
+export const Input: React.FC<InputProps> = ({ variant }) => {
+  const { type, placeholder } = variantConfig[variant] || {
+    type: 'text',
+    placeholder: 'default',
+  };
+
   return (
     <StyledInput>
-      <h1>Welcome to Input!</h1>
+      <input type={type} placeholder={placeholder} />
     </StyledInput>
   );
-}
+};
 
 export default Input;
