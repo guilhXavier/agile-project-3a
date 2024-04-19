@@ -41,6 +41,7 @@ const variantConfig: Record<ButtonVariant, FlattenSimpleInterpolation> = {
 
 const StyledButton = styled.button<StyledButtonProps>`
   ${({ variant }) => variantConfig[variant]}
+  margin: 10px;
 `;
 
 export const Button: React.FC<ButtonProps> = ({ variant, text, onClick }) => (

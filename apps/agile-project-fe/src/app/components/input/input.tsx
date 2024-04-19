@@ -5,23 +5,20 @@ type InputVariant = 'text' | 'email' | 'password';
 
 export interface InputProps {
   variant: InputVariant;
+  placeholder?: string;
 }
+
+const variantConfig: Record<InputVariant, { type: InputVariant }> = {
+  text: { type: 'text' },
+  email: { type: 'email' },
+  password: { type: 'password' },
+};
 
 const StyledInput = styled.div``;
 
-const variantConfig: Record<
-  InputVariant,
-  { type: InputVariant; placeholder: string }
-> = {
-  text: { type: 'text', placeholder: 'Digite o texto aqui' },
-  email: { type: 'email', placeholder: 'Digite o email' },
-  password: { type: 'password', placeholder: 'Digite a senha' },
-};
-
-export const Input: React.FC<InputProps> = ({ variant }) => {
-  const { type, placeholder } = variantConfig[variant] || {
+export const Input: React.FC<InputProps> = ({ variant, placeholder }) => {
+  const { type } = variantConfig[variant] || {
     type: 'text',
-    placeholder: 'default',
   };
 
   return (
