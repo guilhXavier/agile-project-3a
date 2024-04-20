@@ -77,4 +77,34 @@ describe('useForm', () => {
     expect(passwordValidation?.isValid).toBe(true);
     expect(passwordValidation?.message).toBe('');
   });
+
+  it('should return a form and validation object for a numeric field based on a schema', () => {
+    const schema = {
+      price: {
+        type: Field.Number,
+        validation: {
+          predicate: (value: string) => Number(value) > 5,
+          message: 'Price must be greater than 5',
+        },
+      },
+    };
+
+    const { result } = renderHook(() => useForm(schema));
+
+    const formKeys = Array.from(result.current.form.keys());
+
+    expect(formKeys).toContain('price');
+
+    const validationKeys = Array.from(result.current.validation.keys());
+
+    expect(validationKeys).toContain('price');
+
+    act(() => {
+      result.current.set('price', '5.50');
+    });
+
+    const priceValidation = result.current.validation.get('price');
+
+    expect(priceValidation?.isValid).toBe(true);
+  });
 });
