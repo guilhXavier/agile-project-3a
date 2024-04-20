@@ -3,8 +3,14 @@ import { Field, useForm } from './useForm';
 
 describe('useForm', () => {
   const schema = {
-    email: { type: Field.Email, isRequired: true },
-    password: { type: Field.Password, isRequired: true },
+    email: { type: Field.Email },
+    password: {
+      type: Field.Password,
+      validation: {
+        predicate: (value: string) => value.length > 5,
+        message: 'Invalid password',
+      },
+    },
   };
 
   it('should return a form object with a get and set method based on a schema', () => {
@@ -36,5 +42,39 @@ describe('useForm', () => {
     const email = result.current.get('email');
 
     expect(email).toBe('');
+  });
+
+  it('should return a validation object based on a schema', () => {
+    const { result } = renderHook(() => useForm(schema));
+
+    const validationKeys = Array.from(result.current.validation.keys());
+
+    expect(validationKeys).toContain('password');
+  });
+
+  it('should return a validation object with a message if the value is invalid', () => {
+    const { result } = renderHook(() => useForm(schema));
+
+    act(() => {
+      result.current.set('password', '123');
+    });
+
+    const passwordValidation = result.current.validation.get('password');
+
+    expect(passwordValidation?.isValid).toBe(false);
+    expect(passwordValidation?.message).toBe('Invalid password');
+  });
+
+  it('should return a validation object with an empty message if the value is valid', () => {
+    const { result } = renderHook(() => useForm(schema));
+
+    act(() => {
+      result.current.set('password', '123456');
+    });
+
+    const passwordValidation = result.current.validation.get('password');
+
+    expect(passwordValidation?.isValid).toBe(true);
+    expect(passwordValidation?.message).toBe('');
   });
 });
