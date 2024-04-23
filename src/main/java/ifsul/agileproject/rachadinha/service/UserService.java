@@ -1,47 +1,24 @@
 package ifsul.agileproject.rachadinha.service;
 
+import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
-import ifsul.agileproject.rachadinha.repository.UserRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class UserService {
+public interface UserService {
 
-  private final UserRepository userRepository;
+  User saveUser(UserDTO userDTO);
 
-  public UserService(UserRepository userRepository) {
-    Assert.notNull(userRepository, "UserRepository must not be null!");
-    this.userRepository = userRepository;
-  }
+  Optional<User> findUserById(Long id);
 
-  public User saveUser(User user){
-    return userRepository.save(user);
-  }
+  void deleteUserById(Long id);
 
-  public User findUserByID(int id){
-    return userRepository.findByID(id);
-  }
+  List<User> findAll();
 
-  public boolean existsUserByID(int id){
-    return userRepository.existsById(id);
-  }
+  User login(String email, String password);
 
-  public void deleteUserByID(int id){
-    userRepository.deleteById(id);
-  }
+  Optional<User> findUserByEmail(String email);
 
-  public List<User> findAll(){
-    return userRepository.findAll();
-  }
-
-  public User login(String email, String password){
-    return userRepository.findByEmailAndPassword(email, password);
-  }
-
-  public User findUserByEmail(String email){
-    return userRepository.findByEmail(email);
-  }
+  User updateUser(UserDTO userDTO);
 }

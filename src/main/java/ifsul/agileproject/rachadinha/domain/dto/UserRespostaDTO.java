@@ -9,11 +9,11 @@ import lombok.Data;
 @Data
 public class UserRespostaDTO {
 
-  private int id;
+  private Long id;
   private String name;
   private String email;
 
-  public static UserRespostaDTO transformaEmDTO(User user){
+  public static UserRespostaDTO transformaEmDTO(User user) {
     return new UserRespostaDTO(user.getId(), user.getName(), user.getEmail());
   }
 

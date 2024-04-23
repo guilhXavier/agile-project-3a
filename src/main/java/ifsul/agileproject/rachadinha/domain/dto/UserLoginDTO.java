@@ -1,13 +1,10 @@
 package ifsul.agileproject.rachadinha.domain.dto;
 
-import ifsul.agileproject.rachadinha.domain.entity.User;
 import lombok.Data;
 
 @Data
-public class UserDTO {
+public class UserLoginDTO {
 
-  private String name;
   private String email;
   private String password;
-
 }
