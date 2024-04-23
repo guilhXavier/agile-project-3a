@@ -68,7 +68,7 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-	</dependencies>
+		</dependencies>
 
 	<build>
 		<plugins>
