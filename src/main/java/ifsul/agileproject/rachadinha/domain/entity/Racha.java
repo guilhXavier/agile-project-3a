@@ -30,6 +30,7 @@ public class Racha {
     @Column(name = "description", length = 255)
     private String description;
 
+    @NonNull
     @Column(name = "password")
     private String password;
 
@@ -37,7 +38,6 @@ public class Racha {
     @Column(name = "goal")
     private Double goal;
 
-    
     @Column(name = "balance")
     private Double balance;
 
@@ -54,8 +54,6 @@ public class Racha {
     @Column(name = "created_at")
     private Date created_at;
 
-   // @Column(name = "payments")
-   // private ArrayList<Payment> payments;
-
-   
+    @Column(name = "invite_link")
+    private String inviteLink;
 }
