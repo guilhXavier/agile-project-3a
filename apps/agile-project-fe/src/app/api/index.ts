@@ -4,6 +4,6 @@ import axios from 'axios';
 export const queryClient = new QueryClient();
 
 export const baseAxios = axios.create({
-  baseURL: 'http://locahost:8080',
+  baseURL: 'http://localhost:8080',
   headers: { Accept: 'application/json' },
 });
