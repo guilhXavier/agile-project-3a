@@ -1,34 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type InputVariant = 'text' | 'email' | 'password';
-
 export interface InputProps {
-  variant: InputVariant;
+  id: string;
+  inputType: 'text' | 'email' | 'password';
+  label: string;
+  placeholder: string;
+  onInput: (event: React.FormEvent<HTMLInputElement>) => void;
 }
 
-const StyledInput = styled.div``;
+const StyledInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 256px;
 
-const variantConfig: Record<
-  InputVariant,
-  { type: InputVariant; placeholder: string }
-> = {
-  text: { type: 'text', placeholder: 'Digite o texto aqui' },
-  email: { type: 'email', placeholder: 'Digite o email' },
-  password: { type: 'password', placeholder: 'Digite a senha' },
-};
+  label {
+    padding-bottom: 0.5em;
+  }
+`;
 
-export const Input: React.FC<InputProps> = ({ variant }) => {
-  const { type, placeholder } = variantConfig[variant] || {
-    type: 'text',
-    placeholder: 'default',
-  };
-
-  return (
-    <StyledInput>
-      <input type={type} placeholder={placeholder} />
-    </StyledInput>
-  );
-};
+export const Input: React.FC<InputProps> = ({
+  id,
+  inputType,
+  label,
+  placeholder,
+  onInput,
+}) => (
+  <StyledInput>
+    <label htmlFor={id}>{label}:</label>
+    <input
+      id={id}
+      type={inputType}
+      placeholder={placeholder}
+      onInput={onInput}
+    />
+  </StyledInput>
+);
 
 export default Input;

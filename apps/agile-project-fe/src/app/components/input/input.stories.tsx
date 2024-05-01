@@ -5,11 +5,24 @@ export default {
   title: 'Input',
   tags: ['autodocs'],
   argTypes: {
-    variant: {
+    id: { control: 'text' },
+    label: { control: 'text' },
+    inputType: {
       options: ['text', 'email', 'password'],
       control: { type: 'select' },
     },
+    placeholder: { control: 'text' },
   },
 };
 
-export const Primary = {};
+export const Primary = {
+  args: {
+    id: 'input',
+    label: 'Input',
+    inputType: 'text',
+    placeholder: 'Text goes here',
+    onInput: (event: React.FormEvent<HTMLInputElement>) => {
+      console.log(event.currentTarget.value);
+    },
+  },
+};
