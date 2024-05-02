@@ -56,10 +56,12 @@
     "husky": "^8.0.0",
     "jsdom": "~22.1.0",
     "lint-staged": "^15.2.2",
+    "msw": "^2.2.14",
     "nx": "18.0.8",
     "prettier": "^2.6.2",
     "storybook": "^7.5.3",
     "ts-node": "10.9.1",
+    "tslib": "^2.6.2",
     "typescript": "~5.3.2",
     "vite": "~5.0.0",
     "vitest": "^1.5.0"
