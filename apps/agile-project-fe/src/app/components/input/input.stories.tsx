@@ -34,7 +34,7 @@ export const Invalid = {
     label: 'Input',
     inputType: 'text',
     placeholder: 'Text goes here',
-    isInvalid: true,
+    isValid: false,
     validationMessage: 'Invalid input',
     onInput: (event: React.FormEvent<HTMLInputElement>) => {
       console.log(event.currentTarget.value);

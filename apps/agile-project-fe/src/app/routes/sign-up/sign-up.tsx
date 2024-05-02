@@ -39,7 +39,7 @@ export const SignUp: React.FC = () => {
   >(schema);
 
   const handleSubmit = (): void => {
-    mutate(Object.fromEntries(form.entries()));
+    mutate(Object.fromEntries(form.entries()) as unknown as UserForm);
   };
 
   const renderForm = (): React.ReactElement => (
