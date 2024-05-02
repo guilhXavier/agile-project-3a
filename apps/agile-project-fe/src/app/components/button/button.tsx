@@ -5,7 +5,7 @@ type ButtonVariant = 'confirm' | 'cancel' | 'neutral' | 'warning';
 export interface ButtonProps {
   variant: ButtonVariant;
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 interface StyledButtonProps {

@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { baseAxios } from '..';
 
 export interface UserForm {
-  name: string;
+  username: string;
   email: string;
   password: string;
   confirmPassword: string;

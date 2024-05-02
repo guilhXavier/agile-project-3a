@@ -1,32 +1,59 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type InputVariant = 'text' | 'email' | 'password';
-
 export interface InputProps {
-  variant: InputVariant;
+  id: string;
+  inputType: 'text' | 'email' | 'password';
+  label: string;
+  value: string;
+  placeholder: string;
+  onInput: (event: React.FormEvent<HTMLInputElement>) => void;
+  isValid?: boolean;
+  validationMessage?: string;
+  isRequired?: boolean;
 }
 
-const StyledInput = styled.div``;
+const StyledInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 256px;
 
-const variantConfig: Record<
-  InputVariant,
-  { type: InputVariant; placeholder: string }
-> = {
-  text: { type: 'text', placeholder: 'Digite o texto aqui' },
-  email: { type: 'email', placeholder: 'Digite o email' },
-  password: { type: 'password', placeholder: 'Digite a senha' },
-};
+  label {
+    padding-bottom: 0.5em;
+  }
 
-export const Input: React.FC<InputProps> = ({ variant }) => {
-  const { type, placeholder } = variantConfig[variant] || {
-    type: 'text',
-    placeholder: 'default',
-  };
+  span {
+    color: red;
+    padding-top: 0.5em;
+  }
+`;
+
+export const Input: React.FC<InputProps> = ({
+  id,
+  inputType,
+  value,
+  label,
+  placeholder,
+  onInput,
+  validationMessage,
+  isValid = true,
+  isRequired = true,
+}) => {
+  const [isTouched, setIsTouched] = React.useState(false);
 
   return (
     <StyledInput>
-      <input type={type} placeholder={placeholder} />
+      <label htmlFor={id}>{label}:</label>
+      <input
+        id={id}
+        type={inputType}
+        placeholder={placeholder}
+        value={value}
+        required={isRequired}
+        onInput={onInput}
+        onBlur={() => setIsTouched(true)}
+      />
+      {!isValid && isTouched && <span>{validationMessage}</span>}
     </StyledInput>
   );
 };

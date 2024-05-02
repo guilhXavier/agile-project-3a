@@ -22,27 +22,27 @@ export type Validation = {
   message: string;
 };
 
-export interface UseForm {
-  form: Map<string, string>;
+export interface UseForm<T> {
+  form: Map<T, string>;
   validation: Map<string, Validation>;
-  get: (key: string) => string;
-  set: (key: string, value: string) => void;
+  get: (key: T) => string;
+  set: (key: T, value: string) => void;
 }
 
-export const useForm = (schema: Schema): UseForm => {
-  const [form, setForm] = React.useState(new Map<string, string>());
+export const useForm = <T>(schema: Schema): UseForm<T> => {
+  const [form, setForm] = React.useState(new Map<T, string>());
   const [validation, setValidation] = React.useState(
     new Map<string, Validation>()
   );
 
   React.useEffect(() => {
-    const initialForm = new Map<string, string>();
+    const initialForm = new Map<T, string>();
     const initialValidation = new Map<string, Validation>();
 
     const keys = Object.keys(schema);
 
     keys.forEach((key) => {
-      initialForm.set(key, '');
+      initialForm.set(key as T, '');
       initialValidation.set(key, { isValid: true, message: '' });
     });
 
@@ -55,7 +55,7 @@ export const useForm = (schema: Schema): UseForm => {
     const updatedValidation = new Map<string, Validation>(validation);
 
     formKeys.forEach((key) => {
-      const field = schema[key];
+      const field = schema[key as string];
 
       const value = form.get(key) || '';
 
@@ -63,7 +63,7 @@ export const useForm = (schema: Schema): UseForm => {
 
       const message = isValid ? '' : field.validation?.message ?? '';
 
-      updatedValidation.set(key, {
+      updatedValidation.set(key as string, {
         isValid,
         message,
       });
@@ -72,9 +72,9 @@ export const useForm = (schema: Schema): UseForm => {
     setValidation(updatedValidation);
   }, [form]);
 
-  const get = (key: string) => form.get(key) || '';
+  const get = (key: T) => form.get(key) || '';
 
-  const set = (key: string, value: string) => {
+  const set = (key: T, value: string) => {
     const newForm = new Map(form);
 
     newForm.set(key, value);
