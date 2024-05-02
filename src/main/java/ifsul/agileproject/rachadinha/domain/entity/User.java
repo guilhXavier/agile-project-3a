@@ -1,6 +1,8 @@
 //Classe Usuário
 package ifsul.agileproject.rachadinha.domain.entity;
 
+import java.util.ArrayList;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,7 +32,14 @@ public class User {
   @NonNull
   private String password;
 
-  //@ManyToMany
-  //ArrayList<User> listaAmigos;
+  @OneToMany(mappedBy = "owner")
+  private ArrayList<Racha> ownRachas;
+
+  @ManyToMany
+  @JoinTable(
+    name = "racha_members", 
+    joinColumns = @JoinColumn(name = "user_id"), 
+    inverseJoinColumns = @JoinColumn(name = "racha_id"))
+  private ArrayList<Racha> rachas;
 
 }

@@ -1,7 +1,5 @@
 package ifsul.agileproject.rachadinha.domain.entity;
 
-import jakarta.persistence.Entity;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -41,15 +39,16 @@ public class Racha {
     @Column(name = "balance")
     private Double balance;
 
-    @Column(name = "members")
+    @ManyToMany(mappedBy = "rachas")
     private ArrayList<User> members;
 
     @NonNull
-    @Column(name = "owner")
+    @ManyToOne
     private User owner;
 
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.OPEN;
 
     @Column(name = "created_at")
     private Date created_at;
