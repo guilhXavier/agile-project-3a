@@ -3,9 +3,12 @@ package ifsul.agileproject.rachadinha.repository;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+import java.util.Optional;
 
-    User findByEmail(String email);
-    User findByEmailAndPassword(String email, String password);
+public interface UserRepository extends JpaRepository<User, Long> {
+
+  Optional<User> findByEmail(String email);
+
+  User findByEmailAndPassword(String email, String password);
 
 }

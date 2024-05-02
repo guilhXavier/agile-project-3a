@@ -1,76 +1,76 @@
 package ifsul.agileproject.rachadinha.controller;
 
+import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserLoginDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserRespostaDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
-import ifsul.agileproject.rachadinha.service.UserService;
+import ifsul.agileproject.rachadinha.exceptions.UserNotFoundException;
+import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
+@AllArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+  private final UserServiceImpl userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+  //Buscar user por ID
+  @GetMapping("{id}")
+  public ResponseEntity<UserRespostaDTO> getUserByID(@PathVariable Long id) {
+    Optional<User> usuario = userService.findUserById(id);
+
+    if (usuario.isPresent()) {
+      return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario.get()), HttpStatus.OK);
     }
 
-    //Buscar user por ID
-    @GetMapping("{id}")
-    public User getUserByID(@PathVariable Integer id){
-        return userService
-                .findUserByID(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado.")
-                );
+    throw new UserNotFoundException(id);
+  }
+
+  //Cadastrar user
+  @PostMapping("/cadastro")
+  public ResponseEntity<UserRespostaDTO> saveUser(@RequestBody UserDTO userDTO) {
+    User usuario = userService.saveUser(userDTO);
+    return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
+  }
+
+  //Deletar usuário pelo ID
+  @DeleteMapping("{id}")
+  public ResponseEntity deleteUserByID(@PathVariable Long id) {
+    userService.deleteUserById(id);
+    return new ResponseEntity("Usuário deletado", HttpStatus.OK);
+  }
+
+  //Atualizar usuário pelo ID
+  @PatchMapping("{id}")
+  public ResponseEntity updateUser(@RequestBody UserDTO userDTO, @PathVariable Integer id) {
+    return new ResponseEntity(userService.updateUser(userDTO), HttpStatus.OK);
+  }
+
+  //Busca todos usuários
+  @GetMapping("/findAll")
+  public ResponseEntity<List<User>> findAll() {
+    List<User> userList = userService.findAll();
+    return new ResponseEntity<>(userList, HttpStatus.OK);
+  }
+
+  //Login do usuário com EMAIL e PASSWORD
+  @PostMapping("/login")
+  public ResponseEntity<UserRespostaDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
+    Optional<User> findByEmail = userService.findUserByEmail(userLoginDTO.getEmail());
+
+    if (findByEmail.isPresent()) {
+      return new ResponseEntity(UserRespostaDTO.transformaEmDTO(findByEmail.get()), HttpStatus.OK);
     }
 
-    //Cadastrar user
-    @PostMapping("/cadastro")
-    @ResponseStatus(HttpStatus.CREATED)
-    public User saveUser(@RequestBody User usuario){
-        return userService.saveUser(usuario);
-    }
+    return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
 
-    //Deletar
-    @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteUserByID(@PathVariable Integer id){
-        userService.deleteUserByID(id);
-    }
-
-    //Atualizar
-    @PatchMapping("{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public User updateUserByID(@RequestBody User usuario, @PathVariable Integer id){
-        if(userService.existsUserByID(id)){
-            usuario.setId(id);
-            return userService.saveUser(usuario);
-        }else{
-            return new User();
-        }
-    }
-
-    //Busca todos
-    @GetMapping("/findAll")
-    @ResponseStatus(HttpStatus.OK)
-    public List<User> findAll(){
-        return userService.findAll();
-    }
-
-    //Buscar usuário pelo email
-    @PostMapping("/findByEmail")
-    @ResponseStatus(HttpStatus.OK)
-    public User findByEmail(@RequestBody User usuario){
-        return userService.findUserByEmail(usuario.getEmail());
-    }
-
-    @PostMapping("/login")
-    public User login(@RequestBody User usuario){
-        return userService.login(usuario.getEmail(), usuario.getPassword());
-    }
+  }
 
 }
