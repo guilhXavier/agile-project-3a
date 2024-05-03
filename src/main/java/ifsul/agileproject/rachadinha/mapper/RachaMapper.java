@@ -5,6 +5,7 @@ import java.util.function.Function;
 import org.springframework.stereotype.Component;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +22,16 @@ public class RachaMapper implements Function<RachaDTO, Racha> {
 				.owner(dto.getOwner())
 				.status(dto.getStatus())
 				.inviteLink(dto.getInviteLink())
+				.build();
+	}
+
+	public Racha apply(RachaRegisterDTO dto) {
+		return Racha.builder()
+				.name(dto.getName())
+				.description(dto.getDescription())
+				.password(dto.getPassword())
+				.goal(dto.getGoal())
+				.owner(dto.getOwner())
 				.build();
 	}
 }
