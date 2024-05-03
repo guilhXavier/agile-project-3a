@@ -11,6 +11,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Table(name = "Racha")
 public class Racha {
 

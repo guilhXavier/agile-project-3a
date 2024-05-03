@@ -1,6 +1,6 @@
 package ifsul.agileproject.rachadinha.domain.dto;
 
-import ch.qos.logback.core.status.Status;
+import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import lombok.Data;
 
