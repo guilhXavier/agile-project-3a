@@ -21,7 +21,7 @@ public class RachaController {
 
     //Criar racha
     @PostMapping("/criar")
-    public ResponseEntity<Racha> saveUser(@RequestBody RachaRegisterDTO rachaDTO) {
+    public ResponseEntity<Racha> createRacha(@RequestBody RachaRegisterDTO rachaDTO) {
         Racha racha = rachaService.saveRacha(rachaDTO);
         return new ResponseEntity<>(racha, HttpStatus.CREATED);
     }
