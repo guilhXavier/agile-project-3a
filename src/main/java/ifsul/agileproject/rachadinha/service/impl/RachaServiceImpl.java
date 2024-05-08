@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.mapper.RachaMapper;
@@ -16,14 +17,14 @@ import ifsul.agileproject.rachadinha.service.RachaService;
 public class RachaServiceImpl implements RachaService {
 
     @Autowired
-    RachaRepository rachaRepository;
+    private RachaRepository rachaRepository;
 
     @Autowired
-    RachaMapper rachaMapper;
+    private RachaMapper rachaMapper;
 
 
     @Override
-    public Racha saveRacha(RachaDTO rachaDTO) {
+    public Racha saveRacha(RachaRegisterDTO rachaDTO) {
         Racha racha = rachaMapper.apply(rachaDTO);
 
         return rachaRepository.save(racha);

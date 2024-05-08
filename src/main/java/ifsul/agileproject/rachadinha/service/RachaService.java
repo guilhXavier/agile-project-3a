@@ -3,12 +3,13 @@ package ifsul.agileproject.rachadinha.service;
 import java.util.Optional;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
 
 public interface RachaService {
     
-    Racha saveRacha(RachaDTO rachaDTO);
+    Racha saveRacha(RachaRegisterDTO rachaDTO);
 
     Optional<Racha> findRachaById(Long id);
 
