@@ -1,7 +1,7 @@
 package ifsul.agileproject.rachadinha.domain.dto;
 
-import ifsul.agileproject.rachadinha.domain.entity.User;
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 public class RachaRegisterDTO {
@@ -9,5 +9,6 @@ public class RachaRegisterDTO {
 	private String description;
 	private String password;
 	private Double goal;
-	private User owner;
+  private Long ownerId;
+
 }
