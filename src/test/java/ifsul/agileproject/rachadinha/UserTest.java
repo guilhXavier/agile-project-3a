@@ -27,7 +27,7 @@ public class UserTest {
     public void testSalvarERecuperarUsuario() {
         User usuarioOriginal = new User();
         usuarioOriginal.setName("Teste");
-        usuarioOriginal.setEmail("Teste@Teste");
+        usuarioOriginal.setEmail("Teste1@Teste");
         usuarioOriginal.setPassword("Teste123");
 
         User usuarioSalvo = userRepository.save(usuarioOriginal);
@@ -42,12 +42,12 @@ public class UserTest {
     public void loginWithWrongPassword() {
         User user = new User();
         user.setName("Teste");
-        user.setEmail("Teste@Teste");
+        user.setEmail("Teste2@Teste");
         user.setPassword("Teste123");
 
         userRepository.save(user);
 
-        User userLogged = userRepository.findByEmailAndPassword("Teste@Teste", "Teste12345");
+        User userLogged = userRepository.findByEmailAndPassword("Teste2@Teste", "Teste12345");
 
         assertEquals(null, userLogged);
     }
@@ -56,12 +56,12 @@ public class UserTest {
     public void loginWithRightPasswordAndEmail() {
         User user = new User();
         user.setName("Teste");
-        user.setEmail("Teste@Teste");
+        user.setEmail("Teste3@Teste");
         user.setPassword("Teste123");
 
         userRepository.save(user);
 
-        User userLogged = userRepository.findByEmailAndPassword("Teste@Teste", "Teste123");
+        User userLogged = userRepository.findByEmailAndPassword("Teste3@Teste", "Teste123");
 
         assertEquals(user, userLogged);
     }
@@ -70,12 +70,12 @@ public class UserTest {
     public void loginWithWrongEmail() {
         User user = new User();
         user.setName("Teste");
-        user.setEmail("Teste@Teste");
+        user.setEmail("Teste4@Teste");
         user.setPassword("Teste123");
 
         userRepository.save(user);
 
-        User userLogged = userRepository.findByEmailAndPassword("Teste2@Teste", "Teste123");
+        User userLogged = userRepository.findByEmailAndPassword("Teste5@Teste", "Teste123");
 
         assertEquals(null, userLogged);
     }
