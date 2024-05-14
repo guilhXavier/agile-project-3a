@@ -1,8 +1,7 @@
 package ifsul.agileproject.rachadinha.mapper;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.Function;
 
 import ifsul.agileproject.rachadinha.domain.entity.Status;
@@ -33,6 +32,7 @@ public class RachaMapper implements Function<RachaRegisterDTO, Racha> {
       .password(dto.getPassword())
       .goal(dto.getGoal())
       .owner(owner)
+      .members(new ArrayList<>())
       .balance(0.0)
       .status(Status.OPEN)
       .created_at(new Date())

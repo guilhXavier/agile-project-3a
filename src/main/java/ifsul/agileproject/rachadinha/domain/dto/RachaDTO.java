@@ -5,7 +5,6 @@ import java.util.Date;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import lombok.Data;
-import lombok.NonNull;
 
 @Data
 public class RachaDTO {
