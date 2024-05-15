@@ -30,7 +30,7 @@ public class UserController {
       return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario.get()), HttpStatus.OK);
     }
 
-    throw new UserNotFoundException(id);
+    throw new UserNotFoundException();
   }
 
   //Cadastrar user
@@ -63,13 +63,13 @@ public class UserController {
   //Login do usuário com EMAIL e PASSWORD
   @PostMapping("/login")
   public ResponseEntity<UserRespostaDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
-    Optional<User> findByEmail = userService.findUserByEmail(userLoginDTO.getEmail());
+    User userLogged = userService.login(userLoginDTO.getEmail(), userLoginDTO.getPassword());
 
-    if (findByEmail.isPresent()) {
-      return new ResponseEntity(UserRespostaDTO.transformaEmDTO(findByEmail.get()), HttpStatus.OK);
+    if (userLogged != null) {
+      return new ResponseEntity(UserRespostaDTO.transformaEmDTO(userLogged), HttpStatus.OK);
     }
 
-    return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
+    throw new UserNotFoundException();
 
   }
 

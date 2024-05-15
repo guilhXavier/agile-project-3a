@@ -1,6 +1,6 @@
 package ifsul.agileproject.rachadinha.domain.entity;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 import jakarta.persistence.*;
@@ -11,6 +11,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Table(name = "Racha")
 public class Racha {
 
@@ -38,7 +39,7 @@ public class Racha {
   private Double balance;
 
   @ManyToMany(mappedBy = "rachas")
-  private ArrayList<User> members;
+  private List<User> members;
 
   @NonNull
   @ManyToOne
