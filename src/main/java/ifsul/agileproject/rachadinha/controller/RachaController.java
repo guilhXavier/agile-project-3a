@@ -3,6 +3,7 @@ package ifsul.agileproject.rachadinha.controller;
 import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class RachaController {
 
 	private final RachaServiceImpl rachaService;
 
-	//Criar racha
+	// Criar racha
 	@PostMapping("/criar")
 	public ResponseEntity<RachaResponseDTO> createRacha(@RequestBody RachaRegisterDTO rachaDTO) {
 		Racha racha = rachaService.saveRacha(rachaDTO);
@@ -37,12 +38,16 @@ public class RachaController {
 	}
 
 	@GetMapping("/findByOwner/{id}")
-	public ResponseEntity<List<Racha>> findByOwner(@PathVariable Long id) {
+	public ResponseEntity<List<RachaResponseDTO>> findByOwner(@PathVariable Long id) {
 		User owner = new User();
-
 		owner.setId(id);
+
 		List<Racha> rachas = rachaService.findRachaByOwner(owner);
 
-		return new ResponseEntity<>(rachas, HttpStatus.OK);
+		List<RachaResponseDTO> rachasResponseDto = rachas.stream()
+				.map(RachaResponseDTO::transformarEmDto)
+				.collect(Collectors.toList());
+
+		return new ResponseEntity<>(rachasResponseDto, HttpStatus.OK);
 	}
 }
