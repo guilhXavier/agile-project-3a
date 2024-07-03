@@ -106,35 +106,6 @@
   "fileMap": {
     "nonProjectFiles": [],
     "projectFileMap": {
-      "agile-project-fe-e2e": [
-        {
-          "file": "apps/agile-project-fe-e2e/.eslintrc.json",
-          "hash": "15574607285654336286"
-        },
-        {
-          "file": "apps/agile-project-fe-e2e/playwright.config.ts",
-          "hash": "3757630474722516880",
-          "deps": [
-            "npm:@playwright/test",
-            "npm:@nx/devkit"
-          ]
-        },
-        {
-          "file": "apps/agile-project-fe-e2e/project.json",
-          "hash": "11009370777679163769"
-        },
-        {
-          "file": "apps/agile-project-fe-e2e/src/example.spec.ts",
-          "hash": "1909365745453809229",
-          "deps": [
-            "npm:@playwright/test"
-          ]
-        },
-        {
-          "file": "apps/agile-project-fe-e2e/tsconfig.json",
-          "hash": "16675564389721969841"
-        }
-      ],
       "@agile-project-3a/source": [
         {
           "file": ".editorconfig",
@@ -146,7 +117,7 @@
         },
         {
           "file": ".gitignore",
-          "hash": "1286155857531561205"
+          "hash": "1965797881712321072"
         },
         {
           "file": ".husky/commit-msg",
@@ -446,6 +417,106 @@
           "hash": "4864658996689182149"
         },
         {
+          "file": "target/classes/application.properties",
+          "hash": "6032560235209762617"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/RachadinhaApplication.class",
+          "hash": "2289855044073501619"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/controller/RachaController.class",
+          "hash": "16857409231355562838"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/controller/UserController.class",
+          "hash": "16228593322967524526"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaDTO.class",
+          "hash": "7498510581510616333"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaRegisterDTO.class",
+          "hash": "2498335610656733732"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaResponseDTO.class",
+          "hash": "11282591897384287973"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/UserDTO.class",
+          "hash": "15776888622639467120"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/UserLoginDTO.class",
+          "hash": "11955578614892877261"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/UserRespostaDTO.class",
+          "hash": "8061686737721371621"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha$RachaBuilder.class",
+          "hash": "12137027895227339660"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha.class",
+          "hash": "6113255218676283329"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/Status.class",
+          "hash": "18330774683299927177"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/User$UserBuilder.class",
+          "hash": "2634141923212215629"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/User.class",
+          "hash": "7290906410943177358"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundAdvice.class",
+          "hash": "15557582870148942317"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundException.class",
+          "hash": "5074924376154692443"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/mapper/RachaMapper.class",
+          "hash": "17116102315437702989"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/mapper/UserMapper.class",
+          "hash": "8148307587792992888"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/repository/RachaRepository.class",
+          "hash": "5402182636170780073"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/repository/UserRepository.class",
+          "hash": "1719393589871969965"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/service/RachaService.class",
+          "hash": "274566659450575238"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/service/UserService.class",
+          "hash": "17469636520847054975"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/service/impl/RachaServiceImpl.class",
+          "hash": "9220116085501691179"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/service/impl/UserServiceImpl.class",
+          "hash": "7491661810546701286"
+        },
+        {
           "file": "target/test-classes/ifsul/agileproject/rachadinha/RachaTest.class",
           "hash": "11298927575323572777"
         },
@@ -459,111 +530,36 @@
         },
         {
           "file": "tsconfig.base.json",
-          "hash": "16936441711144470533"
+          "hash": "12681267218091083443"
+        }
+      ],
+      "agile-project-fe-e2e": [
+        {
+          "file": "apps/agile-project-fe-e2e/.eslintrc.json",
+          "hash": "15574607285654336286"
         },
         {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaDTO.class",
-          "hash": "7498510581510616333"
+          "file": "apps/agile-project-fe-e2e/playwright.config.ts",
+          "hash": "3757630474722516880",
+          "deps": [
+            "npm:@playwright/test",
+            "npm:@nx/devkit"
+          ]
         },
         {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/UserRespostaDTO.class",
-          "hash": "8061686737721371621"
+          "file": "apps/agile-project-fe-e2e/project.json",
+          "hash": "11009370777679163769"
         },
         {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/UserDTO.class",
-          "hash": "15776888622639467120"
+          "file": "apps/agile-project-fe-e2e/src/example.spec.ts",
+          "hash": "1909365745453809229",
+          "deps": [
+            "npm:@playwright/test"
+          ]
         },
         {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaResponseDTO.class",
-          "hash": "11282591897384287973"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/controller/RachaController.class",
-          "hash": "16857409231355562838"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/controller/UserController.class",
-          "hash": "16228593322967524526"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha.class",
-          "hash": "6113255218676283329"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/RachadinhaApplication.class",
-          "hash": "2289855044073501619"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaRegisterDTO.class",
-          "hash": "2498335610656733732"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha$RachaBuilder.class",
-          "hash": "12137027895227339660"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/Status.class",
-          "hash": "18330774683299927177"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/UserLoginDTO.class",
-          "hash": "11955578614892877261"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/User.class",
-          "hash": "7290906410943177358"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/User$UserBuilder.class",
-          "hash": "2634141923212215629"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/mapper/UserMapper.class",
-          "hash": "8148307587792992888"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/mapper/RachaMapper.class",
-          "hash": "17116102315437702989"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/repository/RachaRepository.class",
-          "hash": "5402182636170780073"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundException.class",
-          "hash": "5074924376154692443"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundAdvice.class",
-          "hash": "15557582870148942317"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/service/impl/RachaServiceImpl.class",
-          "hash": "9220116085501691179"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/service/RachaService.class",
-          "hash": "274566659450575238"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/service/impl/UserServiceImpl.class",
-          "hash": "7491661810546701286"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/repository/UserRepository.class",
-          "hash": "1719393589871969965"
-        },
-        {
-          "file": "target/classes/ifsul/agileproject/rachadinha/service/UserService.class",
-          "hash": "17469636520847054975"
-        },
-        {
-          "file": "target/classes/application.properties",
-          "hash": "6032560235209762617"
-        },
-        {
-          "file": ".nx/workspace-data/d/server-process.json",
-          "hash": "11320741855651740510"
+          "file": "apps/agile-project-fe-e2e/tsconfig.json",
+          "hash": "16675564389721969841"
         }
       ],
       "agile-project-fe": [
@@ -705,14 +701,14 @@
         },
         {
           "file": "apps/agile-project-fe/src/app/routes/login/login.stories.tsx",
-          "hash": "15743606587703465187",
+          "hash": "6611479019606728344",
           "deps": [
             "npm:@tanstack/react-query"
           ]
         },
         {
           "file": "apps/agile-project-fe/src/app/routes/login/login.tsx",
-          "hash": "729004420386159608",
+          "hash": "5558249055381399135",
           "deps": [
             "npm:react"
           ]

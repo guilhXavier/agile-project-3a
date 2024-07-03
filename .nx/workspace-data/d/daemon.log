@@ -1827,3 +1827,455 @@
 [NX Daemon Server] - 2024-07-03T00:20:46.440Z - [REQUEST]: 
 [NX Daemon Server] - 2024-07-03T00:20:46.669Z - Time taken for 'hash changed files from watcher' 10.70380000025034ms
 [NX Daemon Server] - 2024-07-03T00:20:46.826Z - Time taken for 'build-project-configs' 296.8047000002116ms
+[NX Daemon Server] - 2024-07-03T00:20:47.170Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T00:20:47.200Z - [WATCHER]: tsconfig.base.json was modified
+[NX Daemon Server] - 2024-07-03T00:20:47.200Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:20:47.402Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T00:20:47.402Z - [REQUEST]: tsconfig.base.json
+[NX Daemon Server] - 2024-07-03T00:20:47.402Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:20:47.557Z - Time taken for 'hash changed files from watcher' 0.28110000025480986ms
+[NX Daemon Server] - 2024-07-03T00:20:47.623Z - [REQUEST]: Responding to the client. handleHashTasks
+[NX Daemon Server] - 2024-07-03T00:20:47.623Z - Done responding to the client handleHashTasks
+[NX Daemon Server] - 2024-07-03T00:20:47.623Z - Handled HASH_TASKS. Handling time: 19. Response time: 0.
+[NX Daemon Server] - 2024-07-03T00:20:47.634Z - [REQUEST]: Responding to the client. handleWriteTaskRunsToHistory
+[NX Daemon Server] - 2024-07-03T00:20:47.634Z - Done responding to the client handleWriteTaskRunsToHistory
+[NX Daemon Server] - 2024-07-03T00:20:47.634Z - Handled WRITE_TASK_RUNS_TO_HISTORY. Handling time: 3. Response time: 0.
+[NX Daemon Server] - 2024-07-03T00:20:47.637Z - [REQUEST]: Responding to the client. handleGetTaskHistoryForHashes
+[NX Daemon Server] - 2024-07-03T00:20:47.637Z - Done responding to the client handleGetTaskHistoryForHashes
+[NX Daemon Server] - 2024-07-03T00:20:47.637Z - Handled GET_TASK_HISTORY_FOR_HASHES. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-07-03T00:20:47.641Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:20:48.205Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T00:20:48.205Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:20:48.205Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T00:20:48.207Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T00:20:48.208Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T00:20:48.209Z - Time taken for 'total for creating and serializing project graph' 0.5408999999053776ms
+[NX Daemon Server] - 2024-07-03T00:20:48.209Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T00:20:48.209Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 0. Response time: 2.
+[NX Daemon Server] - 2024-07-03T00:20:48.220Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:20:48.220Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:20:48.220Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-03T00:20:48.221Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:23:17.131Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T00:23:17.131Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:23:17.132Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T00:23:17.140Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T00:23:17.141Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T00:23:17.142Z - Time taken for 'total for creating and serializing project graph' 0.7733000000007451ms
+[NX Daemon Server] - 2024-07-03T00:23:17.142Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T00:23:17.143Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 2.
+[NX Daemon Server] - 2024-07-03T00:23:17.153Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:23:17.153Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:23:17.153Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-03T00:23:17.155Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:23:24.612Z - [WATCHER]: 0 file(s) created or restored, 9 file(s) modified, 28 file(s) deleted
+[NX Daemon Server] - 2024-07-03T00:23:24.614Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:23:24.723Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T00:23:24.725Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:23:24.725Z - [REQUEST]: target/classes/application.properties,target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha.class,target/classes/ifsul/agileproject/rachadinha/repository/UserRepository.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/UserDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/UserLoginDTO.class,target/classes/ifsul/agileproject/rachadinha/repository/RachaRepository.class,target/classes/ifsul/agileproject/rachadinha/controller/UserController.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/UserRespostaDTO.class,target/classes/ifsul/agileproject/rachadinha/repository,target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaResponseDTO.class,target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundException.class,target/classes/ifsul/agileproject/rachadinha/controller/RachaController.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/Status.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaDTO.class,target/classes/ifsul/agileproject/rachadinha/mapper/UserMapper.class,target/classes/ifsul/agileproject/rachadinha/service/impl/UserServiceImpl.class,target/classes/ifsul/agileproject/rachadinha/service/UserService.class,target/classes/ifsul/agileproject/rachadinha/service/impl,target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaRegisterDTO.class,target/classes/ifsul/agileproject/rachadinha/RachadinhaApplication.class,target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundAdvice.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha$RachaBuilder.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/User$UserBuilder.class,target/classes/ifsul/agileproject/rachadinha/service/impl/RachaServiceImpl.class,target/classes/ifsul/agileproject/rachadinha/mapper/RachaMapper.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/User.class,target/classes/ifsul/agileproject/rachadinha/service/RachaService.class,target/classes/ifsul/agileproject/rachadinha/service
+[NX Daemon Server] - 2024-07-03T00:23:24.978Z - Time taken for 'hash changed files from watcher' 0.4561999998986721ms
+[NX Daemon Server] - 2024-07-03T00:23:25.286Z - [WATCHER]: 0 file(s) created or restored, 6 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T00:23:25.289Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:23:25.358Z - [WATCHER]: 0 file(s) created or restored, 4 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T00:23:25.444Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:23:25.450Z - [WATCHER]: 0 file(s) created or restored, 5 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T00:23:25.580Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T00:23:25.580Z - [REQUEST]: target/classes/ifsul/agileproject/rachadinha/RachadinhaApplication.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaRegisterDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaResponseDTO.class,target/classes/ifsul/agileproject/rachadinha/controller/RachaController.class,target/classes/ifsul/agileproject/rachadinha/controller/UserController.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/UserDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/UserRespostaDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/UserLoginDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/User.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/User$UserBuilder.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha$RachaBuilder.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/Status.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha.class
+[NX Daemon Server] - 2024-07-03T00:23:25.580Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:23:25.972Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:23:25.973Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:23:25.975Z - [WATCHER]: 0 file(s) created or restored, 10 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T00:23:25.978Z - [WATCHER]: 0 file(s) created or restored, 3 file(s) modified, 3 file(s) deleted
+[NX Daemon Server] - 2024-07-03T00:23:25.982Z - Time taken for 'hash changed files from watcher' 47.5973000000231ms
+[NX Daemon Server] - 2024-07-03T00:23:26.216Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:23:26.220Z - [WATCHER]: 0 file(s) created or restored, 3 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T00:23:26.388Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T00:23:26.388Z - [REQUEST]: target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundException.class,target/classes/ifsul/agileproject/rachadinha/service/RachaService.class,target/classes/ifsul/agileproject/rachadinha/service/impl/UserServiceImpl.class,target/classes/ifsul/agileproject/rachadinha/service/UserService.class,target/classes/ifsul/agileproject/rachadinha/mapper/UserMapper.class,target/classes/ifsul/agileproject/rachadinha/service/impl/RachaServiceImpl.class,target/classes/ifsul/agileproject/rachadinha/mapper/RachaMapper.class,target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundAdvice.class,target/classes/ifsul/agileproject/rachadinha/repository/RachaRepository.class,target/classes/ifsul/agileproject/rachadinha/repository/UserRepository.class,target/test-classes/ifsul/agileproject/rachadinha/UserTest.class,target/test-classes/ifsul/agileproject/rachadinha/RachadinhaApplicationTests.class,target/test-classes/ifsul/agileproject/rachadinha/RachaTest.class
+[NX Daemon Server] - 2024-07-03T00:23:26.388Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:23:26.629Z - [WATCHER]: target/classes/application.properties was modified
+[NX Daemon Server] - 2024-07-03T00:23:26.630Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:23:26.630Z - Time taken for 'hash changed files from watcher' 4.991500000003725ms
+[NX Daemon Server] - 2024-07-03T00:23:27.440Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T00:23:27.440Z - [REQUEST]: target/classes/application.properties
+[NX Daemon Server] - 2024-07-03T00:23:27.440Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:23:27.541Z - Time taken for 'hash changed files from watcher' 0.37609999999403954ms
+[NX Daemon Server] - 2024-07-03T00:23:27.581Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T00:23:27.582Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:23:27.582Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T00:23:27.583Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T00:23:27.584Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T00:23:27.585Z - Time taken for 'total for creating and serializing project graph' 0.4484000001102686ms
+[NX Daemon Server] - 2024-07-03T00:23:27.585Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T00:23:27.586Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 2.
+[NX Daemon Server] - 2024-07-03T00:23:27.596Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:23:27.597Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:23:27.597Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-07-03T00:23:27.598Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:30:01.609Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:30:01.615Z - [WATCHER]: .gitignore was modified
+[NX Daemon Server] - 2024-07-03T00:30:01.615Z - [WATCHER]: Stopping the watcher for C:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (sources)
+[NX Daemon Server] - 2024-07-03T00:30:01.615Z - [WATCHER]: Stopping the watcher for C:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (outputs)
+[NX Daemon Server] - 2024-07-03T00:30:01.615Z - Server stopped because: "Stopping the daemon the set of ignored files changed (native)"
+[NX Daemon Server] - 2024-07-03T00:30:03.380Z - Started listening on: \\.\pipe\nx\C:\Users\Mmatt\AppData\Local\Temp\825ae739f37544daa90a\d.sock
+[NX Daemon Server] - 2024-07-03T00:30:03.385Z - [WATCHER]: Subscribed to changes within: c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (native)
+[NX Daemon Server] - 2024-07-03T00:30:03.386Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:30:03.386Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T00:30:03.387Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:30:03.390Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T00:30:04.994Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T00:30:04.994Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:30:04.994Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:30:08.004Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T00:30:08.008Z - Time taken for 'total for creating and serializing project graph' 4613.939600000158ms
+[NX Daemon Server] - 2024-07-03T00:30:08.011Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T00:30:08.011Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 4614. Response time: 7.
+[NX Daemon Server] - 2024-07-03T00:30:08.020Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:30:08.020Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:30:08.020Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-03T00:30:08.021Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T00:30:57.285Z - [WATCHER]: .gitignore was modified
+[NX Daemon Server] - 2024-07-03T00:30:57.286Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:30:57.286Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (sources)
+[NX Daemon Server] - 2024-07-03T00:30:57.286Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (outputs)
+[NX Daemon Server] - 2024-07-03T00:30:57.286Z - Server stopped because: "Stopping the daemon the set of ignored files changed (native)"
+[NX Daemon Server] - 2024-07-03T00:30:58.724Z - Started listening on: \\.\pipe\nx\C:\Users\Mmatt\AppData\Local\Temp\825ae739f37544daa90a\d.sock
+[NX Daemon Server] - 2024-07-03T00:30:58.728Z - [WATCHER]: Subscribed to changes within: c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (native)
+[NX Daemon Server] - 2024-07-03T00:30:58.733Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:30:58.735Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T00:30:58.735Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:30:58.738Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T00:30:59.697Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T00:30:59.697Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:30:59.697Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:31:01.739Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T00:31:01.741Z - Time taken for 'total for creating and serializing project graph' 3000.9262999985367ms
+[NX Daemon Server] - 2024-07-03T00:31:01.749Z - [WATCHER]: .gitignore was modified
+[NX Daemon Server] - 2024-07-03T00:31:01.750Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:31:01.750Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T00:31:01.750Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 3002. Response time: 11.
+[NX Daemon Server] - 2024-07-03T00:31:01.751Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:31:01.751Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (sources)
+[NX Daemon Server] - 2024-07-03T00:31:01.752Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:31:01.752Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-07-03T00:31:01.752Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (outputs)
+[NX Daemon Server] - 2024-07-03T00:31:01.752Z - Server stopped because: "Stopping the daemon the set of ignored files changed (native)"
+[NX Daemon Server] - 2024-07-03T00:31:02.137Z - Started listening on: \\.\pipe\nx\C:\Users\Mmatt\AppData\Local\Temp\825ae739f37544daa90a\d.sock
+[NX Daemon Server] - 2024-07-03T00:31:02.140Z - [WATCHER]: Subscribed to changes within: c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (native)
+[NX Daemon Server] - 2024-07-03T00:31:02.147Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:31:02.149Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T00:31:02.149Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:31:02.151Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T00:31:03.076Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T00:31:03.076Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:31:03.076Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:31:03.345Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T00:31:03.347Z - Time taken for 'total for creating and serializing project graph' 1194.159699998796ms
+[NX Daemon Server] - 2024-07-03T00:31:03.347Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T00:31:03.347Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1195. Response time: 2.
+[NX Daemon Server] - 2024-07-03T00:31:03.353Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:31:03.353Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:31:03.353Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-07-03T00:31:03.354Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T00:31:17.006Z - [WATCHER]: .gitignore was modified
+[NX Daemon Server] - 2024-07-03T00:31:17.006Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T00:31:17.006Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (sources)
+[NX Daemon Server] - 2024-07-03T00:31:17.007Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (outputs)
+[NX Daemon Server] - 2024-07-03T00:31:17.007Z - Server stopped because: "Stopping the daemon the set of ignored files changed (native)"
+[NX Daemon Server] - 2024-07-03T00:31:18.364Z - Started listening on: \\.\pipe\nx\C:\Users\Mmatt\AppData\Local\Temp\825ae739f37544daa90a\d.sock
+[NX Daemon Server] - 2024-07-03T00:31:18.368Z - [WATCHER]: Subscribed to changes within: c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (native)
+[NX Daemon Server] - 2024-07-03T00:31:18.371Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:31:18.374Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T00:31:18.374Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T00:31:18.377Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T00:31:19.412Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T00:31:19.412Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:31:19.412Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T00:31:19.710Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T00:31:19.714Z - Time taken for 'total for creating and serializing project graph' 1333.7626000009477ms
+[NX Daemon Server] - 2024-07-03T00:31:19.714Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T00:31:19.715Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1334. Response time: 5.
+[NX Daemon Server] - 2024-07-03T00:31:19.722Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:31:19.723Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T00:31:19.723Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-07-03T00:31:19.723Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T00:55:46.359Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:14.644Z - [WATCHER]: 0 file(s) created or restored, 3 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:14.645Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:14.703Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:14.705Z - [WATCHER]: 0 file(s) created or restored, 8 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:14.759Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:09:14.759Z - [REQUEST]: package-lock.json,README.md,nx.json,.npmrc,.prettierignore,imagem-if.png,mvnw.cmd,commitlint.config.js,mvnw,.prettierrc,create.sql
+[NX Daemon Server] - 2024-07-03T01:09:14.759Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:09:14.904Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:14.906Z - [WATCHER]: 0 file(s) created or restored, 6 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:14.907Z - Time taken for 'hash changed files from watcher' 1.7806000001728535ms
+[NX Daemon Server] - 2024-07-03T01:09:14.958Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:14.960Z - [WATCHER]: 0 file(s) created or restored, 3 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:15.122Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:09:15.122Z - [REQUEST]: .vscode/extensions.json,.editorconfig,.eslintrc.json,.lintstagedrc,.husky/commit-msg,.husky/pre-commit,.mvn/wrapper/maven-wrapper.jar,.mvn/wrapper/maven-wrapper.properties,apps/agile-project-fe/tsconfig.storybook.json
+[NX Daemon Server] - 2024-07-03T01:09:15.122Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:09:15.229Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:15.231Z - [WATCHER]: 0 file(s) created or restored, 6 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:15.232Z - Time taken for 'hash changed files from watcher' 7.820600001141429ms
+[NX Daemon Server] - 2024-07-03T01:09:15.262Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:15.265Z - [WATCHER]: 0 file(s) created or restored, 5 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:15.326Z - [WATCHER]: 0 file(s) created or restored, 5 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:15.327Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:15.387Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:15.389Z - [WATCHER]: 0 file(s) created or restored, 7 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:15.454Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:15.667Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:09:15.667Z - [REQUEST]: apps/agile-project-fe/project.json,apps/agile-project-fe/index.html,apps/agile-project-fe/.eslintrc.json,apps/agile-project-fe/tsconfig.spec.json,apps/agile-project-fe/tsconfig.json,apps/agile-project-fe/tsconfig.app.json,apps/agile-project-fe/.storybook/preview.ts,apps/agile-project-fe-e2e/playwright.config.ts,apps/agile-project-fe-e2e/tsconfig.json,apps/agile-project-fe-e2e/project.json,apps/agile-project-fe-e2e/.eslintrc.json,apps/agile-project-fe-e2e/src/example.spec.ts,apps/agile-project-fe/.storybook/main.ts,apps/agile-project-fe/src/app/store/index.ts,apps/agile-project-fe/public/favicon.ico,apps/agile-project-fe/src/app/types/index.ts,target/classes/ifsul/agileproject/rachadinha/RachadinhaApplication.class,apps/agile-project-fe/src/app/components/button/button.stories.tsx,apps/agile-project-fe/src/app/components/button/button.spec.tsx,apps/agile-project-fe/src/app/routes/sign-up/sign-up.spec.tsx,src/test/java/ifsul/agileproject/rachadinha/RachadinhaApplicationTests.java,qodana.yaml,apps/agile-project-fe/src/app/routes/login/login.spec.tsx
+[NX Daemon Server] - 2024-07-03T01:09:15.667Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:09:15.822Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:15.822Z - Time taken for 'hash changed files from watcher' 24.027800001204014ms
+[NX Daemon Server] - 2024-07-03T01:09:16.412Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:09:16.412Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:09:16.412Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:09:16.415Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:09:16.415Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:09:16.418Z - Time taken for 'total for creating and serializing project graph' 0.6436000000685453ms
+[NX Daemon Server] - 2024-07-03T01:09:16.419Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T01:09:16.419Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 0. Response time: 4.
+[NX Daemon Server] - 2024-07-03T01:09:16.431Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:09:16.431Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:09:16.431Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-07-03T01:09:16.432Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:09:26.814Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:26.816Z - [WATCHER]: 0 file(s) created or restored, 4 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:26.924Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:09:26.924Z - [REQUEST]: apps/coverage/agile-project-fe/sorter.js,apps/coverage/agile-project-fe/prettify.js,apps/coverage/agile-project-fe/useForm.ts.html,apps/coverage/agile-project-fe/sort-arrow-sprite.png
+[NX Daemon Server] - 2024-07-03T01:09:26.924Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:09:27.022Z - Time taken for 'hash changed files from watcher' 0.43479999899864197ms
+[NX Daemon Server] - 2024-07-03T01:09:27.047Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:27.049Z - [WATCHER]: apps/coverage/agile-project-fe/prettify.css was modified
+[NX Daemon Server] - 2024-07-03T01:09:27.250Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:09:27.250Z - [REQUEST]: apps/coverage/agile-project-fe/prettify.css
+[NX Daemon Server] - 2024-07-03T01:09:27.250Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:09:27.357Z - [WATCHER]: 0 file(s) created or restored, 6 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:27.358Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:27.358Z - Time taken for 'hash changed files from watcher' 0.31510000117123127ms
+[NX Daemon Server] - 2024-07-03T01:09:27.729Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:27.731Z - [WATCHER]: apps/agile-project-fe/src/app/mocks/node.ts was modified
+[NX Daemon Server] - 2024-07-03T01:09:27.770Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:09:27.770Z - [REQUEST]: apps/coverage/agile-project-fe/block-navigation.js,apps/coverage/agile-project-fe/base.css,apps/coverage/agile-project-fe/index.html,apps/coverage/agile-project-fe/favicon.png,apps/coverage/agile-project-fe/coverage-final.json,apps/coverage/agile-project-fe/clover.xml,apps/agile-project-fe/src/app/mocks/node.ts
+[NX Daemon Server] - 2024-07-03T01:09:27.770Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:09:27.876Z - Time taken for 'hash changed files from watcher' 10.16980000026524ms
+[NX Daemon Server] - 2024-07-03T01:09:27.959Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:27.962Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:28.163Z - [WATCHER]: 0 file(s) created or restored, 4 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:28.164Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:28.439Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:28.440Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:28.533Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:28.533Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:28.644Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:28.646Z - [WATCHER]: 0 file(s) created or restored, 3 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:28.765Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:09:28.765Z - [REQUEST]: target/test-classes/ifsul/agileproject/rachadinha/UserTest.class,target/test-classes/ifsul/agileproject/rachadinha/RachaTest.class,apps/agile-project-fe/src/app/api/useRegister/useRegister.tsx,apps/agile-project-fe/src/app/api/useRegister/useRegister.spec.tsx,apps/agile-project-fe/src/app/api/useLogin/useLogin.tsx,apps/agile-project-fe/src/app/api/useLogin/useLogin.spec.tsx,apps/agile-project-fe/src/app/hooks/useForm/useForm.spec.ts,apps/agile-project-fe/src/app/hooks/useForm/useForm.ts,src/test/java/ifsul/agileproject/rachadinha/RachaTest.java,src/test/java/ifsul/agileproject/rachadinha/UserTest.java,target/classes/ifsul/agileproject/rachadinha/controller/RachaController.class,target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundException.class,target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundAdvice.class
+[NX Daemon Server] - 2024-07-03T01:09:28.766Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:09:28.879Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:28.879Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:28.881Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:28.882Z - [WATCHER]: target/classes/ifsul/agileproject/rachadinha/repository/RachaRepository.class was modified
+[NX Daemon Server] - 2024-07-03T01:09:28.882Z - Time taken for 'hash changed files from watcher' 0.9222999997437ms
+[NX Daemon Server] - 2024-07-03T01:09:28.969Z - [WATCHER]: target/classes/ifsul/agileproject/rachadinha/service/RachaService.class was modified
+[NX Daemon Server] - 2024-07-03T01:09:28.970Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:29.193Z - [WATCHER]: 0 file(s) created or restored, 5 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:29.193Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:29.265Z - [WATCHER]: src/main/java/ifsul/agileproject/rachadinha/repository/RachaRepository.java was modified
+[NX Daemon Server] - 2024-07-03T01:09:29.265Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:29.450Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:29.451Z - [WATCHER]: src/main/java/ifsul/agileproject/rachadinha/service/RachaService.java was modified
+[NX Daemon Server] - 2024-07-03T01:09:29.544Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:29.545Z - [WATCHER]: target/classes/ifsul/agileproject/rachadinha/domain/dto/UserRespostaDTO.class was modified
+[NX Daemon Server] - 2024-07-03T01:09:29.623Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:29.624Z - [WATCHER]: 0 file(s) created or restored, 3 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:29.716Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:29.717Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:29.827Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:29.827Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:29.950Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:29.951Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:30.026Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:30.027Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:30.120Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:30.122Z - [WATCHER]: src/main/java/ifsul/agileproject/rachadinha/domain/dto/UserRespostaDTO.java was modified
+[NX Daemon Server] - 2024-07-03T01:09:30.182Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:30.183Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:30.276Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:30.278Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:30.371Z - [WATCHER]: 0 file(s) created or restored, 2 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:30.371Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:30.431Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:30.432Z - [WATCHER]: src/main/java/ifsul/agileproject/rachadinha/domain/entity/Racha.java was modified
+[NX Daemon Server] - 2024-07-03T01:09:30.495Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:09:30.495Z - [REQUEST]: target/classes/ifsul/agileproject/rachadinha/mapper/RachaMapper.class,target/classes/ifsul/agileproject/rachadinha/mapper/UserMapper.class,target/classes/ifsul/agileproject/rachadinha/repository/RachaRepository.class,target/classes/ifsul/agileproject/rachadinha/service/RachaService.class,src/main/java/ifsul/agileproject/rachadinha/mapper/RachaMapper.java,src/main/java/ifsul/agileproject/rachadinha/exceptions/UserNotFoundException.java,src/main/java/ifsul/agileproject/rachadinha/exceptions/UserNotFoundAdvice.java,src/main/java/ifsul/agileproject/rachadinha/controller/RachaController.java,src/main/java/ifsul/agileproject/rachadinha/mapper/UserMapper.java,src/main/java/ifsul/agileproject/rachadinha/repository/RachaRepository.java,src/main/java/ifsul/agileproject/rachadinha/service/RachaService.java,target/classes/ifsul/agileproject/rachadinha/domain/dto/UserRespostaDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaResponseDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/UserDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/UserLoginDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaRegisterDTO.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/User$UserBuilder.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/Status.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha$RachaBuilder.class,target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha.class,target/classes/ifsul/agileproject/rachadinha/service/impl/UserServiceImpl.class,target/classes/ifsul/agileproject/rachadinha/service/impl/RachaServiceImpl.class,src/main/java/ifsul/agileproject/rachadinha/domain/dto/UserRespostaDTO.java,src/main/java/ifsul/agileproject/rachadinha/domain/dto/UserDTO.java,src/main/java/ifsul/agileproject/rachadinha/domain/dto/UserLoginDTO.java,src/main/java/ifsul/agileproject/rachadinha/domain/dto/RachaRegisterDTO.java,src/main/java/ifsul/agileproject/rachadinha/domain/dto/RachaResponseDTO.java,src/main/java/ifsul/agileproject/rachadinha/domain/entity/Status.java,src/main/java/ifsul/agileproject/rachadinha/domain/dto/RachaDTO.java,src/main/java/ifsul/agileproject/rachadinha/domain/entity/Racha.java
+[NX Daemon Server] - 2024-07-03T01:09:30.495Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:09:30.595Z - [WATCHER]: src/main/java/ifsul/agileproject/rachadinha/service/impl/UserServiceImpl.java was modified
+[NX Daemon Server] - 2024-07-03T01:09:30.595Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:30.596Z - Time taken for 'hash changed files from watcher' 1.0603999998420477ms
+[NX Daemon Server] - 2024-07-03T01:09:30.681Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:30.683Z - [WATCHER]: 0 file(s) created or restored, 3 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:30.855Z - [WATCHER]: 0 file(s) created or restored, 3 file(s) modified, 0 file(s) deleted
+[NX Daemon Server] - 2024-07-03T01:09:30.855Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:09:30.856Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (sources)
+[NX Daemon Server] - 2024-07-03T01:09:30.856Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (outputs)
+[NX Daemon Server] - 2024-07-03T01:09:30.856Z - Server stopped because: "Stopping the daemon the set of ignored files changed (native)"
+[NX Daemon Server] - 2024-07-03T01:09:34.278Z - Started listening on: \\.\pipe\nx\C:\Users\Mmatt\AppData\Local\Temp\825ae739f37544daa90a\d.sock
+[NX Daemon Server] - 2024-07-03T01:09:34.283Z - [WATCHER]: Subscribed to changes within: c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (native)
+[NX Daemon Server] - 2024-07-03T01:09:34.285Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:09:34.286Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T01:09:34.287Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:09:34.290Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:09:35.755Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:09:35.755Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:09:35.755Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:09:36.086Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:09:36.088Z - Time taken for 'total for creating and serializing project graph' 1795.9176000002772ms
+[NX Daemon Server] - 2024-07-03T01:09:36.088Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T01:09:36.088Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1796. Response time: 3.
+[NX Daemon Server] - 2024-07-03T01:09:36.095Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:09:36.096Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:09:36.096Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-07-03T01:09:36.096Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:15:40.095Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:15:40.103Z - [WATCHER]: .gitignore was modified
+[NX Daemon Server] - 2024-07-03T01:15:40.103Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (sources)
+[NX Daemon Server] - 2024-07-03T01:15:40.104Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (outputs)
+[NX Daemon Server] - 2024-07-03T01:15:40.104Z - Server stopped because: "Stopping the daemon the set of ignored files changed (native)"
+[NX Daemon Server] - 2024-07-03T01:15:41.447Z - Started listening on: \\.\pipe\nx\C:\Users\Mmatt\AppData\Local\Temp\825ae739f37544daa90a\d.sock
+[NX Daemon Server] - 2024-07-03T01:15:41.450Z - [WATCHER]: Subscribed to changes within: c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (native)
+[NX Daemon Server] - 2024-07-03T01:15:41.453Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:15:41.455Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:15:41.455Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:15:41.457Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:15:42.475Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:15:42.475Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:15:42.475Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:15:44.720Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:15:44.723Z - Time taken for 'total for creating and serializing project graph' 3262.1008999980986ms
+[NX Daemon Server] - 2024-07-03T01:15:44.731Z - [WATCHER]: .gitignore was modified
+[NX Daemon Server] - 2024-07-03T01:15:44.731Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:15:44.731Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T01:15:44.731Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 3263. Response time: 11.
+[NX Daemon Server] - 2024-07-03T01:15:44.732Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:15:44.734Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:15:44.734Z - [REQUEST]: .gitignore
+[NX Daemon Server] - 2024-07-03T01:15:44.734Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:15:44.816Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:15:44.818Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (sources)
+[NX Daemon Server] - 2024-07-03T01:15:44.818Z - Time taken for 'total for creating and serializing project graph' 84.03139999881387ms
+[NX Daemon Server] - 2024-07-03T01:15:44.818Z - [WATCHER]: Stopping the watcher for c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (outputs)
+[NX Daemon Server] - 2024-07-03T01:15:44.818Z - Server stopped because: "Stopping the daemon the set of ignored files changed (native)"
+[NX Daemon Server] - 2024-07-03T01:15:46.140Z - Started listening on: \\.\pipe\nx\C:\Users\Mmatt\AppData\Local\Temp\825ae739f37544daa90a\d.sock
+[NX Daemon Server] - 2024-07-03T01:15:46.144Z - [WATCHER]: Subscribed to changes within: c:\Users\Mmatt\OneDrive\Documentos\GitHub\agile-project-3a (native)
+[NX Daemon Server] - 2024-07-03T01:15:46.152Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:15:46.153Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:15:46.153Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:15:46.155Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:15:47.168Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:15:47.168Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:15:47.168Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:15:47.510Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:15:47.513Z - Time taken for 'total for creating and serializing project graph' 1355.2124000005424ms
+[NX Daemon Server] - 2024-07-03T01:15:47.513Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T01:15:47.513Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1355. Response time: 3.
+[NX Daemon Server] - 2024-07-03T01:15:47.522Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:15:47.522Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:15:47.522Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-07-03T01:15:47.523Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:15:48.863Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:15:48.864Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:15:48.864Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:15:48.865Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:15:48.865Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:15:48.867Z - Time taken for 'total for creating and serializing project graph' 0.3277000002563ms
+[NX Daemon Server] - 2024-07-03T01:15:48.867Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T01:15:48.867Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 0. Response time: 2.
+[NX Daemon Server] - 2024-07-03T01:15:48.872Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:15:48.872Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:15:48.872Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-07-03T01:15:48.873Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:15:59.985Z - [WATCHER]: _tmp_25720_80473359cd0c40b9c4c88a0c104e22fb was deleted
+[NX Daemon Server] - 2024-07-03T01:15:59.985Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:16:00.094Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:16:00.094Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:16:00.094Z - [REQUEST]: _tmp_25720_80473359cd0c40b9c4c88a0c104e22fb
+[NX Daemon Server] - 2024-07-03T01:16:00.190Z - Time taken for 'hash changed files from watcher' 0.22219999879598618ms
+[NX Daemon Server] - 2024-07-03T01:16:00.988Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:16:00.988Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:16:00.988Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:16:00.990Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:16:00.990Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:16:00.993Z - Time taken for 'total for creating and serializing project graph' 0.4299999997019768ms
+[NX Daemon Server] - 2024-07-03T01:16:00.993Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T01:16:00.993Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 0. Response time: 3.
+[NX Daemon Server] - 2024-07-03T01:16:00.998Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:16:00.999Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:16:00.999Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-07-03T01:16:00.999Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:16:07.979Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:16:07.980Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:16:07.980Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:16:07.985Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:16:07.986Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:16:07.988Z - Time taken for 'total for creating and serializing project graph' 0.6090999990701675ms
+[NX Daemon Server] - 2024-07-03T01:16:07.988Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T01:16:07.988Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 2.
+[NX Daemon Server] - 2024-07-03T01:16:08.062Z - [WATCHER]: tsconfig.base.json was modified
+[NX Daemon Server] - 2024-07-03T01:16:08.062Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:16:08.171Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:16:08.171Z - [REQUEST]: tsconfig.base.json
+[NX Daemon Server] - 2024-07-03T01:16:08.171Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:16:10.261Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:16:10.263Z - [WATCHER]: tsconfig.base.json was modified
+[NX Daemon Server] - 2024-07-03T01:16:10.264Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T01:16:10.264Z - Established a connection. Number of open connections: 3
+[NX Daemon Server] - 2024-07-03T01:16:10.265Z - Time taken for 'hash changed files from watcher' 0.32180000096559525ms
+[NX Daemon Server] - 2024-07-03T01:16:10.265Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-07-03T01:16:10.265Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:16:10.266Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:16:10.267Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:16:10.267Z - [REQUEST]: tsconfig.base.json
+[NX Daemon Server] - 2024-07-03T01:16:10.267Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:16:10.369Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:16:10.372Z - Time taken for 'total for creating and serializing project graph' 103.15460000187159ms
+[NX Daemon Server] - 2024-07-03T01:16:10.373Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T01:16:10.373Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 103. Response time: 4.
+[NX Daemon Server] - 2024-07-03T01:16:10.381Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:16:10.381Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:16:10.381Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-03T01:16:10.382Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:16:42.789Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:16:42.791Z - [WATCHER]: _tmp_24608_c48b7e76073b4aff85db5cedcd580e5f was deleted
+[NX Daemon Server] - 2024-07-03T01:16:42.898Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:16:42.898Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:16:42.898Z - [REQUEST]: _tmp_24608_c48b7e76073b4aff85db5cedcd580e5f
+[NX Daemon Server] - 2024-07-03T01:16:43.006Z - Time taken for 'hash changed files from watcher' 0.1794000007212162ms
+[NX Daemon Server] - 2024-07-03T01:16:43.807Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:16:43.807Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:16:43.807Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:16:43.808Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:16:43.809Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:16:43.810Z - Time taken for 'total for creating and serializing project graph' 0.39560000225901604ms
+[NX Daemon Server] - 2024-07-03T01:16:43.810Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T01:16:43.810Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 1.
+[NX Daemon Server] - 2024-07-03T01:16:43.817Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:16:43.817Z - Done responding to the client handleContextFileData
+[NX Daemon Server] - 2024-07-03T01:16:43.817Z - Handled GET_CONTEXT_FILE_DATA. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-07-03T01:16:43.817Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:16:47.009Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:16:47.010Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-03T01:16:47.011Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-03T01:16:47.013Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-03T01:16:47.014Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-03T01:16:47.016Z - Time taken for 'total for creating and serializing project graph' 0.9970999993383884ms
+[NX Daemon Server] - 2024-07-03T01:16:47.016Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-03T01:16:47.016Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1. Response time: 2.
+[NX Daemon Server] - 2024-07-03T01:16:47.093Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-03T01:16:47.095Z - [WATCHER]: tsconfig.base.json was modified
+[NX Daemon Server] - 2024-07-03T01:16:47.205Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-03T01:16:47.205Z - [REQUEST]: tsconfig.base.json
+[NX Daemon Server] - 2024-07-03T01:16:47.205Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-03T01:16:47.305Z - Time taken for 'hash changed files from watcher' 0.33660000190138817ms

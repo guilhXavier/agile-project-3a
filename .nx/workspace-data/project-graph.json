@@ -7,7 +7,10 @@
         "root": "apps/agile-project-fe-e2e",
         "metadata": {
           "targetGroups": {
-            "E2E (CI)": ["e2e-ci--src/example.spec.ts", "e2e-ci"]
+            "E2E (CI)": [
+              "e2e-ci--src/example.spec.ts",
+              "e2e-ci"
+            ]
           }
         },
         "targets": {
@@ -17,7 +20,9 @@
               "command": "playwright test"
             },
             "metadata": {
-              "technologies": ["playwright"],
+              "technologies": [
+                "playwright"
+              ],
               "description": "Runs Playwright Tests",
               "help": {
                 "command": "pnpm exec playwright test --help",
@@ -33,7 +38,9 @@
               "default",
               "^production",
               {
-                "externalDependencies": ["@playwright/test"]
+                "externalDependencies": [
+                  "@playwright/test"
+                ]
               }
             ],
             "outputs": [
@@ -49,7 +56,9 @@
               "command": "playwright test src/example.spec.ts"
             },
             "metadata": {
-              "technologies": ["playwright"],
+              "technologies": [
+                "playwright"
+              ],
               "description": "Runs Playwright Tests in src/example.spec.ts in CI",
               "help": {
                 "command": "pnpm exec playwright test --help",
@@ -65,7 +74,9 @@
               "default",
               "^production",
               {
-                "externalDependencies": ["@playwright/test"]
+                "externalDependencies": [
+                  "@playwright/test"
+                ]
               }
             ],
             "outputs": [
@@ -82,7 +93,9 @@
               "default",
               "^production",
               {
-                "externalDependencies": ["@playwright/test"]
+                "externalDependencies": [
+                  "@playwright/test"
+                ]
               }
             ],
             "outputs": [
@@ -97,7 +110,9 @@
               }
             ],
             "metadata": {
-              "technologies": ["playwright"],
+              "technologies": [
+                "playwright"
+              ],
               "description": "Runs Playwright Tests in CI",
               "nonAtomizedTarget": "e2e",
               "help": {
@@ -117,7 +132,9 @@
         "$schema": "../node_modules/nx/schemas/project-schema.json",
         "projectType": "application",
         "sourceRoot": "agile-project-fe-e2e/src",
-        "implicitDependencies": ["agile-project-fe"],
+        "implicitDependencies": [
+          "agile-project-fe"
+        ],
         "tags": []
       }
     },
@@ -135,17 +152,25 @@
               "command": "vite build"
             },
             "cache": true,
-            "dependsOn": ["^build"],
+            "dependsOn": [
+              "^build"
+            ],
             "inputs": [
               "production",
               "^production",
               {
-                "externalDependencies": ["vite"]
+                "externalDependencies": [
+                  "vite"
+                ]
               }
             ],
-            "outputs": ["{workspaceRoot}\\apps\\dist\\agile-project-fe"],
+            "outputs": [
+              "{workspaceRoot}\\apps\\dist\\agile-project-fe"
+            ],
             "metadata": {
-              "technologies": ["vite"],
+              "technologies": [
+                "vite"
+              ],
               "description": "Run Vite build",
               "help": {
                 "command": "pnpm exec vite build --help",
@@ -166,7 +191,9 @@
               "command": "vite serve"
             },
             "metadata": {
-              "technologies": ["vite"],
+              "technologies": [
+                "vite"
+              ],
               "description": "Starts Vite dev server",
               "help": {
                 "command": "pnpm exec vite --help",
@@ -186,7 +213,9 @@
               "command": "vite preview"
             },
             "metadata": {
-              "technologies": ["vite"],
+              "technologies": [
+                "vite"
+              ],
               "description": "Locally preview Vite production build",
               "help": {
                 "command": "pnpm exec vite preview --help",
@@ -218,15 +247,21 @@
               "default",
               "^production",
               {
-                "externalDependencies": ["vitest"]
+                "externalDependencies": [
+                  "vitest"
+                ]
               },
               {
                 "env": "CI"
               }
             ],
-            "outputs": ["{workspaceRoot}\\apps\\coverage\\agile-project-fe"],
+            "outputs": [
+              "{workspaceRoot}\\apps\\coverage\\agile-project-fe"
+            ],
             "metadata": {
-              "technologies": ["vite"],
+              "technologies": [
+                "vite"
+              ],
               "description": "Run Vite tests",
               "help": {
                 "command": "pnpm exec vitest --help",
@@ -257,7 +292,10 @@
               "production",
               "^production",
               {
-                "externalDependencies": ["storybook", "@storybook/test-runner"]
+                "externalDependencies": [
+                  "storybook",
+                  "@storybook/test-runner"
+                ]
               }
             ],
             "executor": "nx:run-commands",
@@ -278,7 +316,10 @@
             },
             "inputs": [
               {
-                "externalDependencies": ["storybook", "@storybook/test-runner"]
+                "externalDependencies": [
+                  "storybook",
+                  "@storybook/test-runner"
+                ]
               }
             ],
             "executor": "nx:run-commands",
@@ -318,12 +359,18 @@
               "{projectRoot}/eslintrc.json",
               "{workspaceRoot}/tools/eslint-rules/**/*",
               {
-                "externalDependencies": ["eslint"]
+                "externalDependencies": [
+                  "eslint"
+                ]
               }
             ],
-            "outputs": ["{options.outputFile}"],
+            "outputs": [
+              "{options.outputFile}"
+            ],
             "metadata": {
-              "technologies": ["eslint"],
+              "technologies": [
+                "eslint"
+              ],
               "description": "Runs ESLint on project",
               "help": {
                 "command": "pnpm exec eslint --help",
