@@ -14,11 +14,11 @@ export interface UseLoginReturn {
   isLoading: boolean;
 }
 
-export const useLogin = (loginForm: LoginForm) => {
+export const useLogin = (loginForm: LoginForm, isFormValid: boolean) => {
   const { data, isError, isSuccess, isLoading } = useQuery({
     queryKey: ['login'],
     queryFn: () => baseAxios.post('/login', loginForm),
-    enabled: !!loginForm.email && !!loginForm.password,
+    enabled: isFormValid,
   });
 
   return { data, isError, isSuccess, isLoading };
