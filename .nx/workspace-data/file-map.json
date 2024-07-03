@@ -1,0 +1,789 @@
+{
+  "version": "6.0",
+  "nxVersion": "19.4.0",
+  "deps": {
+    "@tanstack/react-query": "^5.29.0",
+    "axios": "^1.6.8",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-is": "18.2.0",
+    "react-router-dom": "6.11.2",
+    "styled-components": "5.3.6",
+    "zustand": "^4.5.2",
+    "@babel/plugin-syntax-jsx": "^7.24.1",
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
+    "@nrwl/eslint-plugin-nx": "^18.2.4",
+    "@nx/devkit": "18.0.8",
+    "@nx/eslint": "18.0.8",
+    "@nx/eslint-plugin": "18.0.8",
+    "@nx/js": "18.0.8",
+    "@nx/playwright": "18.0.8",
+    "@nx/react": "18.0.8",
+    "@nx/storybook": "18.0.8",
+    "@nx/vite": "18.0.8",
+    "@nx/web": "18.0.8",
+    "@nx/workspace": "18.0.8",
+    "@playwright/test": "^1.43.1",
+    "@storybook/addon-essentials": "7.5.3",
+    "@storybook/addon-interactions": "^7.5.3",
+    "@storybook/core-server": "7.5.3",
+    "@storybook/jest": "^0.2.3",
+    "@storybook/react": "7.5.3",
+    "@storybook/react-vite": "7.5.3",
+    "@storybook/test-runner": "^0.17.0",
+    "@storybook/testing-library": "^0.2.2",
+    "@swc-node/register": "~1.8.0",
+    "@swc/cli": "~0.1.62",
+    "@swc/core": "~1.3.85",
+    "@swc/helpers": "~0.5.2",
+    "@testing-library/react": "14.0.0",
+    "@types/node": "18.16.9",
+    "@types/react": "18.2.33",
+    "@types/react-dom": "18.2.14",
+    "@types/react-is": "18.2.2",
+    "@types/styled-components": "5.1.26",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "@vitejs/plugin-react": "^4.2.0",
+    "@vitest/coverage-v8": "^1.0.4",
+    "@vitest/ui": "^1.3.1",
+    "babel-plugin-styled-components": "1.10.7",
+    "eslint": "~8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-playwright": "^0.15.3",
+    "eslint-plugin-react": "7.32.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "^8.0.0",
+    "jsdom": "~22.1.0",
+    "lint-staged": "^15.2.2",
+    "msw": "^2.2.14",
+    "nx": "18.0.8",
+    "prettier": "^2.6.2",
+    "storybook": "^7.5.3",
+    "ts-node": "10.9.1",
+    "tslib": "^2.6.2",
+    "typescript": "~5.3.2",
+    "vite": "~5.0.0",
+    "vitest": "^1.5.0"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/vite/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "previewTargetName": "preview",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "serveStaticTargetName": "serve-static"
+      }
+    },
+    {
+      "name": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "name": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
+    },
+    {
+      "name": "@nx/storybook/plugin",
+      "options": {
+        "buildStorybookTargetName": "build-storybook",
+        "serveStorybookTargetName": "storybook",
+        "testStorybookTargetName": "test-storybook",
+        "staticStorybookTargetName": "static-storybook"
+      }
+    }
+  ],
+  "fileMap": {
+    "nonProjectFiles": [],
+    "projectFileMap": {
+      "agile-project-fe-e2e": [
+        {
+          "file": "apps/agile-project-fe-e2e/.eslintrc.json",
+          "hash": "15574607285654336286"
+        },
+        {
+          "file": "apps/agile-project-fe-e2e/playwright.config.ts",
+          "hash": "3757630474722516880",
+          "deps": [
+            "npm:@playwright/test",
+            "npm:@nx/devkit"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe-e2e/project.json",
+          "hash": "11009370777679163769"
+        },
+        {
+          "file": "apps/agile-project-fe-e2e/src/example.spec.ts",
+          "hash": "1909365745453809229",
+          "deps": [
+            "npm:@playwright/test"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe-e2e/tsconfig.json",
+          "hash": "16675564389721969841"
+        }
+      ],
+      "@agile-project-3a/source": [
+        {
+          "file": ".editorconfig",
+          "hash": "11532813898455409296"
+        },
+        {
+          "file": ".eslintrc.json",
+          "hash": "14747245247065113718"
+        },
+        {
+          "file": ".gitignore",
+          "hash": "1286155857531561205"
+        },
+        {
+          "file": ".husky/commit-msg",
+          "hash": "12621625064932971565"
+        },
+        {
+          "file": ".husky/pre-commit",
+          "hash": "8159355606113219106"
+        },
+        {
+          "file": ".lintstagedrc",
+          "hash": "16413720315337857793"
+        },
+        {
+          "file": ".mvn/wrapper/maven-wrapper.jar",
+          "hash": "5725047474660621134"
+        },
+        {
+          "file": ".mvn/wrapper/maven-wrapper.properties",
+          "hash": "15762343858126310518"
+        },
+        {
+          "file": ".npmrc",
+          "hash": "754837060302785938"
+        },
+        {
+          "file": ".prettierignore",
+          "hash": "2687824826588932174"
+        },
+        {
+          "file": ".prettierrc",
+          "hash": "6820402234827505055"
+        },
+        {
+          "file": ".vscode/extensions.json",
+          "hash": "3965415705659996554"
+        },
+        {
+          "file": "README.md",
+          "hash": "17949849879275332445"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/base.css",
+          "hash": "18292085993203541995"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/block-navigation.js",
+          "hash": "5892728563879948677"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/clover.xml",
+          "hash": "18431276357336838440"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/coverage-final.json",
+          "hash": "8020157361707287904"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/favicon.png",
+          "hash": "13402560043085226048"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/index.html",
+          "hash": "7247964655867670559"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/prettify.css",
+          "hash": "17770157073144456875"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/prettify.js",
+          "hash": "1601521580667755677"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/sort-arrow-sprite.png",
+          "hash": "254831142482329146"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/sorter.js",
+          "hash": "1752035799906701486"
+        },
+        {
+          "file": "apps/coverage/agile-project-fe/useForm.ts.html",
+          "hash": "6017328819671098739"
+        },
+        {
+          "file": "commitlint.config.js",
+          "hash": "14014965562667558644"
+        },
+        {
+          "file": "create.sql",
+          "hash": "10434905677876218978"
+        },
+        {
+          "file": "imagem-if.png",
+          "hash": "14764955654438875400"
+        },
+        {
+          "file": "mvnw",
+          "hash": "13112754472053139515"
+        },
+        {
+          "file": "mvnw.cmd",
+          "hash": "5038925673191127501"
+        },
+        {
+          "file": "nx.json",
+          "hash": "60079565881429647"
+        },
+        {
+          "file": "package-lock.json",
+          "hash": "1319289938264902451"
+        },
+        {
+          "file": "package.json",
+          "hash": "5884987195189635762",
+          "deps": [
+            "npm:@commitlint/cli",
+            "npm:@commitlint/config-conventional",
+            "npm:@nx/devkit",
+            "npm:@nx/eslint-plugin",
+            "npm:@nx/js",
+            "npm:@nx/react",
+            "npm:@nx/web",
+            "npm:@nx/workspace",
+            "npm:@playwright/test",
+            "npm:@storybook/addon-essentials",
+            "npm:@storybook/addon-interactions",
+            "npm:@storybook/core-server",
+            "npm:@storybook/jest",
+            "npm:@storybook/react",
+            "npm:@storybook/react-vite",
+            "npm:@storybook/test-runner",
+            "npm:@storybook/testing-library",
+            "npm:@swc-node/register",
+            "npm:@swc/cli",
+            "npm:@swc/core",
+            "npm:@swc/helpers",
+            "npm:@testing-library/react",
+            "npm:@types/node",
+            "npm:@types/react",
+            "npm:@types/react-dom",
+            "npm:@types/react-is",
+            "npm:@types/styled-components",
+            "npm:@typescript-eslint/eslint-plugin",
+            "npm:@typescript-eslint/parser",
+            "npm:@vitejs/plugin-react",
+            "npm:@vitest/coverage-v8",
+            "npm:@vitest/ui",
+            "npm:babel-plugin-styled-components",
+            "npm:eslint",
+            "npm:eslint-config-prettier",
+            "npm:eslint-plugin-import",
+            "npm:eslint-plugin-jsx-a11y",
+            "npm:eslint-plugin-playwright",
+            "npm:eslint-plugin-react",
+            "npm:eslint-plugin-react-hooks",
+            "npm:husky",
+            "npm:jsdom",
+            "npm:lint-staged",
+            "npm:msw",
+            "npm:prettier",
+            "npm:storybook",
+            "npm:ts-node",
+            "npm:tslib",
+            "npm:typescript",
+            "npm:vite",
+            "npm:vitest",
+            "npm:@tanstack/react-query",
+            "npm:axios",
+            "npm:react",
+            "npm:react-dom",
+            "npm:react-is",
+            "npm:react-router-dom",
+            "npm:styled-components",
+            "npm:zustand"
+          ]
+        },
+        {
+          "file": "pnpm-lock.yaml",
+          "hash": "12361617908921511038"
+        },
+        {
+          "file": "pom.xml",
+          "hash": "15999639362339162814"
+        },
+        {
+          "file": "qodana.yaml",
+          "hash": "6537176539207994096"
+        },
+        {
+          "file": "rachadinha.iml",
+          "hash": "1861678486265666964"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/RachadinhaApplication.java",
+          "hash": "11842160846004636108"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/controller/RachaController.java",
+          "hash": "4495642416123950917"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/controller/UserController.java",
+          "hash": "17440811088179096425"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/domain/dto/RachaDTO.java",
+          "hash": "16599026237146539582"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/domain/dto/RachaRegisterDTO.java",
+          "hash": "9754551425492953965"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/domain/dto/RachaResponseDTO.java",
+          "hash": "2299895464946292242"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/domain/dto/UserDTO.java",
+          "hash": "9688322371092010005"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/domain/dto/UserLoginDTO.java",
+          "hash": "16805439997988645511"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/domain/dto/UserRespostaDTO.java",
+          "hash": "13642979585545641883"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/domain/entity/Racha.java",
+          "hash": "1876731516129923389"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/domain/entity/Status.java",
+          "hash": "5590805322818098038"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/domain/entity/User.java",
+          "hash": "13265198476255720057"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/exceptions/UserNotFoundAdvice.java",
+          "hash": "14035262282173033580"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/exceptions/UserNotFoundException.java",
+          "hash": "13296300214010365167"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/mapper/RachaMapper.java",
+          "hash": "9411620463208493011"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/mapper/UserMapper.java",
+          "hash": "8790189302519426489"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/repository/RachaRepository.java",
+          "hash": "3511865219068274585"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/repository/UserRepository.java",
+          "hash": "10500737283928301978"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/service/RachaService.java",
+          "hash": "16469888567723650593"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/service/UserService.java",
+          "hash": "13662115613104208345"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/service/impl/RachaServiceImpl.java",
+          "hash": "606242524274836845"
+        },
+        {
+          "file": "src/main/java/ifsul/agileproject/rachadinha/service/impl/UserServiceImpl.java",
+          "hash": "6941240171402331702"
+        },
+        {
+          "file": "src/main/resources/application.properties",
+          "hash": "6032560235209762617"
+        },
+        {
+          "file": "src/test/java/ifsul/agileproject/rachadinha/RachaTest.java",
+          "hash": "4096168029531708011"
+        },
+        {
+          "file": "src/test/java/ifsul/agileproject/rachadinha/RachadinhaApplicationTests.java",
+          "hash": "12047176411635179481"
+        },
+        {
+          "file": "src/test/java/ifsul/agileproject/rachadinha/UserTest.java",
+          "hash": "4864658996689182149"
+        },
+        {
+          "file": "target/test-classes/ifsul/agileproject/rachadinha/RachaTest.class",
+          "hash": "11298927575323572777"
+        },
+        {
+          "file": "target/test-classes/ifsul/agileproject/rachadinha/RachadinhaApplicationTests.class",
+          "hash": "14588259244968893188"
+        },
+        {
+          "file": "target/test-classes/ifsul/agileproject/rachadinha/UserTest.class",
+          "hash": "15708752803887213316"
+        },
+        {
+          "file": "tsconfig.base.json",
+          "hash": "16936441711144470533"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaDTO.class",
+          "hash": "7498510581510616333"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/UserRespostaDTO.class",
+          "hash": "8061686737721371621"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/UserDTO.class",
+          "hash": "15776888622639467120"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaResponseDTO.class",
+          "hash": "11282591897384287973"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/controller/RachaController.class",
+          "hash": "16857409231355562838"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/controller/UserController.class",
+          "hash": "16228593322967524526"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha.class",
+          "hash": "6113255218676283329"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/RachadinhaApplication.class",
+          "hash": "2289855044073501619"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/RachaRegisterDTO.class",
+          "hash": "2498335610656733732"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/Racha$RachaBuilder.class",
+          "hash": "12137027895227339660"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/Status.class",
+          "hash": "18330774683299927177"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/dto/UserLoginDTO.class",
+          "hash": "11955578614892877261"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/User.class",
+          "hash": "7290906410943177358"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/domain/entity/User$UserBuilder.class",
+          "hash": "2634141923212215629"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/mapper/UserMapper.class",
+          "hash": "8148307587792992888"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/mapper/RachaMapper.class",
+          "hash": "17116102315437702989"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/repository/RachaRepository.class",
+          "hash": "5402182636170780073"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundException.class",
+          "hash": "5074924376154692443"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/exceptions/UserNotFoundAdvice.class",
+          "hash": "15557582870148942317"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/service/impl/RachaServiceImpl.class",
+          "hash": "9220116085501691179"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/service/RachaService.class",
+          "hash": "274566659450575238"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/service/impl/UserServiceImpl.class",
+          "hash": "7491661810546701286"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/repository/UserRepository.class",
+          "hash": "1719393589871969965"
+        },
+        {
+          "file": "target/classes/ifsul/agileproject/rachadinha/service/UserService.class",
+          "hash": "17469636520847054975"
+        },
+        {
+          "file": "target/classes/application.properties",
+          "hash": "6032560235209762617"
+        },
+        {
+          "file": ".nx/workspace-data/d/server-process.json",
+          "hash": "11320741855651740510"
+        }
+      ],
+      "agile-project-fe": [
+        {
+          "file": "apps/agile-project-fe/.eslintrc.json",
+          "hash": "6919653241462639034"
+        },
+        {
+          "file": "apps/agile-project-fe/.storybook/main.ts",
+          "hash": "13933858628442131256",
+          "deps": [
+            "npm:@storybook/react-vite"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/.storybook/preview.ts",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/agile-project-fe/index.html",
+          "hash": "1147338675754405821"
+        },
+        {
+          "file": "apps/agile-project-fe/project.json",
+          "hash": "1008020478868151347"
+        },
+        {
+          "file": "apps/agile-project-fe/public/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/api/index.ts",
+          "hash": "13793580715638663314",
+          "deps": [
+            "npm:@tanstack/react-query",
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/api/useLogin/useLogin.spec.tsx",
+          "hash": "15211540656828219962",
+          "deps": [
+            "npm:msw",
+            "npm:@testing-library/react",
+            "npm:@tanstack/react-query"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/api/useLogin/useLogin.tsx",
+          "hash": "11863629801032299232",
+          "deps": [
+            "npm:@tanstack/react-query",
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/api/useRegister/useRegister.spec.tsx",
+          "hash": "1866912209382776234",
+          "deps": [
+            "npm:msw",
+            "npm:@tanstack/react-query",
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/api/useRegister/useRegister.tsx",
+          "hash": "6529427039355235378",
+          "deps": [
+            "npm:@tanstack/react-query",
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/components/button/button.spec.tsx",
+          "hash": "9838632094671529061",
+          "deps": [
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/components/button/button.stories.tsx",
+          "hash": "17494879634598100350"
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/components/button/button.tsx",
+          "hash": "2551891428362312801",
+          "deps": [
+            "npm:react",
+            "npm:styled-components"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/components/input/input.spec.tsx",
+          "hash": "2283536539692090468",
+          "deps": [
+            "npm:@testing-library/react",
+            "npm:@storybook/react"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/components/input/input.stories.tsx",
+          "hash": "2538738597358893353"
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/components/input/input.tsx",
+          "hash": "5382665841915624779",
+          "deps": [
+            "npm:react",
+            "npm:styled-components"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/hooks/useForm/useForm.spec.ts",
+          "hash": "7383887944409656330",
+          "deps": [
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/hooks/useForm/useForm.ts",
+          "hash": "227330255482371490",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/mocks/node.ts",
+          "hash": "2909397448900424527",
+          "deps": [
+            "npm:msw"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/routes/login/login.spec.tsx",
+          "hash": "11495337604799962986",
+          "deps": [
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/routes/login/login.stories.tsx",
+          "hash": "15743606587703465187",
+          "deps": [
+            "npm:@tanstack/react-query"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/routes/login/login.tsx",
+          "hash": "729004420386159608",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/routes/sign-up/sign-up.spec.tsx",
+          "hash": "4533195356155690361",
+          "deps": [
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/routes/sign-up/sign-up.stories.tsx",
+          "hash": "3099928934490769909",
+          "deps": [
+            "npm:@tanstack/react-query"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/routes/sign-up/sign-up.tsx",
+          "hash": "18033773692527411468",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/store/index.ts",
+          "hash": "5012210424054015852",
+          "deps": [
+            "npm:zustand"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/src/app/types/index.ts",
+          "hash": "14787836155274155862"
+        },
+        {
+          "file": "apps/agile-project-fe/src/main.tsx",
+          "hash": "7148232411352060661",
+          "deps": [
+            "npm:react",
+            "npm:react-dom",
+            "npm:react-router-dom",
+            "npm:@tanstack/react-query"
+          ]
+        },
+        {
+          "file": "apps/agile-project-fe/tsconfig.app.json",
+          "hash": "6283473913218162664"
+        },
+        {
+          "file": "apps/agile-project-fe/tsconfig.json",
+          "hash": "14507580880385445611"
+        },
+        {
+          "file": "apps/agile-project-fe/tsconfig.spec.json",
+          "hash": "3196722816363976710"
+        },
+        {
+          "file": "apps/agile-project-fe/tsconfig.storybook.json",
+          "hash": "2971558230537140863"
+        },
+        {
+          "file": "apps/agile-project-fe/vite.config.ts",
+          "hash": "7747087891185367987",
+          "deps": [
+            "npm:vite",
+            "npm:@vitejs/plugin-react"
+          ]
+        }
+      ]
+    }
+  }
+}
