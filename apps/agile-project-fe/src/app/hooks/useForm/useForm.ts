@@ -27,6 +27,7 @@ export interface UseForm<T> {
   validation: Map<string, Validation>;
   get: (key: T) => string;
   set: (key: T, value: string) => void;
+  isValid: boolean;
 }
 
 export const useForm = <T>(schema: Schema): UseForm<T> => {
@@ -34,6 +35,7 @@ export const useForm = <T>(schema: Schema): UseForm<T> => {
   const [validation, setValidation] = React.useState(
     new Map<string, Validation>()
   );
+  const [isValid, setIsValid] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     const initialForm = new Map<T, string>();
@@ -43,7 +45,7 @@ export const useForm = <T>(schema: Schema): UseForm<T> => {
 
     keys.forEach((key) => {
       initialForm.set(key as T, '');
-      initialValidation.set(key, { isValid: true, message: '' });
+      initialValidation.set(key, { isValid: false, message: '' });
     });
 
     setForm(initialForm);
@@ -69,6 +71,11 @@ export const useForm = <T>(schema: Schema): UseForm<T> => {
       });
     });
 
+    const isFormValid = Array.from(updatedValidation.values()).every(
+      (value) => value.isValid
+    );
+
+    setIsValid(isFormValid);
     setValidation(updatedValidation);
   }, [form]);
 
@@ -82,5 +89,5 @@ export const useForm = <T>(schema: Schema): UseForm<T> => {
     setForm(newForm);
   };
 
-  return { form, validation, get, set };
+  return { form, validation, get, set, isValid };
 };

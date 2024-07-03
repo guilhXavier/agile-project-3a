@@ -22,27 +22,31 @@ const schema = {
 };
 
 export const Login: React.FC = () => {
-  const [loginForm, setLoginForm] = useState<LoginForm>({
-    email: '',
-    password: '',
-  });
-  const { data, isError, isSuccess, isLoading } = useLogin(loginForm);
+  const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
 
-  const { form, validation, get, set } = useForm<'email' | 'password'>(schema);
+  const { form, validation, get, set, isValid } = useForm<'email' | 'password'>(
+    schema
+  );
+
+  const { isError, isSuccess } = useLogin(
+    Object.fromEntries(form.entries()) as unknown as LoginForm,
+    isValid && isSubmitted
+  );
+
+  React.useEffect(() => {
+    // Show error message
+    setIsSubmitted(false);
+  }, [isError]);
+
+  React.useEffect(() => {
+    // Redirect
+    setIsSubmitted(false);
+  }, [isSuccess]);
 
   const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
-    const formData = Object.fromEntries(form.entries()) as unknown as LoginForm;
-    setLoginForm(formData);
+    setIsSubmitted(true);
   };
-
-  if (isSuccess) {
-    // Redirecionar para a página principal
-  }
-
-  if (isError) {
-    // Mostrar mensagem de erro
-  }
 
   const renderForm = (): React.ReactElement => (
     <section>
