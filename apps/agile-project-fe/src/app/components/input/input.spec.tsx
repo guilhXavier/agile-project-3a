@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { composeStory, composeStories } from '@storybook/react';
+import { composeStories } from '@storybook/react';
 
 import * as stories from './input.stories';
 

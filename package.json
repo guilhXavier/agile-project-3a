@@ -60,6 +60,7 @@
     "nx": "18.0.8",
     "prettier": "^2.6.2",
     "storybook": "^7.5.3",
+    "storybook-addon-remix-react-router": "^3.0.0",
     "ts-node": "10.9.1",
     "tslib": "^2.6.2",
     "typescript": "~5.3.2",
