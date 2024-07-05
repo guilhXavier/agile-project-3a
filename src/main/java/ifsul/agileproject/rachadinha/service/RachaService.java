@@ -1,22 +1,25 @@
 package ifsul.agileproject.rachadinha.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
+import ifsul.agileproject.rachadinha.domain.entity.User;
 
 public interface RachaService {
-    
-    Racha saveRacha(RachaRegisterDTO rachaDTO);
 
-    Optional<Racha> findRachaById(Long id);
+	Racha saveRacha(RachaRegisterDTO rachaDTO);
 
-    void deleteRachaById(Long id);
+	Optional<Racha> findRachaById(Long id);
 
-    Racha updateRacha(RachaDTO rachaDTO);
+	void deleteRachaById(Long id);
 
-    Racha findRachaByStatus(Status status);
-    
+	Racha updateRacha(RachaDTO rachaDTO);
+
+	Racha findRachaByStatus(Status status);
+
+	List<Racha> findRachaByOwner(User owner);
 }
