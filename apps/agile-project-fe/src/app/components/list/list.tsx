@@ -1,9 +1,23 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { ChipIn } from '../../types';
 
-export interface ListProps {}
+export interface ListProps {
+  items: Array<ChipIn>;
+}
 
-const List: React.FC<ListProps> = () => (
-  <div data-testid="list">List Component</div>
+export const List: React.FC<ListProps> = ({ items }) => (
+  <div>
+    {Array.isArray(items) ? (
+      items.map((item, index) => (
+        <div key={index}>
+          <p>{item.amount}</p>
+          <p>{item.user.name}</p>
+        </div>
+      ))
+    ) : (
+      <p>No items to display</p>
+    )}
+  </div>
 );
 
 export default List;

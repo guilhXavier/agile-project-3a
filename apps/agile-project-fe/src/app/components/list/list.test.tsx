@@ -4,7 +4,7 @@ import List from './list';
 
 describe('List component', () => {
   test('should render successfully', () => {
-    const { baseElement } = render(<List />);
+    const { baseElement } = render(<List items={[]} />);
 
     expect(baseElement).toBeTruthy();
   });
