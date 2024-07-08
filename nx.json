@@ -70,6 +70,5 @@
         "cacheableOperations": ["build-storybook"]
       }
     }
-  },
-  "defaultBase": "main"
+  }
 }
