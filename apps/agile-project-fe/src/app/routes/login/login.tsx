@@ -3,6 +3,7 @@ import { useForm, Field } from '../../hooks/useForm/useForm';
 import Input from '../../components/input/input';
 import { Button } from '../../components/button/button';
 import { useLogin, LoginForm } from '../../api/useLogin/useLogin';
+import { useNavigate } from 'react-router-dom';
 
 const schema = {
   email: {
@@ -32,6 +33,12 @@ export const Login: React.FC = () => {
     Object.fromEntries(form.entries()) as unknown as LoginForm,
     isValid && isSubmitted
   );
+
+  const navigate = useNavigate();
+
+  const goToRegister = () => {
+    navigate('/register');
+  };
 
   React.useEffect(() => {
     // Show error message
@@ -72,6 +79,7 @@ export const Login: React.FC = () => {
           validationMessage={validation.get('password')?.message}
         />
         <Button variant="confirm" text="Entrar" />
+        <Button variant="neutral" text="Cadastre-se" onClick={goToRegister} />
       </form>
     </section>
   );
