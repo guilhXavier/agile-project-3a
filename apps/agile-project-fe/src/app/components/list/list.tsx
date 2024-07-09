@@ -6,18 +6,19 @@ export interface ListProps {
 }
 
 export const List: React.FC<ListProps> = ({ items }) => (
-  <div>
+  <ul>
     {Array.isArray(items) ? (
       items.map((item, index) => (
-        <div key={index}>
-          <p>{item.amount}</p>
-          <p>{item.user.name}</p>
-        </div>
+        <li key={index}>
+          <p>Id: {item.id}</p>
+          <p>User: {item.user.name}</p>
+          <p>Amount: {item.amount}</p>
+        </li>
       ))
     ) : (
-      <p>No items to display</p>
+      <li>No items to display</li>
     )}
-  </div>
+  </ul>
 );
 
 export default List;
