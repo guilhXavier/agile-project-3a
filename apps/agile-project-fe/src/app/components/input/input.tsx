@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-
+import { StyledInput } from './input.styled';
 export interface InputProps {
   id: string;
   inputType: 'text' | 'email' | 'password';
@@ -12,21 +11,6 @@ export interface InputProps {
   validationMessage?: string;
   isRequired?: boolean;
 }
-
-const StyledInput = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 256px;
-
-  label {
-    padding-bottom: 0.5em;
-  }
-
-  span {
-    color: red;
-    padding-top: 0.5em;
-  }
-`;
 
 export const Input: React.FC<InputProps> = ({
   id,
