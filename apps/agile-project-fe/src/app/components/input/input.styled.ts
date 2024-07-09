@@ -9,8 +9,8 @@ export const StyledInput = styled.div`
   input {
     background-color: #f2f2f2;
     padding: 0.5em;
-    margin: 0.5em 0 1em;
-    border: 1px solid #ccc;
+    margin: 0.5em 0 0.4em;
+    border: none;
     border-radius: 0.4em;
 
     font-family: 'Roboto', sans-serif;
@@ -28,6 +28,6 @@ export const StyledInput = styled.div`
 
   span {
     color: red;
-    padding-top: 0.5em;
+    font-size: 12px;
   }
 `;
