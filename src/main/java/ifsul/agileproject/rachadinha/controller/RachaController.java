@@ -11,13 +11,7 @@ import jakarta.transaction.Transactional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
@@ -58,9 +52,9 @@ public class RachaController {
 	}
 
 
-	@DeleteMapping("/{idRacha}/owner/{idOwner}")
+	@DeleteMapping("/{idRacha}")
 
-	public ResponseEntity deleteRachaByID(@PathVariable Long idRacha, @PathVariable Long idOwner) {
+	public ResponseEntity deleteRachaByID(@PathVariable Long idRacha, @RequestParam Long idOwner) {
 
     Optional<Racha> racha = rachaService.findRachaById(idRacha);
     Optional<User> owner = userService.findUserById(idOwner);
@@ -82,9 +76,9 @@ public class RachaController {
     }
   }
 
-  	@PostMapping("/join/{idUser}/{idRacha}/{pass}")
+  @PostMapping("/join")
 	@Transactional
-	public ResponseEntity joinRacha(@PathVariable long idUser, @PathVariable long idRacha, @PathVariable String pass) {
+	public ResponseEntity joinRacha(@RequestParam long idUser, @RequestParam long idRacha, @RequestParam String pass) {
 		Optional<User> userOpt = userService.findUserById(idUser);
 		Optional<Racha> rachaOpt = rachaService.findRachaById(idRacha);
 
@@ -99,9 +93,9 @@ public class RachaController {
 
 				if (racha.getPassword().equals(pass)) {
 					racha.getMembers().add(user);
-					user.getRachas().add(racha); // Adiciona também no usuário
+					user.getRachas().add(racha);
 					rachaService.save(racha);
-					userService.save(user); // Salva as mudanças no usuário também, se necessário
+					userService.save(user);
 					return new ResponseEntity<>("Usuário adicionado ao racha.", HttpStatus.OK);
 				} else {
 					return new ResponseEntity<>("Senha incorreta.", HttpStatus.BAD_REQUEST);
