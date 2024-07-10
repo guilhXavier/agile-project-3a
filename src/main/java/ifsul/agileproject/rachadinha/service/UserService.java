@@ -14,5 +14,5 @@ public interface UserService {
   User login(String email, String password);
   Optional<User> findUserByEmail(String email);
   User updateUser(UserDTO userDTO);
-  User save(User user);
+  void save(User user);
 }
