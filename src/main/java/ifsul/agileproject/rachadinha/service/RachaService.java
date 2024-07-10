@@ -22,4 +22,6 @@ public interface RachaService {
 	Racha findRachaByStatus(Status status);
 
 	List<Racha> findRachaByOwner(User owner);
+
+	void save(Racha racha);
 }

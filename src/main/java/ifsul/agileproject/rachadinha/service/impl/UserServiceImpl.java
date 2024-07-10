@@ -22,9 +22,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User saveUser(UserDTO userDTO) {
-
     User user = userMapper.apply(userDTO);
-
     return userRepository.save(user);
   }
 
@@ -71,4 +69,8 @@ public class UserServiceImpl implements UserService {
     throw new RuntimeException();
   }
 
+  @Override
+  public User save(User user) {
+    return userRepository.save(user);
+  }
 }

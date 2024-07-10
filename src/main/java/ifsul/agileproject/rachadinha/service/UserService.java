@@ -7,18 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-
   User saveUser(UserDTO userDTO);
-
   Optional<User> findUserById(Long id);
-
   void deleteUserById(Long id);
-
   List<User> findAll();
-
   User login(String email, String password);
-
   Optional<User> findUserByEmail(String email);
-
   User updateUser(UserDTO userDTO);
+  User save(User user);
 }

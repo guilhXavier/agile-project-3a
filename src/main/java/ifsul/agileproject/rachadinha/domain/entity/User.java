@@ -36,11 +36,6 @@ public class User {
   @OneToMany(mappedBy = "owner")
   private Set<Racha> ownRachas;
 
-  @ManyToMany
-  @JoinTable(
-    name = "racha_members",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "racha_id"))
+  @ManyToMany(mappedBy = "members")
   private List<Racha> rachas;
-
 }
