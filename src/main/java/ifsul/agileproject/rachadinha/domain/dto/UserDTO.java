@@ -1,6 +1,5 @@
 package ifsul.agileproject.rachadinha.domain.dto;
 
-import ifsul.agileproject.rachadinha.domain.entity.User;
 import lombok.Data;
 
 @Data
