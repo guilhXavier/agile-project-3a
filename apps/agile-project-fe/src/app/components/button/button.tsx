@@ -12,8 +12,21 @@ interface StyledButtonProps {
   variant: ButtonVariant;
 }
 
+const DefaultButtonStyle = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+  width: 360px;
+  height: 40px;
+  border-radius: 0.6em;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+`;
+
 const ConfirmButtonStyle = css`
-  background-color: green;
+  background-color: #1b850a;
   color: white;
 `;
 
@@ -40,6 +53,7 @@ const variantConfig: Record<ButtonVariant, FlattenSimpleInterpolation> = {
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
+  ${DefaultButtonStyle}
   ${({ variant }) => variantConfig[variant]}
 `;
 

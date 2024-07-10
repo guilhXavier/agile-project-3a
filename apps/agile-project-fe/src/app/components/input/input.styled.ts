@@ -8,10 +8,12 @@ export const StyledInput = styled.div`
 
   input {
     background-color: #f2f2f2;
-    padding: 0.5em;
     margin: 0.5em 0 0.4em;
     border: none;
     border-radius: 0.4em;
+
+    height: 40px;
+    width: 360px;
 
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
