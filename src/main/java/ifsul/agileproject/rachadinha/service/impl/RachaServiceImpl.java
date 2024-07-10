@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.domain.entity.User;
@@ -42,20 +43,24 @@ public class RachaServiceImpl implements RachaService {
 	}
 
 	@Override
-	public Racha updateRacha(RachaDTO rachaDTO) {
-		Optional<Racha> existingRacha = rachaRepository.findById(rachaDTO.getId());
-
-		if (existingRacha.isPresent()) {
-			Racha updatedRacha = existingRacha.get();
-			updatedRacha.setName(rachaDTO.getName());
-			updatedRacha.setDescription(rachaDTO.getDescription());
-			updatedRacha.setGoal(rachaDTO.getGoal());
-			updatedRacha.setPassword(rachaDTO.getPassword());
-			updatedRacha.setStatus(rachaDTO.getStatus());
-
-			return rachaRepository.save(updatedRacha);
+	public Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha) {
+		Optional<Racha> existingRacha = rachaRepository.findById(racha.getId());
+		Racha updatedRacha = existingRacha.get();
+		if (rachaUpdateDTO.getName() != null) {
+			updatedRacha.setName(rachaUpdateDTO.getName());
+			
 		}
-		throw new RuntimeException();
+		if (rachaUpdateDTO.getDescription() != null) {
+			updatedRacha.setDescription(rachaUpdateDTO.getDescription());
+		}
+		if (rachaUpdateDTO.getGoal() != null) {
+			updatedRacha.setGoal(rachaUpdateDTO.getGoal());
+		}
+		if (rachaUpdateDTO.getPassword() != null) {
+			updatedRacha.setPassword(rachaUpdateDTO.getPassword());
+		}
+		return rachaRepository.save(updatedRacha);
+
 	}
 
 	@Override
