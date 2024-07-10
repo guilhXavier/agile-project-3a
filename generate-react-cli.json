@@ -1,0 +1,14 @@
+{
+  "usesTypeScript": true,
+  "usesStyledComponents": true,
+  "testLibrary": "Testing Library",
+  "component": {
+    "default": {
+      "path": "apps/agile-project-fe/src/app/components",
+      "withStyle": true,
+      "withTest": true,
+      "withStory": true,
+      "withLazy": false
+    }
+  }
+}
