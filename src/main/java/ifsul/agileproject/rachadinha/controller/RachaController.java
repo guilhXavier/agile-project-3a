@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
+import jakarta.transaction.Transactional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.User;
@@ -80,5 +81,37 @@ public class RachaController {
       return new ResponseEntity("Racha não existe", HttpStatus.FORBIDDEN);
     }
   }
+
+  	@PostMapping("/join/{idUser}/{idRacha}/{pass}")
+	@Transactional
+	public ResponseEntity joinRacha(@PathVariable long idUser, @PathVariable long idRacha, @PathVariable String pass) {
+		Optional<User> userOpt = userService.findUserById(idUser);
+		Optional<Racha> rachaOpt = rachaService.findRachaById(idRacha);
+
+		if (rachaOpt.isPresent()) {
+			if (userOpt.isPresent()) {
+				User user = userOpt.get();
+				Racha racha = rachaOpt.get();
+
+				if (racha.getMembers().contains(user)) {
+					return new ResponseEntity<>("Usuário já está no racha.", HttpStatus.OK);
+				}
+
+				if (racha.getPassword().equals(pass)) {
+					racha.getMembers().add(user);
+					user.getRachas().add(racha); // Adiciona também no usuário
+					rachaService.save(racha);
+					userService.save(user); // Salva as mudanças no usuário também, se necessário
+					return new ResponseEntity<>("Usuário adicionado ao racha.", HttpStatus.OK);
+				} else {
+					return new ResponseEntity<>("Senha incorreta.", HttpStatus.BAD_REQUEST);
+				}
+			} else {
+				return new ResponseEntity<>("Usuário não existe", HttpStatus.FORBIDDEN);
+			}
+		} else {
+			return new ResponseEntity<>("Racha não existe", HttpStatus.FORBIDDEN);
+		}
+	}
 }
 
