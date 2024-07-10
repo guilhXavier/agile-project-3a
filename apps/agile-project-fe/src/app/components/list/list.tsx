@@ -9,17 +9,13 @@ export interface ListProps {
 export const List: React.FC<ListProps> = ({ items }) => (
   <StyledList>
     <ul>
-      {Array.isArray(items) ? (
-        items.map((item, index) => (
-          <li key={index}>
-            <p>Id: {item.id}</p>
-            <p>User: {item.user.name}</p>
-            <p>Amount: {item.amount}</p>
-          </li>
-        ))
-      ) : (
-        <li>No items to display</li>
-      )}
+      {items.map((item, index) => (
+        <li key={index}>
+          <p>Id: {item.id}</p>
+          <p>User: {item.user.name}</p>
+          <p>Amount: {item.amount}</p>
+        </li>
+      ))}
     </ul>
   </StyledList>
 );
