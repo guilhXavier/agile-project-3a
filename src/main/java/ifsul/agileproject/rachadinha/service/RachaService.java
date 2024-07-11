@@ -3,7 +3,6 @@ package ifsul.agileproject.rachadinha.service;
 import java.util.List;
 import java.util.Optional;
 
-import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
