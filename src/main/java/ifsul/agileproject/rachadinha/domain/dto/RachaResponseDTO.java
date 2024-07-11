@@ -15,13 +15,13 @@ public class RachaResponseDTO {
   private String description;
   private Double goal;
   private Double balance;
-  private UserRespostaDTO owner;
+  private OwnerDTO owner;
   private Status status;
   private Date created_at;
   private String inviteLink;
 
   public static RachaResponseDTO transformarEmDto(Racha racha) {
-    UserRespostaDTO owner = UserRespostaDTO.transformaEmDTO(racha.getOwner());
+    OwnerDTO owner = OwnerDTO.transformaEmDTO(racha.getOwner());
     return new RachaResponseDTO(racha.getId(), racha.getName(), racha.getDescription(), racha.getGoal(), racha.getBalance(), owner, racha.getStatus(), racha.getCreated_at(), racha.getInviteLink());
   }
 }
