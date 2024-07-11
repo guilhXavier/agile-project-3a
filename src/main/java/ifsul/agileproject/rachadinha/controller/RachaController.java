@@ -1,6 +1,7 @@
 package ifsul.agileproject.rachadinha.controller;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 
 import java.util.List;
 import java.util.Optional;

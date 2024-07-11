@@ -50,7 +50,7 @@ export const useForm = <T>(schema: Schema): UseForm<T> => {
 
     setForm(initialForm);
     setValidation(initialValidation);
-  });
+  }, []);
 
   React.useEffect(() => {
     const formKeys = Array.from(form.keys());
@@ -77,7 +77,7 @@ export const useForm = <T>(schema: Schema): UseForm<T> => {
 
     setIsValid(isFormValid);
     setValidation(updatedValidation);
-  }, [form, schema, validation]);
+  }, [form]);
 
   const get = (key: T) => form.get(key) || '';
 

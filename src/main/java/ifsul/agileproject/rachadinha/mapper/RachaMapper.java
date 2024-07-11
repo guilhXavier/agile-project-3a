@@ -41,4 +41,5 @@ public class RachaMapper implements Function<RachaRegisterDTO, Racha> {
       .inviteLink(invite)
       .build();
   }
+  
 }

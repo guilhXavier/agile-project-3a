@@ -5,7 +5,7 @@ import * as stories from './input.stories';
 
 const { Primary, Invalid } = composeStories(stories);
 
-describe('Input', () => {
+describe('Input component', () => {
   it('should render successfully', () => {
     const inputFn = vitest.fn();
 

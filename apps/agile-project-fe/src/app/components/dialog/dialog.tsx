@@ -15,7 +15,7 @@ const StyledDialogCard = styled.div<{ isVisible: boolean }>`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 300px;
-  height: 200px;
+  height: 256px;
   font-size: 12px;
   border-radius: 10px;
   padding: 20px;

@@ -68,6 +68,7 @@
     "vitest": "^1.5.0"
   },
   "dependencies": {
+    "@material-ui/icons": "^4.11.3",
     "@tanstack/react-query": "^5.29.0",
     "axios": "^1.6.8",
     "react": "18.2.0",
