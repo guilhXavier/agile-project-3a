@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
@@ -55,9 +56,14 @@ public class UserController {
 
   //Busca todos usuários
   @GetMapping("/findAll")
-  public ResponseEntity<List<User>> findAll() {
+  public ResponseEntity<List<UserRespostaDTO>> findAll() {
     List<User> userList = userService.findAll();
-    return new ResponseEntity<>(userList, HttpStatus.OK);
+
+    List<UserRespostaDTO> listDTO = userList.stream()
+      .map(UserRespostaDTO::transformaEmDTO)
+      .collect(Collectors.toList());
+
+    return new ResponseEntity<>(listDTO, HttpStatus.OK);
   }
 
   //Login do usuário com EMAIL e PASSWORD
