@@ -44,23 +44,19 @@ public class RachaServiceImpl implements RachaService {
 
 	@Override
 	public Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha) {
-		Optional<Racha> existingRacha = rachaRepository.findById(racha.getId());
-		Racha updatedRacha = existingRacha.get();
 		if (rachaUpdateDTO.getName() != null) {
-			updatedRacha.setName(rachaUpdateDTO.getName());
-			
+			racha.setName(rachaUpdateDTO.getName());
 		}
 		if (rachaUpdateDTO.getDescription() != null) {
-			updatedRacha.setDescription(rachaUpdateDTO.getDescription());
+			racha.setDescription(rachaUpdateDTO.getDescription());
 		}
 		if (rachaUpdateDTO.getGoal() != null) {
-			updatedRacha.setGoal(rachaUpdateDTO.getGoal());
+			racha.setGoal(rachaUpdateDTO.getGoal());
 		}
 		if (rachaUpdateDTO.getPassword() != null) {
-			updatedRacha.setPassword(rachaUpdateDTO.getPassword());
+			racha.setPassword(rachaUpdateDTO.getPassword());
 		}
-		return rachaRepository.save(updatedRacha);
-
+		return rachaRepository.save(racha);
 	}
 
 	@Override
