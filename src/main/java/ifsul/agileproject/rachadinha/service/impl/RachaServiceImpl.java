@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
@@ -46,8 +45,8 @@ public class RachaServiceImpl implements RachaService {
     rachaRepository.deleteById(id);
   }
 
-	@Override
-	public Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha) {
+  @Override
+  public Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha) {
 		if (rachaUpdateDTO.getName() != null) {
 			racha.setName(rachaUpdateDTO.getName());
 		}
