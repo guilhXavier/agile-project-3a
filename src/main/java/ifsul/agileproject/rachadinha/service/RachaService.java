@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.domain.entity.User;
@@ -17,7 +18,7 @@ public interface RachaService {
 
 	void deleteRachaById(Long id);
 
-	Racha updateRacha(RachaDTO rachaDTO);
+	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha);
 
 	Racha findRachaByStatus(Status status);
 

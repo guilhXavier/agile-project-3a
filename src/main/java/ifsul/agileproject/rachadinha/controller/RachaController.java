@@ -1,6 +1,7 @@
 package ifsul.agileproject.rachadinha.controller;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,7 +60,6 @@ public class RachaController {
 
 
 	@DeleteMapping("/{idRacha}/owner/{idOwner}")
-
 	public ResponseEntity deleteRachaByID(@PathVariable Long idRacha, @PathVariable Long idOwner) {
 
     Optional<Racha> racha = rachaService.findRachaById(idRacha);
@@ -80,5 +81,30 @@ public class RachaController {
       return new ResponseEntity("Racha não existe", HttpStatus.FORBIDDEN);
     }
   }
+
+  @PatchMapping("/{idRacha}/owner/{idOwner}")
+  public ResponseEntity<RachaResponseDTO> updateRacha(@PathVariable Long idRacha, @PathVariable Long idOwner, @RequestBody RachaUpdateDTO rachaUpdateDTO) {
+
+	Optional<Racha> racha = rachaService.findRachaById(idRacha);
+	Optional<User> owner = userService.findUserById(idOwner);
+
+	if (racha.isPresent()) {
+	  if(owner.isPresent()) {
+
+		if (racha.get().getOwner().getId() != owner.get().getId()) {
+		  return new ResponseEntity("Usuário não autorizado", HttpStatus.FORBIDDEN);
+		}
+
+		Racha rachaAtualizado = rachaService.updateRacha(rachaUpdateDTO, racha.get());
+		RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(rachaAtualizado);
+
+		return new ResponseEntity<>(rachaResponseDTO, HttpStatus.OK);
+	  } else{
+		return new ResponseEntity("Usuário não existe", HttpStatus.FORBIDDEN);
+	  }
+	} else {
+	  return new ResponseEntity("Racha não existe", HttpStatus.FORBIDDEN);
+	}
 }
 
+}
