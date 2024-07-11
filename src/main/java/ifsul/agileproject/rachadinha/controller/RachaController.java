@@ -51,9 +51,7 @@ public class RachaController {
 		return new ResponseEntity<>(rachasResponseDto, HttpStatus.OK);
 	}
 
-
 	@DeleteMapping("/{idRacha}")
-
 	public ResponseEntity deleteRachaByID(@PathVariable Long idRacha, @RequestParam Long idOwner) {
 
     Optional<Racha> racha = rachaService.findRachaById(idRacha);
@@ -107,5 +105,31 @@ public class RachaController {
 			return new ResponseEntity<>("Racha não existe", HttpStatus.FORBIDDEN);
 		}
 	}
-}
 
+  @PostMapping("/leave")
+  @Transactional
+  public ResponseEntity leaveRacha(@RequestParam long idUser, @RequestParam long idRacha) {
+
+    Optional<User> userOpt = userService.findUserById(idUser);
+    Optional<Racha> rachaOpt = rachaService.findRachaById(idRacha);
+
+    if (rachaOpt.isPresent()) {
+      if (userOpt.isPresent()) {
+        User user = userOpt.get();
+        Racha racha = rachaOpt.get();
+
+        if(racha.getMembers().contains(user)){
+          racha.getMembers().remove(user);
+          return new ResponseEntity("Usuário removido do racha", HttpStatus.OK);
+        } else{
+          return new ResponseEntity("Usuário não está neste racha", HttpStatus.FORBIDDEN);
+        }
+
+      } else {
+        return new ResponseEntity<>("Usuário não existe", HttpStatus.FORBIDDEN);
+      }
+    } else {
+      return new ResponseEntity<>("Racha não existe", HttpStatus.FORBIDDEN);
+    }
+  }
+}
