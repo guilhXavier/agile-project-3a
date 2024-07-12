@@ -41,6 +41,10 @@ public class RachaServiceImpl implements RachaService {
     return rachaRepository.findById(id);
   }
 
+  public List<Racha> findAll(){
+    return rachaRepository.findAll();
+  }
+
   @Override
   public void deleteRachaById(Long id) {
     rachaRepository.deleteById(id);

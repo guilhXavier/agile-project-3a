@@ -15,6 +15,8 @@ public interface RachaService {
 
 	Optional<Racha> findRachaById(Long id);
 
+  List<Racha> findAll();
+
 	void deleteRachaById(Long id);
 
 	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha);

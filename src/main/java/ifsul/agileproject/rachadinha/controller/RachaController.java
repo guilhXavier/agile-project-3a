@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
 import jakarta.transaction.Transactional;
 
@@ -51,6 +52,17 @@ public class RachaController {
 
 		return new ResponseEntity<>(rachasResponseDto, HttpStatus.OK);
 	}
+
+  @GetMapping("/findAll")
+  public ResponseEntity<List<RachaResponseDTO>> findAll(){
+    List<Racha> rachaList = rachaService.findAll();
+
+    List<RachaResponseDTO> listDTO = rachaList.stream()
+      .map(RachaResponseDTO::transformarEmDto)
+      .collect(Collectors.toList());
+
+    return new ResponseEntity<>(listDTO, HttpStatus.OK);
+  }
 
 	@DeleteMapping("/{idRacha}")
 	public ResponseEntity deleteRachaByID(@PathVariable Long idRacha, @RequestParam Long idOwner) {
