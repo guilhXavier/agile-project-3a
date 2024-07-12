@@ -75,6 +75,31 @@ public class RachaController {
     }
   }
 
+  @PatchMapping("/{idRacha}/owner/{idOwner}")
+  public ResponseEntity<RachaResponseDTO> updateRacha(@PathVariable Long idRacha, @PathVariable Long idOwner, @RequestBody RachaUpdateDTO rachaUpdateDTO) {
+
+    Optional<Racha> racha = rachaService.findRachaById(idRacha);
+    Optional<User> owner = userService.findUserById(idOwner);
+
+    if (racha.isPresent()) {
+      if(owner.isPresent()) {
+
+        if (racha.get().getOwner().getId() != owner.get().getId()) {
+          return new ResponseEntity("Usuário não autorizado", HttpStatus.FORBIDDEN);
+        }
+
+        Racha rachaAtualizado = rachaService.updateRacha(rachaUpdateDTO, racha.get());
+        RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(rachaAtualizado);
+
+        return new ResponseEntity<>(rachaResponseDTO, HttpStatus.OK);
+      } else{
+        return new ResponseEntity("Usuário não existe", HttpStatus.FORBIDDEN);
+      }
+    } else {
+      return new ResponseEntity("Racha não existe", HttpStatus.FORBIDDEN);
+    }
+  }
+
   @PostMapping("/join")
 	@Transactional
 	public ResponseEntity joinRacha(@RequestParam long idUser, @RequestParam long idRacha, @RequestParam String pass) {
