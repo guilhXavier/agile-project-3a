@@ -2,7 +2,7 @@ package ifsul.agileproject.rachadinha.controller;
 
 import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserLoginDTO;
-import ifsul.agileproject.rachadinha.domain.dto.UserRespostaDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.exceptions.UserNotFoundException;
 import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
@@ -23,11 +24,11 @@ public class UserController {
 
   //Buscar user por ID
   @GetMapping("{id}")
-  public ResponseEntity<UserRespostaDTO> getUserByID(@PathVariable Long id) {
+  public ResponseEntity<UserResponseDTO> getUserByID(@PathVariable Long id) {
     Optional<User> usuario = userService.findUserById(id);
 
     if (usuario.isPresent()) {
-      return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario.get()), HttpStatus.OK);
+      return new ResponseEntity<>(UserResponseDTO.transformaEmDTO(usuario.get()), HttpStatus.OK);
     }
 
     throw new UserNotFoundException();
@@ -35,9 +36,9 @@ public class UserController {
 
   //Cadastrar user
   @PostMapping("/cadastro")
-  public ResponseEntity<UserRespostaDTO> saveUser(@RequestBody UserDTO userDTO) {
+  public ResponseEntity<UserResponseDTO> saveUser(@RequestBody UserDTO userDTO) {
     User usuario = userService.saveUser(userDTO);
-    return new ResponseEntity<>(UserRespostaDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
+    return new ResponseEntity<>(UserResponseDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
   }
 
   //Deletar usuário pelo ID
@@ -55,18 +56,23 @@ public class UserController {
 
   //Busca todos usuários
   @GetMapping("/findAll")
-  public ResponseEntity<List<User>> findAll() {
+  public ResponseEntity<List<UserResponseDTO>> findAll() {
     List<User> userList = userService.findAll();
-    return new ResponseEntity<>(userList, HttpStatus.OK);
+
+    List<UserResponseDTO> listDTO = userList.stream()
+      .map(UserResponseDTO::transformaEmDTO)
+      .collect(Collectors.toList());
+
+    return new ResponseEntity<>(listDTO, HttpStatus.OK);
   }
 
   //Login do usuário com EMAIL e PASSWORD
   @PostMapping("/login")
-  public ResponseEntity<UserRespostaDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
+  public ResponseEntity<UserResponseDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
     User userLogged = userService.login(userLoginDTO.getEmail(), userLoginDTO.getPassword());
 
     if (userLogged != null) {
-      return new ResponseEntity(UserRespostaDTO.transformaEmDTO(userLogged), HttpStatus.OK);
+      return new ResponseEntity(UserResponseDTO.transformaEmDTO(userLogged), HttpStatus.OK);
     }
 
     throw new UserNotFoundException();

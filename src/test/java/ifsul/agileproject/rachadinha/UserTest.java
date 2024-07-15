@@ -2,8 +2,6 @@ package ifsul.agileproject.rachadinha;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.repository.UserRepository;
-import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
 
 @Transactional
 @SpringBootTest
@@ -19,9 +16,6 @@ public class UserTest {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private UserServiceImpl userService;
 
     @Test
     public void testSalvarERecuperarUsuario() {

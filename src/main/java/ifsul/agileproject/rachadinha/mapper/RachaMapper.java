@@ -26,6 +26,8 @@ public class RachaMapper implements Function<RachaRegisterDTO, Racha> {
 
     User owner = userService.findUserById(dto.getOwnerId()).get();
 
+    String invite = RandomCodeGenerator.generateRandomCode();
+
     return Racha.builder()
       .name(dto.getName())
       .description(dto.getDescription())
@@ -36,7 +38,7 @@ public class RachaMapper implements Function<RachaRegisterDTO, Racha> {
       .balance(0.0)
       .status(Status.OPEN)
       .created_at(new Date())
-      .inviteLink("")
+      .inviteLink(invite)
       .build();
   }
   

@@ -38,7 +38,11 @@ public class Racha {
   @Column(name = "balance")
   private Double balance;
 
-  @ManyToMany(mappedBy = "rachas")
+  @ManyToMany
+  @JoinTable(
+    name = "racha_members",
+    joinColumns = @JoinColumn(name = "racha_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
   private List<User> members;
 
   @NonNull
