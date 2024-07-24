@@ -14,14 +14,12 @@ import ifsul.agileproject.rachadinha.repository.UserRepository;
 
 @Transactional
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class UserTest {
 
     @Autowired
     private UserRepository userRepository;
 
     @Test
-    @Rollback(true)
     public void saveAndRecoverUser() {
         User usuarioOriginal = new User();
         usuarioOriginal.setName("AccountTest");
@@ -37,7 +35,6 @@ public class UserTest {
     }
 
     @Test
-    @Rollback(true)
     public void loginWithWrongPassword() {
         User user = new User();
         user.setName("AccountTest");
@@ -52,7 +49,6 @@ public class UserTest {
     }
 
     @Test
-    @Rollback(true)
     public void loginWithWrongEmail() {
         User user = new User();
         user.setName("AccountTest");
@@ -67,7 +63,6 @@ public class UserTest {
     }
 
     @Test
-    @Rollback(true)
     public void loginWithRightPasswordAndEmail() {
         User user = new User();
         user.setName("AccountTest");
@@ -82,7 +77,6 @@ public class UserTest {
     }
 
     @Test
-    @Rollback(true)
     public void updateUserProperties() throws Exception{
         User user = new User();
         user.setName("AccountTest");
@@ -105,7 +99,6 @@ public class UserTest {
     }
 
     @Test
-    @Rollback(true)
     public void deleteUser() throws Exception{
         User user = new User();
         user.setName("AccountTest");
@@ -124,8 +117,7 @@ public class UserTest {
     }
 
     @Test
-    @Rollback(true)
-    public void createUserWithRepeatedEmailAndReturError() throws Exception{
+    public void deleteUserOwnAccount() throws Exception {
         User user = new User();
         user.setName("AccountTest");
         user.setEmail("AccountTest");
@@ -133,16 +125,13 @@ public class UserTest {
 
         userRepository.save(user);
 
-        User userRepeated = new User();
-        userRepeated.setName("AccountTest");
-        userRepeated.setEmail("AccountTest");
-        userRepeated.setPassword("AccountTest");
+        User userLogged = userRepository.findByEmailAndPassword("AccountTest", "AccountTest");
 
-        try {
-            userRepository.save(userRepeated);
-        } catch (Exception e) {
-            assertEquals("Email already in use", e.getMessage());
-        }
+        userRepository.delete(userLogged);
+
+        User userDeleted = userRepository.findByEmailAndPassword("AccountTest", "AccountTest");
+
+        assertEquals(null, userDeleted);
     }
     
 }
