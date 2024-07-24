@@ -77,4 +77,22 @@ public class UserServiceImpl implements UserService {
   public void save(User user) {
     userRepository.save(user);
   }
+
+  @Override
+  public User resetPassword(Long userId, String oriPass, String newPass) throws Exception {
+    Optional<User> user = userRepository.findById(userId);
+
+    if(user.isPresent()){
+      User usuario = user.get();
+
+      if(usuario.getPassword().equals(oriPass)){
+        usuario.setPassword(newPass);
+        return userRepository.save(usuario);
+      } else{
+        throw new Exception("Senha errada");
+      }
+    } else{
+      throw new Exception("Usuário não existe");
+    }
+  }
 }

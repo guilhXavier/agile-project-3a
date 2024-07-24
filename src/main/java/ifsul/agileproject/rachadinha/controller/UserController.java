@@ -88,4 +88,14 @@ public class UserController {
 
   }
 
+  @PatchMapping("/resetPass")
+  public ResponseEntity resetPassword(@RequestParam Long userId, String oriPass, String newPass){
+    try{
+      userService.resetPassword(userId, oriPass, newPass);
+      return new ResponseEntity<>("Senha alterada com sucesso.", HttpStatus.OK);
+    }catch (Exception ex){
+      return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+  }
+
 }
