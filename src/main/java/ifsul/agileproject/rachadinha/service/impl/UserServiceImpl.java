@@ -2,6 +2,7 @@ package ifsul.agileproject.rachadinha.service.impl;
 
 import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
+import ifsul.agileproject.rachadinha.exceptions.EmailAlreadyUsedException;
 import ifsul.agileproject.rachadinha.mapper.UserMapper;
 import ifsul.agileproject.rachadinha.repository.UserRepository;
 import ifsul.agileproject.rachadinha.service.UserService;
@@ -22,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User saveUser(UserDTO userDTO) {
+    if (userRepository.existsByEmail(userDTO.getEmail())) {
+      throw new EmailAlreadyUsedException("Endereco de email ja utilizado");
+    }
     User user = userMapper.apply(userDTO);
     return userRepository.save(user);
   }
