@@ -76,4 +76,9 @@ public class RachaServiceImpl implements RachaService {
   public List<Racha> findRachaByOwner(User owner) {
     return rachaRepository.findByOwner(owner);
   }
+
+  @Override
+  public Racha findRachaByInvite(String invite) {
+    return rachaRepository.findByInviteLink(invite);
+  }
 }
