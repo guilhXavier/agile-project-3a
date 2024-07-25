@@ -45,7 +45,7 @@ public class UserController {
       User usuario = userService.saveUser(userDTO);
       return new ResponseEntity<>(UserResponseDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
     } catch (EmailAlreadyUsedException e) {
-      return new ResponseEntity(new ErrorResponse("Endereco de email ja utilizado"), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
   }
