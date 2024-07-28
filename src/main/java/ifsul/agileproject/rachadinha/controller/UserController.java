@@ -4,13 +4,10 @@ import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserLoginDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
-import ifsul.agileproject.rachadinha.exceptions.EmailAlreadyUsedException;
-import ifsul.agileproject.rachadinha.exceptions.ErrorResponse;
-import ifsul.agileproject.rachadinha.exceptions.UserNotFoundException;
+import ifsul.agileproject.rachadinha.exceptions.*;
 import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,45 +19,53 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor
+@SuppressWarnings("rawtypes")
 public class UserController {
 
   private final UserServiceImpl userService;
 
   // Buscar user por ID
   @GetMapping("{id}")
-  public ResponseEntity<UserResponseDTO> getUserByID(@PathVariable Long id) {
-    Optional<User> usuario = userService.findUserById(id);
-
-    if (usuario.isPresent()) {
-      return new ResponseEntity<>(UserResponseDTO.transformaEmDTO(usuario.get()), HttpStatus.OK);
+  public ResponseEntity getUserByID(@PathVariable Long id) {
+    try {
+      Optional<User> usuario = userService.findUserById(id);
+      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario.get()), HttpStatus.OK);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
-
-    throw new UserNotFoundException();
   }
 
   // Cadastrar user
   @PostMapping("/cadastro")
-  public ResponseEntity<UserResponseDTO> saveUser(@RequestBody UserDTO userDTO) {
+  public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
     try {
       User usuario = userService.saveUser(userDTO);
-      return new ResponseEntity<>(UserResponseDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
+      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
     } catch (EmailAlreadyUsedException e) {
-      return new ResponseEntity(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
-
   }
 
   // Deletar usuário pelo ID
   @DeleteMapping("{id}")
   public ResponseEntity deleteUserByID(@PathVariable Long id) {
-    userService.deleteUserById(id);
-    return new ResponseEntity("Usuário deletado", HttpStatus.OK);
+    try {
+      userService.deleteUserById(id);
+      return new ResponseEntity<String>("Usuário deletado", HttpStatus.OK);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
   }
 
   // Atualizar usuário pelo ID
   @PatchMapping("{id}")
   public ResponseEntity updateUser(@RequestBody UserDTO userDTO, @PathVariable Integer id) {
-    return new ResponseEntity(userService.updateUser(userDTO), HttpStatus.OK);
+    try {
+      User usuario = userService.updateUser(userDTO);
+      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario), HttpStatus.OK);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
   }
 
   // Busca todos usuários
@@ -72,19 +77,20 @@ public class UserController {
         .map(UserResponseDTO::transformaEmDTO)
         .collect(Collectors.toList());
 
-    return new ResponseEntity<>(listDTO, HttpStatus.OK);
+    return new ResponseEntity<List<UserResponseDTO>>(listDTO, HttpStatus.OK);
   }
 
   // Login do usuário com EMAIL e PASSWORD
   @PostMapping("/login")
-  public ResponseEntity<UserResponseDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
-    User userLogged = userService.login(userLoginDTO.getEmail(), userLoginDTO.getPassword());
-
-    if (userLogged != null) {
-      return new ResponseEntity(UserResponseDTO.transformaEmDTO(userLogged), HttpStatus.OK);
+  public ResponseEntity login(@RequestBody UserLoginDTO userLoginDTO) {
+    try {
+      User userLogged = userService.login(userLoginDTO.getEmail(), userLoginDTO.getPassword());
+      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(userLogged), HttpStatus.OK);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (IncorrectUserPasswordException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
-
-    throw new UserNotFoundException();
 
   }
 
@@ -92,9 +98,11 @@ public class UserController {
   public ResponseEntity resetPassword(@RequestParam Long userId, String oriPass, String newPass){
     try{
       userService.resetPassword(userId, oriPass, newPass);
-      return new ResponseEntity<>("Senha alterada com sucesso.", HttpStatus.OK);
-    }catch (Exception ex){
-      return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<String>("Senha alterada com sucesso.", HttpStatus.OK);
+    } catch (UserNotFoundException e){
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (IncorrectUserPasswordException e){
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
   }
 
