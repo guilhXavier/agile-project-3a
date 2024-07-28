@@ -25,5 +25,7 @@ public interface RachaService {
 
 	List<Racha> findRachaByOwner(User owner);
 
+	Racha findRachaByInvite(String invite);
+
 	void save(Racha racha);
 }
