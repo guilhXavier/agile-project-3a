@@ -30,7 +30,7 @@ public class RachaController {
   private final UserServiceImpl userService;
 
 	// Criar racha
-	@PostMapping("/criar")
+	@PostMapping("/new")
 	public ResponseEntity<RachaResponseDTO> createRacha(@RequestBody RachaRegisterDTO rachaDTO) {
 		Racha racha = rachaService.saveRacha(rachaDTO);
 

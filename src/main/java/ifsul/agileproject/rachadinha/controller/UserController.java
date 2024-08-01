@@ -36,7 +36,7 @@ public class UserController {
   }
 
   // Cadastrar user
-  @PostMapping("/cadastro")
+  @PostMapping("/signup")
   public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
     try {
       User usuario = userService.saveUser(userDTO);
