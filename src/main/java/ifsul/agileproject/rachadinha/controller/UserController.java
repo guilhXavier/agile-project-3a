@@ -1,20 +1,23 @@
 package ifsul.agileproject.rachadinha.controller;
 
-import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
-import ifsul.agileproject.rachadinha.domain.dto.UserLoginDTO;
-import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
-import ifsul.agileproject.rachadinha.domain.entity.User;
-import ifsul.agileproject.rachadinha.exceptions.*;
-import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
-import lombok.AllArgsConstructor;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserLoginDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
+import ifsul.agileproject.rachadinha.domain.entity.User;
+import ifsul.agileproject.rachadinha.exceptions.EmailAlreadyUsedException;
+import ifsul.agileproject.rachadinha.exceptions.ErrorResponse;
+import ifsul.agileproject.rachadinha.exceptions.IncorrectUserPasswordException;
+import ifsul.agileproject.rachadinha.exceptions.UserNotFoundException;
+import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/user")

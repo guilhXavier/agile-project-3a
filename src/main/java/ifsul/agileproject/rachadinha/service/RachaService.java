@@ -19,11 +19,17 @@ public interface RachaService {
 
 	void deleteRachaById(Long id);
 
+	void deleteRachaById(Long id, Long loggerUserId);
+
 	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha);
+
+	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha, Long loggerUserId);
 
 	Racha findRachaByStatus(Status status);
 
 	List<Racha> findRachaByOwner(User owner);
+
+	List<Racha> findRachaByOwner(Long ownerId);
 
 	void save(Racha racha);
 }

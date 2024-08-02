@@ -15,5 +15,5 @@ public interface UserService {
   Optional<User> findUserByEmail(String email);
   User updateUser(UserDTO userDTO);
   void save(User user);
-  User resetPassword(Long userId, String oriPass, String newPass) throws Exception;
+  User resetPassword(Long userId, String oriPass, String newPass);
 }
