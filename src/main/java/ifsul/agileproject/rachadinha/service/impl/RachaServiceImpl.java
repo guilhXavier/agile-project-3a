@@ -3,7 +3,7 @@ package ifsul.agileproject.rachadinha.service.impl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
@@ -23,17 +23,15 @@ import ifsul.agileproject.rachadinha.repository.UserRepository;
 import ifsul.agileproject.rachadinha.service.RachaService;
 
 @Service
+@AllArgsConstructor
 public class RachaServiceImpl implements RachaService {
 
-  @Autowired
   private RachaRepository rachaRepository;
 
-  @Autowired
   private UserRepository userRepository;
 
-  @Autowired
   private RachaMapper rachaMapper;
-  
+
   @Override
   public Racha saveRacha(RachaRegisterDTO rachaDTO) {
     if (!userRepository.existsById(rachaDTO.getOwnerId())) {

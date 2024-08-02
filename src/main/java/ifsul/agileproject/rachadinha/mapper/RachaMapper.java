@@ -7,18 +7,16 @@ import java.util.function.Function;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
-import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class RachaMapper implements Function<RachaRegisterDTO, Racha> {
 
-  @Autowired
   UserService userService;
 
   @Override
@@ -41,5 +39,5 @@ public class RachaMapper implements Function<RachaRegisterDTO, Racha> {
       .inviteLink(invite)
       .build();
   }
-  
+
 }
