@@ -1,7 +1,6 @@
 package ifsul.agileproject.rachadinha.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -12,14 +11,8 @@ import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
-import ifsul.agileproject.rachadinha.domain.entity.User;
-import ifsul.agileproject.rachadinha.exceptions.ErrorResponse;
-import ifsul.agileproject.rachadinha.exceptions.ForbiddenUserException;
-import ifsul.agileproject.rachadinha.exceptions.RachaNotFoundException;
-import ifsul.agileproject.rachadinha.exceptions.UserNotFoundException;
+import ifsul.agileproject.rachadinha.exceptions.*;
 import ifsul.agileproject.rachadinha.service.impl.RachaServiceImpl;
-import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -29,16 +22,15 @@ import lombok.AllArgsConstructor;
 public class RachaController {
 
 	private final RachaServiceImpl rachaService;
-  private final UserServiceImpl userService;
 
-	@PostMapping("/new")
+	@PostMapping("/criar")
 	public ResponseEntity createRacha(@RequestBody RachaRegisterDTO rachaDTO) {
     try {
       Racha racha = rachaService.saveRacha(rachaDTO);
       RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
       return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.CREATED);
     } catch (UserNotFoundException e) {
-      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 	}
 
@@ -51,7 +43,7 @@ public class RachaController {
           .collect(Collectors.toList());
       return new ResponseEntity<List<RachaResponseDTO>>(rachasResponseDto, HttpStatus.OK);
     } catch (UserNotFoundException e) {
-      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 	}
 
@@ -74,9 +66,9 @@ public class RachaController {
     } catch (ForbiddenUserException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     } catch (UserNotFoundException e) {
-      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     } catch (RachaNotFoundException e) {
-      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
   }
 
@@ -92,70 +84,39 @@ public class RachaController {
     } catch (ForbiddenUserException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     } catch (UserNotFoundException e) {
-      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     } catch (RachaNotFoundException e) {
-      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
   }
 
-  // TODO: move this to RachaService
   @PostMapping("/join")
-	@Transactional
 	public ResponseEntity joinRacha(@RequestParam long idUser, @RequestParam long idRacha, @RequestParam String pass) {
-		Optional<User> userOpt = userService.findUserById(idUser);
-		Optional<Racha> rachaOpt = rachaService.findRachaById(idRacha);
-
-		if (rachaOpt.isPresent()) {
-			if (userOpt.isPresent()) {
-				User user = userOpt.get();
-				Racha racha = rachaOpt.get();
-
-				if (racha.getMembers().contains(user)) {
-					return new ResponseEntity<>("Usuário já está no racha.", HttpStatus.OK);
-				}
-
-				if (racha.getPassword().equals(pass)) {
-					racha.getMembers().add(user);
-					user.getRachas().add(racha);
-					rachaService.save(racha);
-					userService.save(user);
-					return new ResponseEntity<>("Usuário adicionado ao racha.", HttpStatus.OK);
-				} else {
-					return new ResponseEntity<>("Senha incorreta.", HttpStatus.BAD_REQUEST);
-				}
-			} else {
-				return new ResponseEntity<>("Usuário não existe", HttpStatus.FORBIDDEN);
-			}
-		} else {
-			return new ResponseEntity<>("Racha não existe", HttpStatus.FORBIDDEN);
-		}
+    try {
+      rachaService.addMemberToRacha(idRacha, idUser, pass);
+      return new ResponseEntity<String>("Usuário adicionado ao racha", HttpStatus.OK);
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserAlreadyInRachaException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
+    } catch (IncorrectRachaPasswordException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
 	}
 
-  // TODO: move this to RachaService
   @PostMapping("/leave")
-  @Transactional
   public ResponseEntity leaveRacha(@RequestParam long idUser, @RequestParam long idRacha) {
-
-    Optional<User> userOpt = userService.findUserById(idUser);
-    Optional<Racha> rachaOpt = rachaService.findRachaById(idRacha);
-
-    if (rachaOpt.isPresent()) {
-      if (userOpt.isPresent()) {
-        User user = userOpt.get();
-        Racha racha = rachaOpt.get();
-
-        if(racha.getMembers().contains(user)){
-          racha.getMembers().remove(user);
-          return new ResponseEntity("Usuário removido do racha", HttpStatus.OK);
-        } else{
-          return new ResponseEntity("Usuário não está neste racha", HttpStatus.FORBIDDEN);
-        }
-
-      } else {
-        return new ResponseEntity<>("Usuário não existe", HttpStatus.FORBIDDEN);
-      }
-    } else {
-      return new ResponseEntity<>("Racha não existe", HttpStatus.FORBIDDEN);
+    try {
+      rachaService.removeMemberFromRacha(idRacha, idUser);
+      return new ResponseEntity<String>("Usuário removido do racha", HttpStatus.OK);
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotInRachaException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
     }
   }
 }

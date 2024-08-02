@@ -31,5 +31,9 @@ public interface RachaService {
 
 	List<Racha> findRachaByOwner(Long ownerId);
 
+	void addMemberToRacha(Long rachaId, Long userId, String password);
+
+	void removeMemberFromRacha(Long rachaId, Long userId);
+
 	void save(Racha racha);
 }

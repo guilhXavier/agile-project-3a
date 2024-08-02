@@ -12,10 +12,7 @@ import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserLoginDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
-import ifsul.agileproject.rachadinha.exceptions.EmailAlreadyUsedException;
-import ifsul.agileproject.rachadinha.exceptions.ErrorResponse;
-import ifsul.agileproject.rachadinha.exceptions.IncorrectUserPasswordException;
-import ifsul.agileproject.rachadinha.exceptions.UserNotFoundException;
+import ifsul.agileproject.rachadinha.exceptions.*;
 import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 
@@ -39,7 +36,7 @@ public class UserController {
   }
 
   // Cadastrar user
-  @PostMapping("/signup")
+  @PostMapping("/cadastro")
   public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
     try {
       User usuario = userService.saveUser(userDTO);
