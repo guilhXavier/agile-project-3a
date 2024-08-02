@@ -23,7 +23,7 @@ public class RachaController {
 
 	private final RachaServiceImpl rachaService;
 
-	@PostMapping("/criar")
+	@PostMapping("/create")
 	public ResponseEntity createRacha(@RequestBody RachaRegisterDTO rachaDTO) {
     try {
       Racha racha = rachaService.saveRacha(rachaDTO);

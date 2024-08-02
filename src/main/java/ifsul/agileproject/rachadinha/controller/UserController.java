@@ -24,7 +24,6 @@ public class UserController {
 
   private final UserServiceImpl userService;
 
-  // Buscar user por ID
   @GetMapping("{id}")
   public ResponseEntity getUserByID(@PathVariable Long id) {
     try {
@@ -35,8 +34,7 @@ public class UserController {
     }
   }
 
-  // Cadastrar user
-  @PostMapping("/cadastro")
+  @PostMapping("/signup")
   public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
     try {
       User usuario = userService.saveUser(userDTO);
@@ -46,7 +44,6 @@ public class UserController {
     }
   }
 
-  // Deletar usuário pelo ID
   @DeleteMapping("{id}")
   public ResponseEntity deleteUserByID(@PathVariable Long id) {
     try {
@@ -57,7 +54,6 @@ public class UserController {
     }
   }
 
-  // Atualizar usuário pelo ID
   @PatchMapping("{id}")
   public ResponseEntity updateUser(@RequestBody UserDTO userDTO, @PathVariable Integer id) {
     try {
@@ -68,7 +64,6 @@ public class UserController {
     }
   }
 
-  // Busca todos usuários
   @GetMapping("/findAll")
   public ResponseEntity<List<UserResponseDTO>> findAll() {
     List<User> userList = userService.findAll();
@@ -80,7 +75,6 @@ public class UserController {
     return new ResponseEntity<List<UserResponseDTO>>(listDTO, HttpStatus.OK);
   }
 
-  // Login do usuário com EMAIL e PASSWORD
   @PostMapping("/login")
   public ResponseEntity login(@RequestBody UserLoginDTO userLoginDTO) {
     try {
@@ -105,5 +99,4 @@ public class UserController {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
   }
-
 }
