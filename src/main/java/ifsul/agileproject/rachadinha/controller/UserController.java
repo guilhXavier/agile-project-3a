@@ -14,6 +14,9 @@ import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.exceptions.*;
 import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -24,6 +27,11 @@ public class UserController {
 
   private final UserServiceImpl userService;
 
+  @Operation(summary = "Busca um usuário pelo ID", description = "Retorna os dados públicos de um usuário com base no ID")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Usuário encontrado"),
+    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+  })
   @GetMapping("{id}")
   public ResponseEntity getUserByID(@PathVariable Long id) {
     try {
@@ -34,6 +42,11 @@ public class UserController {
     }
   }
 
+  @Operation(summary = "Cria um novo usuário", description = "Cria um novo usuário com base nos dados passados no corpo da requisição")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso"),
+    @ApiResponse(responseCode = "400", description = "Email já em uso")
+  })
   @PostMapping("/signup")
   public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
     try {
@@ -44,6 +57,11 @@ public class UserController {
     }
   }
 
+  @Operation(summary = "Deleta um usuário", description = "Deleta um usuário com base no ID")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Usuário deletado"),
+    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+  })
   @DeleteMapping("{id}")
   public ResponseEntity deleteUserByID(@PathVariable Long id) {
     try {
@@ -54,6 +72,11 @@ public class UserController {
     }
   }
 
+  @Operation(summary = "Atualiza um usuário", description = "Atualiza um usuário com base nos dados passados no corpo da requisição")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Usuário atualizado"),
+    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+  })
   @PatchMapping("{id}")
   public ResponseEntity updateUser(@RequestBody UserDTO userDTO, @PathVariable Integer id) {
     try {
@@ -64,7 +87,11 @@ public class UserController {
     }
   }
 
-  @GetMapping("/findAll")
+  @Operation(summary = "Busca todos os usuários", description = "Retorna uma lista com todos os usuários cadastrados")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Usuários encontrados")
+  })
+  @GetMapping("/list/all")
   public ResponseEntity<List<UserResponseDTO>> findAll() {
     List<User> userList = userService.findAll();
 
@@ -75,6 +102,12 @@ public class UserController {
     return new ResponseEntity<List<UserResponseDTO>>(listDTO, HttpStatus.OK);
   }
 
+  @Operation(summary = "Faz login", description = "Faz login com base no email e senha passados no corpo da requisição")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Login efetuado com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+    @ApiResponse(responseCode = "400", description = "Senha incorreta")
+  })
   @PostMapping("/login")
   public ResponseEntity login(@RequestBody UserLoginDTO userLoginDTO) {
     try {
@@ -88,6 +121,12 @@ public class UserController {
 
   }
 
+  @Operation(summary = "Define uma nova senha", description = "Define uma nova senha para um usuário com base no ID")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Senha alterada com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+    @ApiResponse(responseCode = "400", description = "Senha original incorreta")
+  })
   @PatchMapping("/resetPass")
   public ResponseEntity resetPassword(@RequestParam Long userId, String oriPass, String newPass){
     try{
