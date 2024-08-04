@@ -10,6 +10,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Dialog } from '../dialog/dialog';
 import { Field, useForm } from '../../hooks/useForm/useForm';
 import Input from '../input/input';
+import { useCreateChipIn } from '../../api/useCreateChipIn/useCreateChipIn';
+import { useStore } from '../../store';
 
 const schema = {
   name: {
@@ -84,19 +86,35 @@ const StyledSideMenu = styled.div<{ isExpanded: boolean }>`
 `;
 
 export const SideMenu: React.FC = () => {
+  const ownerId = useStore((state) => state.user?.id);
+
   const [isExpanded, setIsExpanded] = React.useState<boolean>(false);
+
   const [isCreateDialogOpen, setIsCreateDialogOpen] =
     React.useState<boolean>(false);
 
-  const { validation, get, set } = useForm<
+  const { validation, get, set, isValid } = useForm<
     'name' | 'description' | 'totalValue' | 'password'
   >(schema);
+
+  const { createChipIn } = useCreateChipIn();
 
   const renderCreateDialog = () => (
     <Dialog
       title="Criar racha"
       isVisible={isCreateDialogOpen}
       handleClose={() => setIsCreateDialogOpen(!isCreateDialogOpen)}
+      onConfirm={() => {
+        if (isValid) {
+          createChipIn({
+            name: get('name'),
+            description: get('description'),
+            goal: Number(get('totalValue')),
+            password: get('password'),
+            ownerId: Number(ownerId),
+          });
+        }
+      }}
     >
       <Input
         id="name"
