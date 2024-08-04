@@ -8,12 +8,4 @@ export const StyledList = styled.ul`
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  li {
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    min-width: 200px;
-    max-width: 300px;
-    text-align: center;
-  }
 `;

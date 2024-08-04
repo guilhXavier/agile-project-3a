@@ -88,55 +88,55 @@ export const SideMenu: React.FC = () => {
   const [isCreateDialogOpen, setIsCreateDialogOpen] =
     React.useState<boolean>(false);
 
-  const { validation, get, set } = useForm<
+  const { validation, get, set, isValid } = useForm<
     'name' | 'description' | 'totalValue' | 'password'
   >(schema);
 
   const renderCreateDialog = () => (
     <Dialog
-        title="Criar racha"
-        isVisible={isCreateDialogOpen}
-        handleClose={() => setIsCreateDialogOpen(!isCreateDialogOpen)}
-      >
-        <Input
-          id="name"
-          inputType="text"
-          label="Nome"
-          placeholder="Nome do racha"
-          value={get('name')}
-          onInput={(e) => set('name', e.currentTarget.value)}
-          isValid={validation.get('name')?.isValid}
-          validationMessage={validation.get('name')?.message}
-        />
-        <Input
-          id="description"
-          inputType="text"
-          label="Descrição"
-          placeholder="Descrição do racha"
-          value={get('description')}
-          onInput={(e) => set('description', e.currentTarget.value)}
-        />
-        <Input
-          id="totalValue"
-          inputType="text"
-          label="Valor total"
-          placeholder="Valor total do racha"
-          value={get('totalValue')}
-          onInput={(e) => set('totalValue', e.currentTarget.value)}
-          isValid={validation.get('totalValue')?.isValid}
-          validationMessage={validation.get('totalValue')?.message}
-        />
-        <Input
-          id="password"
-          inputType="password"
-          label="Senha"
-          placeholder="Senha do racha"
-          value={get('password')}
-          onInput={(e) => set('password', e.currentTarget.value)}
-          isValid={validation.get('password')?.isValid}
-          validationMessage={validation.get('password')?.message}
-        />
-      </Dialog>
+      title="Criar racha"
+      isVisible={isCreateDialogOpen}
+      handleClose={() => setIsCreateDialogOpen(!isCreateDialogOpen)}
+    >
+      <Input
+        id="name"
+        inputType="text"
+        label="Nome"
+        placeholder="Nome do racha"
+        value={get('name')}
+        onInput={(e) => set('name', e.currentTarget.value)}
+        isValid={validation.get('name')?.isValid}
+        validationMessage={validation.get('name')?.message}
+      />
+      <Input
+        id="description"
+        inputType="text"
+        label="Descrição"
+        placeholder="Descrição do racha"
+        value={get('description')}
+        onInput={(e) => set('description', e.currentTarget.value)}
+      />
+      <Input
+        id="totalValue"
+        inputType="text"
+        label="Valor total"
+        placeholder="Valor total do racha"
+        value={get('totalValue')}
+        onInput={(e) => set('totalValue', e.currentTarget.value)}
+        isValid={validation.get('totalValue')?.isValid}
+        validationMessage={validation.get('totalValue')?.message}
+      />
+      <Input
+        id="password"
+        inputType="password"
+        label="Senha"
+        placeholder="Senha do racha"
+        value={get('password')}
+        onInput={(e) => set('password', e.currentTarget.value)}
+        isValid={validation.get('password')?.isValid}
+        validationMessage={validation.get('password')?.message}
+      />
+    </Dialog>
   );
 
   return (
