@@ -84,11 +84,11 @@ const StyledSideMenu = styled.div<{ isExpanded: boolean }>`
 `;
 
 export const SideMenu: React.FC = () => {
-  const [isExpanded, setIsExpanded] = React.useState<boolean>(true);
+  const [isExpanded, setIsExpanded] = React.useState<boolean>(false);
   const [isCreateDialogOpen, setIsCreateDialogOpen] =
     React.useState<boolean>(false);
 
-  const { validation, get, set, isValid } = useForm<
+  const { validation, get, set } = useForm<
     'name' | 'description' | 'totalValue' | 'password'
   >(schema);
 

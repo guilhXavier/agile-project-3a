@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "msw-storybook-addon": "^2.0.3"
+  }
+}
