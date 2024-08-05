@@ -5,6 +5,7 @@ import { Button } from '../../components/button/button';
 import { useLogin, LoginForm } from '../../api/useLogin/useLogin';
 import { useNavigate } from 'react-router-dom';
 import { SectionStyled } from './login.styled';
+import { useStore } from '../../store';
 
 const schema = {
   email: {
@@ -26,11 +27,13 @@ const schema = {
 export const Login: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
 
+  const { setUser } = useStore();
+
   const { form, validation, get, set, isValid } = useForm<'email' | 'password'>(
     schema
   );
 
-  const { isError, isSuccess } = useLogin(
+  const { isError, isSuccess, data } = useLogin(
     Object.fromEntries(form.entries()) as unknown as LoginForm,
     isValid && isSubmitted
   );
@@ -42,13 +45,14 @@ export const Login: React.FC = () => {
   };
 
   React.useEffect(() => {
-    // Show error message
     setIsSubmitted(false);
-  }, [isError]);
+  }, [isError, isSuccess]);
 
   React.useEffect(() => {
-    // Redirect
-    setIsSubmitted(false);
+    if (isSuccess && data) {
+      setUser(data);
+      navigate('/listing');
+    }
   }, [isSuccess]);
 
   const handleSubmit = (event: React.FormEvent): void => {

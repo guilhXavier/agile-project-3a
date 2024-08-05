@@ -80,5 +80,10 @@
     "react-router-dom": "6.11.2",
     "styled-components": "5.3.6",
     "zustand": "^4.5.2"
+  },
+  "msw": {
+    "workerDirectory": [
+      "apps/agile-project-fe/public"
+    ]
   }
 }

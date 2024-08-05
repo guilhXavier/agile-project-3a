@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { baseAxios } from '..';
-import { AxiosResponse } from 'axios';
+import { User } from '../../types';
 
 export interface LoginForm {
   email: string;
@@ -8,16 +8,19 @@ export interface LoginForm {
 }
 
 export interface UseLoginReturn {
-  data: AxiosResponse<string, string>;
+  data?: User;
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;
 }
 
-export const useLogin = (loginForm: LoginForm, isFormValid: boolean) => {
+export const useLogin = (
+  loginForm: LoginForm,
+  isFormValid: boolean
+): UseLoginReturn => {
   const { data, isError, isSuccess, isLoading } = useQuery({
     queryKey: ['login'],
-    queryFn: () => baseAxios.post('/login', loginForm),
+    queryFn: (): Promise<User> => baseAxios.post('/login', loginForm),
     enabled: isFormValid,
   });
 

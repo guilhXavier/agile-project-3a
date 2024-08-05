@@ -6,6 +6,8 @@ export interface DialogProps {
   isVisible: boolean;
   title: string;
   handleClose: () => void;
+  onConfirm?: () => void;
+  onCancel?: () => void;
   children: React.ReactNode;
 }
 
@@ -15,7 +17,7 @@ const StyledDialogCard = styled.div<{ isVisible: boolean }>`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 300px;
-  height: 256px;
+  height: auto;
   font-size: 12px;
   border-radius: 10px;
   padding: 20px;
@@ -101,6 +103,8 @@ export const Dialog: React.FC<DialogProps> = ({
   title,
   handleClose,
   children,
+  onConfirm,
+  onCancel,
 }) => (
   <>
     <StyledOverlay isVisible={isVisible} onClick={handleClose} />
@@ -110,8 +114,22 @@ export const Dialog: React.FC<DialogProps> = ({
         <StyledDialogContainer>{children}</StyledDialogContainer>
       </StyledDialogContent>
       <StyledDialogActions>
-        <Button variant="confirm" text="Confirm" onClick={handleClose} />
-        <Button variant="cancel" text="Cancel" onClick={handleClose} />
+        <Button
+          variant="confirm"
+          text="Confirm"
+          onClick={() => {
+            handleClose();
+            onConfirm?.();
+          }}
+        />
+        <Button
+          variant="cancel"
+          text="Cancel"
+          onClick={() => {
+            handleClose();
+            onCancel?.();
+          }}
+        />
       </StyledDialogActions>
     </StyledDialogCard>
   </>
