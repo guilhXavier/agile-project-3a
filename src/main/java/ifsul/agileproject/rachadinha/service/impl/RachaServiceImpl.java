@@ -18,6 +18,7 @@ import ifsul.agileproject.rachadinha.exceptions.UserAlreadyInRachaException;
 import ifsul.agileproject.rachadinha.exceptions.UserNotFoundException;
 import ifsul.agileproject.rachadinha.exceptions.UserNotInRachaException;
 import ifsul.agileproject.rachadinha.mapper.RachaMapper;
+import ifsul.agileproject.rachadinha.mapper.RandomCodeGenerator;
 import ifsul.agileproject.rachadinha.repository.RachaRepository;
 import ifsul.agileproject.rachadinha.repository.UserRepository;
 import ifsul.agileproject.rachadinha.service.RachaService;
@@ -38,6 +39,7 @@ public class RachaServiceImpl implements RachaService {
       throw new UserNotFoundException(rachaDTO.getOwnerId());
     }
     Racha racha = rachaMapper.apply(rachaDTO);
+    racha.setInviteLink(generateUniqueInviteLink());
     return rachaRepository.save(racha);
   }
 
@@ -116,9 +118,21 @@ public class RachaServiceImpl implements RachaService {
     return rachaRepository.findByOwner(owner);
   }
 
+  private String generateUniqueInviteLink() {
+    String invite;
+    do {
+      invite = RandomCodeGenerator.generateRandomCode();
+    } while (rachaRepository.findByInviteLink(invite) != null);
+    return invite;
+  }
+
   @Override
   public Racha findRachaByInvite(String invite) {
-    return rachaRepository.findByInviteLink(invite);
+    Racha racha = rachaRepository.findByInviteLink(invite);
+    if (racha == null) {
+      throw new RachaNotFoundException();
+    }
+    return racha;
   }
 
   @Override

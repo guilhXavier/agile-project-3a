@@ -178,15 +178,19 @@ public class RachaController {
     }
   }
 
-  @PostMapping("/invite/{invite}")
-  public ResponseEntity<RachaResponseDTO> findByInvite(@PathVariable String invite) {
-	Racha racha = rachaService.findRachaByInvite(invite);
-
-	if (racha != null) {
-	  RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
-	  return new ResponseEntity<>(rachaResponseDTO, HttpStatus.OK);
-	} else {
-	  return new ResponseEntity("Racha não encontrado", HttpStatus.FORBIDDEN);
-	}
+  @Operation(summary = "Busca um racha pelo convite", description = "Retorna os dados de um racha com base no convite")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Racha encontrado"),
+    @ApiResponse(responseCode = "403", description = "Racha não encontrado")
+  })
+  @GetMapping("/invite/{invite}")
+  public ResponseEntity findByInvite(@PathVariable String invite) {
+    try {
+      Racha racha = rachaService.findRachaByInvite(invite);
+      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
+      return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
   }
 }
