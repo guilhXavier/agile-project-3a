@@ -177,4 +177,16 @@ public class RachaController {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
     }
   }
+
+  @PostMapping("/invite/{invite}")
+  public ResponseEntity<RachaResponseDTO> findByInvite(@PathVariable String invite) {
+	Racha racha = rachaService.findRachaByInvite(invite);
+
+	if (racha != null) {
+	  RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
+	  return new ResponseEntity<>(rachaResponseDTO, HttpStatus.OK);
+	} else {
+	  return new ResponseEntity("Racha não encontrado", HttpStatus.FORBIDDEN);
+	}
+  }
 }

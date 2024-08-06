@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const StyledInput = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 256px;
   font-family: 'Roboto', sans-serif;
 
   input {
@@ -13,7 +12,6 @@ export const StyledInput = styled.div`
     border-radius: 0.4em;
 
     height: 40px;
-    width: 360px;
 
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -21,6 +19,10 @@ export const StyledInput = styled.div`
     &:focus {
       outline: none;
       border-color: black;
+    }
+
+    &::placeholder {
+      padding-left: 0.5em;
     }
   }
 

@@ -117,6 +117,11 @@ public class RachaServiceImpl implements RachaService {
   }
 
   @Override
+  public Racha findRachaByInvite(String invite) {
+    return rachaRepository.findByInviteLink(invite);
+  }
+
+  @Override
   public List<Racha> findRachaByOwner(Long id) {
     User owner = new User();
     owner.setId(id);

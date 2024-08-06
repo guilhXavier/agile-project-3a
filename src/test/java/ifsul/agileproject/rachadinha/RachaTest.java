@@ -38,4 +38,22 @@ public class RachaTest {
 
         assertEquals(rachaSalvo, rachaRecuperado);
     }
+
+    @Test
+    public void testFindRachaByInviteLink(){
+        RachaRegisterDTO rachaRegister = new RachaRegisterDTO();
+        rachaRegister.setName("Teste Nome");
+        rachaRegister.setDescription("Teste Descrição");
+        rachaRegister.setGoal(500.00);
+        rachaRegister.setPassword("123");
+        rachaRegister.setOwnerId(11L);
+
+        Racha racha = rachaMapper.apply(rachaRegister);
+
+        Racha rachaSalvo = rachaRepository.save(racha);
+
+        Racha rachaRecuperado = rachaRepository.findByInviteLink(rachaSalvo.getInviteLink());
+
+        assertEquals(rachaSalvo, rachaRecuperado);
+    }
 }

@@ -15,10 +15,10 @@ public interface RachaService {
 
 	Optional<Racha> findRachaById(Long id);
 
-  List<Racha> findAll();
+	List<Racha> findAll();
 
 	void deleteRachaById(Long id);
-
+	
 	void deleteRachaById(Long id, Long loggerUserId);
 
 	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha);
@@ -28,6 +28,8 @@ public interface RachaService {
 	Racha findRachaByStatus(Status status);
 
 	List<Racha> findRachaByOwner(User owner);
+
+	Racha findRachaByInvite(String invite);
 
 	List<Racha> findRachaByOwner(Long ownerId);
 

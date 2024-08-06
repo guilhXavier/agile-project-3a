@@ -17,7 +17,7 @@ const DefaultButtonStyle = css`
   justify-content: center;
   align-items: center;
   margin: 8px 0;
-  width: 360px;
+  min-width: 100px;
   height: 40px;
   border-radius: 0.6em;
   border: none;
