@@ -9,16 +9,10 @@ import org.springframework.stereotype.Service;
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
-import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.domain.entity.User;
-import ifsul.agileproject.rachadinha.exceptions.ForbiddenUserException;
-import ifsul.agileproject.rachadinha.exceptions.IncorrectRachaPasswordException;
-import ifsul.agileproject.rachadinha.exceptions.RachaNotFoundException;
-import ifsul.agileproject.rachadinha.exceptions.UserAlreadyInRachaException;
-import ifsul.agileproject.rachadinha.exceptions.UserNotFoundException;
-import ifsul.agileproject.rachadinha.exceptions.UserNotInRachaException;
+import ifsul.agileproject.rachadinha.exceptions.*;
 import ifsul.agileproject.rachadinha.mapper.RachaMapper;
-import ifsul.agileproject.rachadinha.mapper.RandomCodeGenerator;
+import ifsul.agileproject.rachadinha.utils.RandomCodeGenerator;
 import ifsul.agileproject.rachadinha.repository.RachaRepository;
 import ifsul.agileproject.rachadinha.repository.UserRepository;
 import ifsul.agileproject.rachadinha.service.RachaService;
@@ -44,11 +38,6 @@ public class RachaServiceImpl implements RachaService {
   }
 
   @Override
-  public void save(Racha racha){
-    rachaRepository.save(racha);
-  }
-
-  @Override
   public Optional<Racha> findRachaById(Long id) {
     if (!rachaRepository.existsById(id)) {
       throw new RachaNotFoundException(id);
@@ -58,14 +47,6 @@ public class RachaServiceImpl implements RachaService {
 
   public List<Racha> findAll(){
     return rachaRepository.findAll();
-  }
-
-  @Override
-  public void deleteRachaById(Long id) {
-    if (!rachaRepository.existsById(id)) {
-      throw new RachaNotFoundException(id);
-    }
-    rachaRepository.deleteById(id);
   }
 
   @Override
@@ -106,11 +87,6 @@ public class RachaServiceImpl implements RachaService {
       throw new ForbiddenUserException(loggedUserId);
     }
     return updateRacha(rachaUpdateDTO, racha);
-  }
-
-  @Override
-  public Racha findRachaByStatus(Status status) {
-    return rachaRepository.findByStatus(status);
   }
 
   private String generateUniqueInviteLink() {
