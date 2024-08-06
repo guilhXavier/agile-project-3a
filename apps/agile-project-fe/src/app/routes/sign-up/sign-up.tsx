@@ -4,6 +4,7 @@ import Input from '../../components/input/input';
 import { Button } from '../../components/button/button';
 import { useRegister, UserForm } from '../../api/useRegister/useRegister';
 import { SectionStyled } from './sign-up.styled';
+import { useNavigate } from 'react-router-dom';
 
 const schema = {
   username: {
@@ -38,6 +39,12 @@ export const SignUp: React.FC = () => {
   const { form, validation, get, set } = useForm<
     'username' | 'email' | 'password' | 'confirmPassword'
   >(schema);
+
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate('/login');
+  };
 
   const handleSubmit = (): void => {
     mutate(Object.fromEntries(form.entries()) as unknown as UserForm);
@@ -98,6 +105,8 @@ export const SignUp: React.FC = () => {
             validationMessage={validation.get('confirmPassword')?.message}
           />
           <Button variant="confirm" text="Enviar" />
+          <span className="divider"></span>
+          <Button variant="neutral" text="Cancelar" onClick={goBack} />
         </form>
         <footer>
           <p>
