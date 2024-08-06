@@ -113,11 +113,6 @@ public class RachaServiceImpl implements RachaService {
     return rachaRepository.findByStatus(status);
   }
 
-  @Override
-  public List<Racha> findRachaByOwner(User owner) {
-    return rachaRepository.findByOwner(owner);
-  }
-
   private String generateUniqueInviteLink() {
     String invite;
     do {
