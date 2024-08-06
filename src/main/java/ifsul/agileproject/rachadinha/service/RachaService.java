@@ -18,7 +18,7 @@ public interface RachaService {
 	List<Racha> findAll();
 
 	void deleteRachaById(Long id);
-	
+
 	void deleteRachaById(Long id, Long loggerUserId);
 
 	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha);
@@ -26,8 +26,6 @@ public interface RachaService {
 	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha, Long loggerUserId);
 
 	Racha findRachaByStatus(Status status);
-
-	List<Racha> findRachaByOwner(User owner);
 
 	Racha findRachaByInvite(String invite);
 
