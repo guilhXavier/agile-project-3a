@@ -38,7 +38,7 @@ export const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const goToRegister = () => {
-    navigate('/register');
+    navigate('/sign-up');
   };
 
   React.useEffect(() => {
