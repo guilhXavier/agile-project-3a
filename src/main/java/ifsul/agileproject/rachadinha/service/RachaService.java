@@ -6,8 +6,6 @@ import java.util.Optional;
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
-import ifsul.agileproject.rachadinha.domain.entity.Status;
-import ifsul.agileproject.rachadinha.domain.entity.User;
 
 public interface RachaService {
 
@@ -15,17 +13,19 @@ public interface RachaService {
 
 	Optional<Racha> findRachaById(Long id);
 
-  List<Racha> findAll();
+	List<Racha> findAll();
 
-	void deleteRachaById(Long id);
+  void deleteRachaById(Long id, Long loggerUserId);
 
 	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha);
 
-	Racha findRachaByStatus(Status status);
+	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha, Long loggerUserId);
 
-	List<Racha> findRachaByOwner(User owner);
+  Racha findRachaByInvite(String invite);
 
-	Racha findRachaByInvite(String invite);
+	List<Racha> findRachaByOwner(Long ownerId);
 
-	void save(Racha racha);
+	void addMemberToRacha(Long rachaId, Long userId, String password);
+
+	void removeMemberFromRacha(Long rachaId, Long userId);
 }

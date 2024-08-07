@@ -7,37 +7,23 @@ import java.util.function.Function;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.service.UserService;
-import ifsul.agileproject.rachadinha.service.RachaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+import lombok.AllArgsConstructor;
+
 import org.springframework.stereotype.Component;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
-import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class RachaMapper implements Function<RachaRegisterDTO, Racha> {
 
-  @Autowired
-  @Lazy
   UserService userService;
-
-  @Autowired
-  @Lazy
-  RachaService rachaService;
-
+  
   @Override
   public Racha apply(RachaRegisterDTO dto) {
 
     User owner = userService.findUserById(dto.getOwnerId()).get();
-
-    String invite = RandomCodeGenerator.generateRandomCode();
-
-    while (rachaService.findRachaByInvite(invite) != null) {
-      invite = RandomCodeGenerator.generateRandomCode();
-    }
 
     return Racha.builder()
       .name(dto.getName())
@@ -49,7 +35,6 @@ public class RachaMapper implements Function<RachaRegisterDTO, Racha> {
       .balance(0.0)
       .status(Status.OPEN)
       .created_at(new Date())
-      .inviteLink(invite)
       .build();
   }
   

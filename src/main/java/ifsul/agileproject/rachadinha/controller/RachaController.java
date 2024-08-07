@@ -1,185 +1,196 @@
 package ifsul.agileproject.rachadinha.controller;
 
-import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
-import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
-import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
-import jakarta.transaction.Transactional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
-import ifsul.agileproject.rachadinha.domain.entity.User;
+import ifsul.agileproject.rachadinha.exceptions.*;
 import ifsul.agileproject.rachadinha.service.impl.RachaServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/racha")
 @AllArgsConstructor
+@SuppressWarnings("rawtypes")
 public class RachaController {
 
 	private final RachaServiceImpl rachaService;
-  private final UserServiceImpl userService;
 
-	// Criar racha
-	@PostMapping("/criar")
-	public ResponseEntity<RachaResponseDTO> createRacha(@RequestBody RachaRegisterDTO rachaDTO) {
-		Racha racha = rachaService.saveRacha(rachaDTO);
+  @Operation(summary = "Busca um racha pelo ID", description = "Retorna os dados de um racha com base no ID")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Racha encontrado"),
+    @ApiResponse(responseCode = "404", description = "Racha não encontrado")
+  })
+  @GetMapping("{idRacha}")
+  public ResponseEntity findRachaByID(@PathVariable Long idRacha) {
+    try {
+      Racha racha = rachaService.findRachaById(idRacha).orElseThrow(() -> new RachaNotFoundException(idRacha));
+      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
+      return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+  }
 
-		RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
-
-		return new ResponseEntity<>(rachaResponseDTO, HttpStatus.CREATED);
+  @Operation(summary = "Cria um racha", description = "Cria um racha com base nos dados passados no corpo da requisição")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "201", description = "Racha criado com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+  })
+	@PostMapping("/create")
+	public ResponseEntity createRacha(@RequestBody RachaRegisterDTO rachaDTO) {
+    try {
+      Racha racha = rachaService.saveRacha(rachaDTO);
+      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
+      return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.CREATED);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
 	}
 
-	@GetMapping("/findByOwner/{id}")
-	public ResponseEntity<List<RachaResponseDTO>> findByOwner(@PathVariable Long id) {
-		User owner = new User();
-		owner.setId(id);
-
-		List<Racha> rachas = rachaService.findRachaByOwner(owner);
-
-		List<RachaResponseDTO> rachasResponseDto = rachas.stream()
-				.map(RachaResponseDTO::transformarEmDto)
-				.collect(Collectors.toList());
-
-		return new ResponseEntity<>(rachasResponseDto, HttpStatus.OK);
+  @Operation(summary = "Lista todos os rachas criados por um usuário", description = "Retorna uma lista com todos os rachas criados por um usuário")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Rachas encontrados com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+  })
+	@GetMapping("/list/owner/{idOwner}")
+	public ResponseEntity findByOwner(@PathVariable Long idOwner) {
+    try {
+      List<Racha> rachas = rachaService.findRachaByOwner(idOwner);
+      List<RachaResponseDTO> rachasResponseDto = rachas.stream()
+          .map(RachaResponseDTO::transformarEmDto)
+          .collect(Collectors.toList());
+      return new ResponseEntity<List<RachaResponseDTO>>(rachasResponseDto, HttpStatus.OK);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
 	}
 
-  @GetMapping("/findAll")
-  public ResponseEntity<List<RachaResponseDTO>> findAll(){
+  @Operation(summary = "Lista todos os rachas", description = "Retorna uma lista com todos os rachas")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Rachas encontrados com sucesso")
+  })
+  @GetMapping("/list/all")
+  public ResponseEntity findAll(){
     List<Racha> rachaList = rachaService.findAll();
 
     List<RachaResponseDTO> listDTO = rachaList.stream()
       .map(RachaResponseDTO::transformarEmDto)
       .collect(Collectors.toList());
 
-    return new ResponseEntity<>(listDTO, HttpStatus.OK);
+    return new ResponseEntity<List<RachaResponseDTO>>(listDTO, HttpStatus.OK);
   }
 
+  @Operation(summary = "Deleta um racha", description = "Deleta um racha com base no ID")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Racha deletado com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Racha não encontrado"),
+    @ApiResponse(responseCode = "403", description = "Usuário não tem permissão para deletar o racha")
+  })
 	@DeleteMapping("/{idRacha}")
 	public ResponseEntity deleteRachaByID(@PathVariable Long idRacha, @RequestParam Long idOwner) {
-
-    Optional<Racha> racha = rachaService.findRachaById(idRacha);
-    Optional<User> owner = userService.findUserById(idOwner);
-
-    if (racha.isPresent()) {
-      if(owner.isPresent()) {
-
-        if (racha.get().getOwner().getId() != owner.get().getId()) {
-          return new ResponseEntity("Usuário não autorizado", HttpStatus.FORBIDDEN);
-        }
-
-        rachaService.deleteRachaById(racha.get().getId());
-        return new ResponseEntity("Racha deletado", HttpStatus.OK);
-      } else{
-        return new ResponseEntity("Usuário não existe", HttpStatus.FORBIDDEN);
-      }
-    } else {
-      return new ResponseEntity("Racha não existe", HttpStatus.FORBIDDEN);
+    try {
+      rachaService.deleteRachaById(idRacha, idOwner);
+      return new ResponseEntity<String>("Racha deletado", HttpStatus.OK);
+    } catch (ForbiddenUserException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
   }
 
+  @Operation(summary = "Atualiza um racha", description = "Atualiza um racha com base nas informações passadas no corpo da requisição")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Racha atualizado com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Racha não encontrado"),
+    @ApiResponse(responseCode = "403", description = "Usuário não tem permissão para atualizar o racha")
+  })
   @PatchMapping("/{idRacha}/owner/{idOwner}")
-  public ResponseEntity<RachaResponseDTO> updateRacha(@PathVariable Long idRacha, @PathVariable Long idOwner, @RequestBody RachaUpdateDTO rachaUpdateDTO) {
+  public ResponseEntity updateRacha(@PathVariable Long idRacha, @PathVariable Long idOwner, @RequestBody RachaUpdateDTO rachaUpdateDTO) {
+    try {
+      Racha racha = rachaService.findRachaById(idRacha).orElseThrow(() -> new RachaNotFoundException(idRacha));
 
-    Optional<Racha> racha = rachaService.findRachaById(idRacha);
-    Optional<User> owner = userService.findUserById(idOwner);
+      Racha rachaAtualizado = rachaService.updateRacha(rachaUpdateDTO, racha, idOwner);
+      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(rachaAtualizado);
 
-    if (racha.isPresent()) {
-      if(owner.isPresent()) {
-
-        if (racha.get().getOwner().getId() != owner.get().getId()) {
-          return new ResponseEntity("Usuário não autorizado", HttpStatus.FORBIDDEN);
-        }
-
-        Racha rachaAtualizado = rachaService.updateRacha(rachaUpdateDTO, racha.get());
-        RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(rachaAtualizado);
-
-        return new ResponseEntity<>(rachaResponseDTO, HttpStatus.OK);
-      } else{
-        return new ResponseEntity("Usuário não existe", HttpStatus.FORBIDDEN);
-      }
-    } else {
-      return new ResponseEntity("Racha não existe", HttpStatus.FORBIDDEN);
+      return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
+    } catch (ForbiddenUserException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
   }
 
+  @Operation(summary = "Adiciona um usuário a um racha", description = "Adiciona um usuário a um racha com base nos IDs passados como parâmetro")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Usuário adicionado ao racha com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Racha ou usuário não encontrado"),
+    @ApiResponse(responseCode = "409", description = "Usuário já está no racha"),
+    @ApiResponse(responseCode = "401", description = "Senha incorreta")
+  })
   @PostMapping("/join")
-	@Transactional
 	public ResponseEntity joinRacha(@RequestParam long idUser, @RequestParam long idRacha, @RequestParam String pass) {
-		Optional<User> userOpt = userService.findUserById(idUser);
-		Optional<Racha> rachaOpt = rachaService.findRachaById(idRacha);
-
-		if (rachaOpt.isPresent()) {
-			if (userOpt.isPresent()) {
-				User user = userOpt.get();
-				Racha racha = rachaOpt.get();
-
-				if (racha.getMembers().contains(user)) {
-					return new ResponseEntity<>("Usuário já está no racha.", HttpStatus.OK);
-				}
-
-				if (racha.getPassword().equals(pass)) {
-					racha.getMembers().add(user);
-					user.getRachas().add(racha);
-					rachaService.save(racha);
-					userService.save(user);
-					return new ResponseEntity<>("Usuário adicionado ao racha.", HttpStatus.OK);
-				} else {
-					return new ResponseEntity<>("Senha incorreta.", HttpStatus.BAD_REQUEST);
-				}
-			} else {
-				return new ResponseEntity<>("Usuário não existe", HttpStatus.FORBIDDEN);
-			}
-		} else {
-			return new ResponseEntity<>("Racha não existe", HttpStatus.FORBIDDEN);
-		}
+    try {
+      rachaService.addMemberToRacha(idRacha, idUser, pass);
+      return new ResponseEntity<String>("Usuário adicionado ao racha", HttpStatus.OK);
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserAlreadyInRachaException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
+    } catch (IncorrectRachaPasswordException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
 	}
 
+  @Operation(summary = "Remove um usuário de um racha", description = "Remove um usuário de um racha com base nos IDs passados como parâmetro")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Usuário removido do racha com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Racha ou usuário não encontrado"),
+    @ApiResponse(responseCode = "409", description = "Usuário não está no racha")
+  })
   @PostMapping("/leave")
-  @Transactional
   public ResponseEntity leaveRacha(@RequestParam long idUser, @RequestParam long idRacha) {
-
-    Optional<User> userOpt = userService.findUserById(idUser);
-    Optional<Racha> rachaOpt = rachaService.findRachaById(idRacha);
-
-    if (rachaOpt.isPresent()) {
-      if (userOpt.isPresent()) {
-        User user = userOpt.get();
-        Racha racha = rachaOpt.get();
-
-        if(racha.getMembers().contains(user)){
-          racha.getMembers().remove(user);
-          return new ResponseEntity("Usuário removido do racha", HttpStatus.OK);
-        } else{
-          return new ResponseEntity("Usuário não está neste racha", HttpStatus.FORBIDDEN);
-        }
-
-      } else {
-        return new ResponseEntity<>("Usuário não existe", HttpStatus.FORBIDDEN);
-      }
-    } else {
-      return new ResponseEntity<>("Racha não existe", HttpStatus.FORBIDDEN);
+    try {
+      rachaService.removeMemberFromRacha(idRacha, idUser);
+      return new ResponseEntity<String>("Usuário removido do racha", HttpStatus.OK);
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotInRachaException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
     }
   }
 
-  @PostMapping("/invite/{invite}")
-  public ResponseEntity<RachaResponseDTO> findByInvite(@PathVariable String invite) {
-	Racha racha = rachaService.findRachaByInvite(invite);
-
-	if (racha != null) {
-	  RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
-	  return new ResponseEntity<>(rachaResponseDTO, HttpStatus.OK);
-	} else {
-	  return new ResponseEntity("Racha não encontrado", HttpStatus.FORBIDDEN);
-	}
+  @Operation(summary = "Busca um racha pelo convite", description = "Retorna os dados de um racha com base no convite")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Racha encontrado"),
+    @ApiResponse(responseCode = "403", description = "Racha não encontrado")
+  })
+  @GetMapping("/invite/{invite}")
+  public ResponseEntity findByInvite(@PathVariable String invite) {
+    try {
+      Racha racha = rachaService.findRachaByInvite(invite);
+      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
+      return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
   }
 }

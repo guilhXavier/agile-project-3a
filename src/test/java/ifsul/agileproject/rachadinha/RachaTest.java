@@ -2,8 +2,8 @@ package ifsul.agileproject.rachadinha;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,16 +14,15 @@ import ifsul.agileproject.rachadinha.repository.RachaRepository;
 
 @Transactional
 @SpringBootTest
+@AllArgsConstructor
 public class RachaTest {
-    
-    @Autowired
+
     private RachaRepository rachaRepository;
 
-    @Autowired
     private RachaMapper rachaMapper;
 
     @Test
-    public void testSalvarERecuperarRacha(){        
+    public void testSalvarERecuperarRacha(){
         RachaRegisterDTO rachaRegister = new RachaRegisterDTO();
         rachaRegister.setName("Teste Nome");
         rachaRegister.setDescription("Teste Descrição");
