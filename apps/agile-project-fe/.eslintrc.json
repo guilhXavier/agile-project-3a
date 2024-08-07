@@ -1,9 +1,6 @@
 {
   "extends": ["plugin:@nx/react", "../../.eslintrc.json"],
   "ignorePatterns": ["!**/*", "storybook-static", "public"],
-  "rules": {
-    "react-hooks/exahaustive-deps": "off"
-  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
