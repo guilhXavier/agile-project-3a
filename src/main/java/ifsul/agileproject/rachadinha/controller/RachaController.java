@@ -193,4 +193,24 @@ public class RachaController {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
   }
+
+  @Operation(summary = "Busca os rachas que um usuário está participando", description = "Retorna a lista de rachas que o usuário está participando")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Lista encontrada"),
+    @ApiResponse(responseCode = "403", description = "Usuário não encontrado")
+  })
+  @GetMapping("/list/user/{userId}")
+  public ResponseEntity getRachasByUserId(@PathVariable Long userId){
+    try {
+      List<Racha> listRachas = rachaService.getRachasByUserId(userId);
+
+      List<RachaResponseDTO> listRachasDTO = listRachas.stream()
+        .map(RachaResponseDTO::transformarEmDto)
+        .toList();
+
+      return new ResponseEntity(listRachasDTO, HttpStatus.OK);
+    } catch (UserNotFoundException e){
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+  }
 }

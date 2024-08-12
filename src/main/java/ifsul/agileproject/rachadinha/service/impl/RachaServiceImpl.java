@@ -153,4 +153,11 @@ public class RachaServiceImpl implements RachaService {
     rachaRepository.save(racha);
     userRepository.save(user);
   }
+
+  public List<Racha> getRachasByUserId(Long userId) {
+    if (!userRepository.existsById(userId)) {
+      throw new UserNotFoundException(userId);
+    }
+    return rachaRepository.findByMembersId(userId);
+  }
 }

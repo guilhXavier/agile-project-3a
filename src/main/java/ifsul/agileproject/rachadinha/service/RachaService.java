@@ -28,4 +28,6 @@ public interface RachaService {
 	void addMemberToRacha(Long rachaId, Long userId, String password);
 
 	void removeMemberFromRacha(Long rachaId, Long userId);
+
+  List<Racha> getRachasByUserId(Long userId);
 }
