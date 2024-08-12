@@ -15,12 +15,8 @@ public class UserResponseDTO {
   private Long id;
   private String name;
   private String email;
-  private List<RachaResponseDTO> rachas;
 
   public static UserResponseDTO transformaEmDTO(User user) {
-    return new UserResponseDTO(user.getId(), user.getName(), user.getEmail(), user.getRachas()
-      .stream()
-      .map(RachaResponseDTO::transformarEmDto)
-      .collect(Collectors.toList()));
+    return new UserResponseDTO(user.getId(), user.getName(), user.getEmail());
   }
 }
