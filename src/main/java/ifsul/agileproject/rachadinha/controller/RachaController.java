@@ -213,4 +213,18 @@ public class RachaController {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
   }
+
+  @GetMapping("/list/user/{userId}/all")
+  public ResponseEntity getAllRachasByUserId(@PathVariable long userId){
+    try {
+      List<Racha> listRachas = rachaService.getAllRachasByUserVinculo(userId);
+
+      List<RachaResponseDTO> listRachasDTO = listRachas.stream()
+        .map(RachaResponseDTO::transformarEmDto)
+        .toList();
+      return new ResponseEntity(listRachasDTO, HttpStatus.OK);
+    } catch (UserNotFoundException e){
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+  }
 }

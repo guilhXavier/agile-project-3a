@@ -19,4 +19,6 @@ public interface RachaRepository extends JpaRepository<Racha, Long> {
 	Racha findByInviteLink(String invite);
 
   List<Racha> findByMembersId(Long userId);
+
+   List<Racha> findByOwnerId(Long ownerId);
 }

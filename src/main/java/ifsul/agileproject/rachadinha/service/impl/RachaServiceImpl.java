@@ -1,7 +1,6 @@
 package ifsul.agileproject.rachadinha.service.impl;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -159,5 +158,19 @@ public class RachaServiceImpl implements RachaService {
       throw new UserNotFoundException(userId);
     }
     return rachaRepository.findByMembersId(userId);
+  }
+
+  public List<Racha> getAllRachasByUserVinculo(Long userId) {
+    if (!userRepository.existsById(userId)) {
+      throw new UserNotFoundException(userId);
+    }
+
+    List<Racha> rachasAsMember = rachaRepository.findByMembersId(userId);
+    List<Racha> rachasAsOwner = rachaRepository.findByOwnerId(userId);
+
+    Set<Racha> allRachas = new HashSet<>(rachasAsMember);
+    allRachas.addAll(rachasAsOwner);
+
+    return new ArrayList<>(allRachas);
   }
 }
