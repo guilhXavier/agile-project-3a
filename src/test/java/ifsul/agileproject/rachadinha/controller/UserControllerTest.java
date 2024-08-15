@@ -89,7 +89,7 @@ public class UserControllerTest {
 
         mockMvc.perform(post("/user/cadastro")
                 .contentType("application/json")
-                .content("{ \"name\": \"John Doe\", \"email\": \"john@example.com\", \"password\": \"password123\" }"))
+                .content("{ \"name\": \"Diego\", \"email\": \"Diego@Diego\", \"password\": \"123\" }"))
                 .andExpect(status().isCreated());
 
         ResponseEntity<UserResponseDTO> response = userController.saveUser(userDTO);
