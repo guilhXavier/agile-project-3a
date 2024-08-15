@@ -208,7 +208,7 @@ public class RachaController {
         .map(RachaResponseDTO::transformarEmDto)
         .toList();
 
-      return new ResponseEntity(listRachasDTO, HttpStatus.OK);
+      return new ResponseEntity<List<RachaResponseDTO>>(listRachasDTO, HttpStatus.OK);
     } catch (UserNotFoundException e){
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }

@@ -5,9 +5,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 public class UserResponseDTO {
