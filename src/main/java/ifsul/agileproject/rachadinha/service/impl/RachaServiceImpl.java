@@ -106,10 +106,8 @@ public class RachaServiceImpl implements RachaService {
   }
 
   @Override
-  public List<Racha> findRachaByOwner(Long id) {
-    User owner = new User();
-    owner.setId(id);
-    return rachaRepository.findByOwner(owner);
+  public List<Racha> findRachaByOwner(Long userId) {
+    return rachaRepository.findByOwnerId(userId);
   }
 
   @Override
