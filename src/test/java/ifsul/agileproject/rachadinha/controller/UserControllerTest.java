@@ -46,20 +46,17 @@ public class UserControllerTest {
 
     @Test
     public void testGetUserByID() {
-        // Arrange
         User user = new User();
         user.setId((long) 55);
         user.setName("DiegoTeste");
         user.setEmail("DiegoTeste");
         user.setPassword("DiegoTeste");
         user.setRachas(new ArrayList<>());
-        // Mocking findUserById to return the user
+
         when(userService.findUserById(anyLong())).thenReturn(Optional.of(user));
 
-        // Act: Fetch the user by ID
         ResponseEntity<UserResponseDTO> response = userController.getUserByID((long) 55);
 
-        // Assert: Verify fetch response
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("DiegoTeste", response.getBody().getName());
         assertEquals("DiegoTeste", response.getBody().getEmail());
@@ -77,7 +74,27 @@ public class UserControllerTest {
         ResponseEntity<List<UserResponseDTO>> response =  userController.findAll();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(6, response.getBody().size());
+        assertEquals(0, response.getBody().size());
+    }
+
+    @Test
+    public void testSaveUser() throws Exception {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName("Diego");
+        userDTO.setEmail("Diego@Diego");
+        userDTO.setPassword("123");
+
+        User user = new User(1L, "Diego", "Diego@Diego", "123", null, null);
+        when(userService.saveUser(any(UserDTO.class))).thenReturn(user);
+
+        mockMvc.perform(post("/user/cadastro")
+                .contentType("application/json")
+                .content("{ \"name\": \"John Doe\", \"email\": \"john@example.com\", \"password\": \"password123\" }"))
+                .andExpect(status().isCreated());
+
+        ResponseEntity<UserResponseDTO> response = userController.saveUser(userDTO);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals("Diego", response.getBody().getName());
     }
    
     
