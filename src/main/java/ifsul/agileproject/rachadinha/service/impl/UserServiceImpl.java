@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
   public User login(String email, String password) {
     if (!userRepository.existsByEmail(email)) {
       throw new UserNotFoundException(email);
-    } 
+    }
     User foundUser = userRepository.findByEmailAndPassword(email, password);
     if (foundUser == null) {
       throw new IncorrectUserPasswordException(email);
