@@ -1,4 +1,4 @@
-package ifsul.agileproject.rachadinha.mapper;
+package ifsul.agileproject.rachadinha.utils;
 
 import java.security.SecureRandom;
 

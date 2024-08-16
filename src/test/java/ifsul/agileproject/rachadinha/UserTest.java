@@ -2,8 +2,8 @@ package ifsul.agileproject.rachadinha;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.Rollback;
@@ -14,9 +14,9 @@ import ifsul.agileproject.rachadinha.repository.UserRepository;
 
 @Transactional
 @SpringBootTest
+@AllArgsConstructor
 public class UserTest {
 
-    @Autowired
     private UserRepository userRepository;
 
     @Test

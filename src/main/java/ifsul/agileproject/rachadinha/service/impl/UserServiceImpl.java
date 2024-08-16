@@ -2,10 +2,12 @@ package ifsul.agileproject.rachadinha.service.impl;
 
 import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
+import ifsul.agileproject.rachadinha.exceptions.*;
 import ifsul.agileproject.rachadinha.mapper.UserMapper;
 import ifsul.agileproject.rachadinha.repository.UserRepository;
 import ifsul.agileproject.rachadinha.service.UserService;
 import lombok.AllArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,17 +24,26 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User saveUser(UserDTO userDTO) {
+    if (userRepository.existsByEmail(userDTO.getEmail())) {
+      throw new EmailAlreadyUsedException(userDTO.getEmail());
+    }
     User user = userMapper.apply(userDTO);
     return userRepository.save(user);
   }
 
   @Override
   public Optional<User> findUserById(Long id) {
+    if (!userRepository.existsById(id)) {
+      throw new UserNotFoundException(id);
+    }
     return userRepository.findById(id);
   }
 
   @Override
   public void deleteUserById(Long id) {
+    if (!userRepository.existsById(id)) {
+      throw new UserNotFoundException(id);
+    }
     userRepository.deleteById(id);
   }
 
@@ -43,7 +54,14 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User login(String email, String password) {
-    return userRepository.findByEmailAndPassword(email, password);
+    if (!userRepository.existsByEmail(email)) {
+      throw new UserNotFoundException(email);
+    }
+    User foundUser = userRepository.findByEmailAndPassword(email, password);
+    if (foundUser == null) {
+      throw new IncorrectUserPasswordException(email);
+    }
+    return foundUser;
   }
 
   @Override
@@ -57,20 +75,40 @@ public class UserServiceImpl implements UserService {
 
     Predicate<String> isNotEmpty = (value) -> !value.isEmpty();
 
-    if (user.isPresent()) {
-      User updatedUser = user.get();
-
-      Optional.ofNullable(userDTO.getName()).filter(isNotEmpty).ifPresent(updatedUser::setName);
-      Optional.ofNullable(userDTO.getEmail()).filter(isNotEmpty).ifPresent(updatedUser::setEmail);
-      Optional.ofNullable(userDTO.getPassword()).filter(isNotEmpty).ifPresent(updatedUser::setPassword);
-
-      return userRepository.save(updatedUser);
+    if (!user.isPresent()) {
+      throw new UserNotFoundException(userDTO.getEmail());
     }
-    throw new RuntimeException();
+
+    User updatedUser = user.get();
+
+    Optional.ofNullable(userDTO.getName()).filter(isNotEmpty).ifPresent(updatedUser::setName);
+    Optional.ofNullable(userDTO.getEmail()).filter(isNotEmpty).ifPresent(updatedUser::setEmail);
+    Optional.ofNullable(userDTO.getPassword()).filter(isNotEmpty).ifPresent(updatedUser::setPassword);
+
+    return userRepository.save(updatedUser);
   }
 
   @Override
   public void save(User user) {
     userRepository.save(user);
+  }
+
+  @Override
+  public User resetPassword(Long userId, String oriPass, String newPass) {
+    Optional<User> user = userRepository.findById(userId);
+
+    if (!user.isPresent()) {
+      throw new UserNotFoundException(userId);
+    }
+
+    User usuario = user.get();
+
+    if(!usuario.getPassword().equals(oriPass)){
+      throw new IncorrectUserPasswordException(usuario.getEmail());
+    }
+
+    usuario.setPassword(newPass);
+
+    return userRepository.save(usuario);
   }
 }

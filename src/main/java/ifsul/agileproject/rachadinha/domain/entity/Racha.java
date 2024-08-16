@@ -51,6 +51,7 @@ public class Racha {
 
   @Column(name = "status")
   @Enumerated(EnumType.STRING)
+  @Builder.Default
   private Status status = Status.OPEN;
 
   @Column(name = "created_at")

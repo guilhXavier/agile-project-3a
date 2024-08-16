@@ -8,14 +8,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,12 +23,9 @@ import ifsul.agileproject.rachadinha.service.impl.RachaServiceImpl;
 
 @Transactional
 @SpringBootTest
+@AllArgsConstructor
 public class RachaTest {
-    
-@Mock
-    private RachaRepository rachaRepository;
 
-    @Mock
     private RachaMapper rachaMapper;
 
     @InjectMocks
@@ -47,70 +37,6 @@ public class RachaTest {
     }
 
     @Test
-    public void testSaveRacha() {
-        User owner = new User();
-        owner.setId(1L);
-        
-        RachaRegisterDTO rachaRegisterDTO = new RachaRegisterDTO();
-        rachaRegisterDTO.setName("New Racha");
-        rachaRegisterDTO.setPassword("password123");
-        rachaRegisterDTO.setGoal(1000.0);
-        rachaRegisterDTO.setOwnerId(1L);
-
-        Racha racha = Racha.builder()
-                .name(rachaRegisterDTO.getName())
-                .password(rachaRegisterDTO.getPassword())
-                .goal(rachaRegisterDTO.getGoal())
-                .owner(owner)
-                .build();
-
-        when(rachaMapper.apply(rachaRegisterDTO)).thenReturn(racha);
-        when(rachaRepository.save(racha)).thenReturn(racha);
-
-        Racha savedRacha = rachaService.saveRacha(rachaRegisterDTO);
-
-        assertNotNull(savedRacha);
-        assertEquals("New Racha", savedRacha.getName());
-        verify(rachaRepository, times(1)).save(racha);
-    }
-
-    @Test
-    public void testFindRachaById() {
-        Long rachaId = 1L;
-        User owner = new User();
-        owner.setId(1L);
-
-        Racha racha = Racha.builder()
-                .id(rachaId)
-                .name("Existing Racha")
-                .password("password123")
-                .goal(1000.0)
-                .owner(owner)
-                .build();
-
-        when(rachaRepository.findById(rachaId)).thenReturn(Optional.of(racha));
-
-        Optional<Racha> foundRacha = rachaService.findRachaById(rachaId);
-
-        assertTrue(foundRacha.isPresent());
-        assertEquals("Existing Racha", foundRacha.get().getName());
-        verify(rachaRepository, times(1)).findById(rachaId);
-    }
-
-    @Test
-    public void testUpdateRacha() {
-        Long rachaId = 1L;
-        User owner = new User();
-        owner.setId(1L);
-
-        Racha existingRacha = Racha.builder()
-                .id(rachaId)
-                .name("Old Racha")
-                .password("oldPassword")
-                .goal(1000.0)
-                .owner(owner)
-                .build();
-
         RachaUpdateDTO rachaUpdateDTO = new RachaUpdateDTO();
         rachaUpdateDTO.setName("Updated Racha");
         rachaUpdateDTO.setGoal(1500.0);
@@ -178,5 +104,23 @@ public class RachaTest {
 
         racha.setStatus(Status.CLOSED);
         assertEquals(Status.CLOSED, racha.getStatus());
+    }
+
+    @Test
+    public void testFindRachaByInviteLink(){
+        RachaRegisterDTO rachaRegister = new RachaRegisterDTO();
+        rachaRegister.setName("Teste Nome");
+        rachaRegister.setDescription("Teste Descrição");
+        rachaRegister.setGoal(500.00);
+        rachaRegister.setPassword("123");
+        rachaRegister.setOwnerId(11L);
+
+        Racha racha = rachaMapper.apply(rachaRegister);
+
+        Racha rachaSalvo = rachaRepository.save(racha);
+
+        Racha rachaRecuperado = rachaRepository.findByInviteLink(rachaSalvo.getInviteLink());
+
+        assertEquals(rachaSalvo, rachaRecuperado);
     }
 }

@@ -17,7 +17,7 @@ describe('useLogin test suite', () => {
 
   it('should login successfully', async () => {
     const { result } = renderHook(
-      () => useLogin({ email: 'email@x.com', password: 'password' }),
+      () => useLogin({ email: 'email@x.com', password: 'password' }, true),
       {
         wrapper: ({ children }) => (
           <QueryClientProvider client={queryClient}>
