@@ -6,7 +6,7 @@ import { useRegister, UserForm } from '../../api/useRegister/useRegister';
 import { SectionStyled } from './sign-up.styled';
 
 const schema = {
-  username: {
+  name: {
     type: Field.Text,
   },
   email: {
@@ -36,10 +36,11 @@ export const SignUp: React.FC = () => {
   const { mutate } = useRegister();
 
   const { form, validation, get, set } = useForm<
-    'username' | 'email' | 'password' | 'confirmPassword'
+    'name' | 'email' | 'password' | 'confirmPassword'
   >(schema);
 
-  const handleSubmit = (): void => {
+  const handleSubmit = (event: React.FormEvent): void => {
+    event.preventDefault();
     mutate(Object.fromEntries(form.entries()) as unknown as UserForm);
   };
 
@@ -58,12 +59,12 @@ export const SignUp: React.FC = () => {
         </header>
         <form onSubmit={handleSubmit}>
           <Input
-            id="username"
+            id="name"
             inputType="text"
             label="Nome de usuário"
             placeholder="Fulano da Silva"
-            value={get('username')}
-            onInput={(event) => set('username', event.currentTarget.value)}
+            value={get('name')}
+            onInput={(event) => set('name', event.currentTarget.value)}
           />
           <Input
             id="email"

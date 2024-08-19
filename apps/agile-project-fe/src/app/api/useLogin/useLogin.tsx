@@ -20,9 +20,9 @@ export const useLogin = (
 ): UseLoginReturn => {
   const { data, isError, isSuccess, isLoading } = useQuery({
     queryKey: ['login'],
-    queryFn: (): Promise<User> => baseAxios.post('/login', loginForm),
+    queryFn: () => baseAxios.post('/user/login', loginForm),
     enabled: isFormValid,
   });
 
-  return { data, isError, isSuccess, isLoading };
+  return { data: data?.data as User, isError, isSuccess, isLoading };
 };
