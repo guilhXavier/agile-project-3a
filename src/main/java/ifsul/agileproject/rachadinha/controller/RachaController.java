@@ -3,6 +3,8 @@ package ifsul.agileproject.rachadinha.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import ifsul.agileproject.rachadinha.session.UserSession;
+import ifsul.agileproject.rachadinha.session.UserSessionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,8 @@ public class RachaController {
 
 	private final RachaServiceImpl rachaService;
 
+  private final UserSessionService session;
+
   @Operation(summary = "Busca um racha pelo ID", description = "Retorna os dados de um racha com base no ID")
   @ApiResponses(value = {
     @ApiResponse(responseCode = "200", description = "Racha encontrado"),
@@ -48,11 +52,17 @@ public class RachaController {
     @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
   })
 	@PostMapping("/create")
-	public ResponseEntity createRacha(@RequestBody RachaRegisterDTO rachaDTO) {
+	public ResponseEntity createRacha(@RequestBody RachaRegisterDTO rachaDTO, @RequestHeader("Authorization") String token) {
     try {
-      Racha racha = rachaService.saveRacha(rachaDTO);
-      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
-      return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.CREATED);
+
+      if(session.isSessionValid(token)){
+        Racha racha = rachaService.saveRacha(rachaDTO);
+        RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
+        return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.CREATED);
+      }else{
+        return new ResponseEntity("Acesso inválido", HttpStatus.UNAUTHORIZED);
+      }
+
     } catch (UserNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
@@ -63,14 +73,22 @@ public class RachaController {
     @ApiResponse(responseCode = "200", description = "Rachas encontrados com sucesso"),
     @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
   })
-	@GetMapping("/list/owner/{idOwner}")
-	public ResponseEntity findByOwner(@PathVariable Long idOwner) {
+	@GetMapping("/list/owner")
+	public ResponseEntity findByOwner(@RequestHeader("Authorization") String token) {
     try {
-      List<Racha> rachas = rachaService.findRachaByOwner(idOwner);
-      List<RachaResponseDTO> rachasResponseDto = rachas.stream()
+
+      UserSession userSession = session.getSessionByToken(token);
+
+      if(userSession != null){
+        List<Racha> rachas = rachaService.findRachaByOwner(userSession.getUserId());
+        List<RachaResponseDTO> rachasResponseDto = rachas.stream()
           .map(RachaResponseDTO::transformarEmDto)
           .collect(Collectors.toList());
-      return new ResponseEntity<List<RachaResponseDTO>>(rachasResponseDto, HttpStatus.OK);
+        return new ResponseEntity<List<RachaResponseDTO>>(rachasResponseDto, HttpStatus.OK);
+      }else{
+        return new ResponseEntity("Acesso inválido", HttpStatus.UNAUTHORIZED);
+      }
+
     } catch (UserNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
@@ -98,10 +116,18 @@ public class RachaController {
     @ApiResponse(responseCode = "403", description = "Usuário não tem permissão para deletar o racha")
   })
 	@DeleteMapping("/{idRacha}")
-	public ResponseEntity deleteRachaByID(@PathVariable Long idRacha, @RequestParam Long idOwner) {
+	public ResponseEntity deleteRachaByID(@PathVariable Long idRacha, @RequestHeader("Authorization") String token) {
     try {
-      rachaService.deleteRachaById(idRacha, idOwner);
-      return new ResponseEntity<String>("Racha deletado", HttpStatus.OK);
+
+      UserSession userSession = session.getSessionByToken(token);
+
+      if(userSession != null){
+        rachaService.deleteRachaById(idRacha, userSession.getUserId());
+        return new ResponseEntity<String>("Racha deletado", HttpStatus.OK);
+      }else{
+        return new ResponseEntity("Acesso inválido", HttpStatus.UNAUTHORIZED);
+      }
+
     } catch (ForbiddenUserException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     } catch (UserNotFoundException e) {
@@ -117,15 +143,23 @@ public class RachaController {
     @ApiResponse(responseCode = "404", description = "Racha não encontrado"),
     @ApiResponse(responseCode = "403", description = "Usuário não tem permissão para atualizar o racha")
   })
-  @PatchMapping("/{idRacha}/owner/{idOwner}")
-  public ResponseEntity updateRacha(@PathVariable Long idRacha, @PathVariable Long idOwner, @RequestBody RachaUpdateDTO rachaUpdateDTO) {
+  @PatchMapping("/{idRacha}")
+  public ResponseEntity updateRacha(@PathVariable Long idRacha, @RequestHeader("Authorization") String token, @RequestBody RachaUpdateDTO rachaUpdateDTO) {
     try {
-      Racha racha = rachaService.findRachaById(idRacha).orElseThrow(() -> new RachaNotFoundException(idRacha));
 
-      Racha rachaAtualizado = rachaService.updateRacha(rachaUpdateDTO, racha, idOwner);
-      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(rachaAtualizado);
+      UserSession userSession = session.getSessionByToken(token);
 
-      return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
+      if(userSession != null){
+        Racha racha = rachaService.findRachaById(idRacha).orElseThrow(() -> new RachaNotFoundException(idRacha));
+
+        Racha rachaAtualizado = rachaService.updateRacha(rachaUpdateDTO, racha, userSession.getUserId());
+        RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(rachaAtualizado);
+
+        return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
+      } else{
+        return new ResponseEntity("Acesso inválido", HttpStatus.UNAUTHORIZED);
+      }
+
     } catch (ForbiddenUserException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     } catch (UserNotFoundException e) {
@@ -143,10 +177,18 @@ public class RachaController {
     @ApiResponse(responseCode = "401", description = "Senha incorreta")
   })
   @PostMapping("/join")
-	public ResponseEntity joinRacha(@RequestParam long idUser, @RequestParam long idRacha, @RequestParam String pass) {
+	public ResponseEntity joinRacha(@RequestHeader("Authorization") String token, @RequestParam long idRacha, @RequestParam String pass) {
     try {
-      rachaService.addMemberToRacha(idRacha, idUser, pass);
-      return new ResponseEntity<String>("Usuário adicionado ao racha", HttpStatus.OK);
+
+      UserSession userSession = session.getSessionByToken(token);
+
+      if(userSession != null){
+        rachaService.addMemberToRacha(idRacha, userSession.getUserId(), pass);
+        return new ResponseEntity<String>("Usuário adicionado ao racha", HttpStatus.OK);
+      }else{
+        return new ResponseEntity("Acesso inválido", HttpStatus.UNAUTHORIZED);
+      }
+
     } catch (RachaNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     } catch (UserNotFoundException e) {
@@ -165,10 +207,18 @@ public class RachaController {
     @ApiResponse(responseCode = "409", description = "Usuário não está no racha")
   })
   @PostMapping("/leave")
-  public ResponseEntity leaveRacha(@RequestParam long idUser, @RequestParam long idRacha) {
+  public ResponseEntity leaveRacha(@RequestHeader("Authorization") String token, @RequestParam long idRacha) {
     try {
-      rachaService.removeMemberFromRacha(idRacha, idUser);
-      return new ResponseEntity<String>("Usuário removido do racha", HttpStatus.OK);
+
+      UserSession userSession = session.getSessionByToken(token);
+
+      if(userSession != null){
+        rachaService.removeMemberFromRacha(idRacha, userSession.getUserId());
+        return new ResponseEntity<String>("Usuário removido do racha", HttpStatus.OK);
+      }else{
+        return new ResponseEntity("Acesso inválido", HttpStatus.UNAUTHORIZED);
+      }
+
     } catch (RachaNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     } catch (UserNotFoundException e) {
