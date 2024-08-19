@@ -40,7 +40,8 @@ export const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const goToRegister = () => {
+  const goToRegister = (event: React.FormEvent) => {
+    event.preventDefault();
     navigate('/register');
   };
 
@@ -96,8 +97,10 @@ export const Login: React.FC = () => {
           />
           <Button variant="confirm" text="Entrar" />
           <span className="divider"></span>
-          <Button variant="neutral" text="Cadastre-se" onClick={goToRegister} />
         </form>
+        <div>
+          <Button variant="neutral" text="Cadastre-se" onClick={goToRegister} />
+        </div>
         <footer>
           <p>
             &#169;{' '}
