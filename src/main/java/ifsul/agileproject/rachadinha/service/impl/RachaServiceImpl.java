@@ -1,7 +1,6 @@
 package ifsul.agileproject.rachadinha.service.impl;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -107,10 +106,8 @@ public class RachaServiceImpl implements RachaService {
   }
 
   @Override
-  public List<Racha> findRachaByOwner(Long id) {
-    User owner = new User();
-    owner.setId(id);
-    return rachaRepository.findByOwner(owner);
+  public List<Racha> findRachaByOwner(Long userId) {
+    return rachaRepository.findByOwnerId(userId);
   }
 
   @Override
@@ -152,5 +149,26 @@ public class RachaServiceImpl implements RachaService {
     user.getRachas().remove(racha);
     rachaRepository.save(racha);
     userRepository.save(user);
+  }
+
+  public List<Racha> getRachasByUserId(Long userId) {
+    if (!userRepository.existsById(userId)) {
+      throw new UserNotFoundException(userId);
+    }
+    return rachaRepository.findByMembersId(userId);
+  }
+
+  public List<Racha> getAllRachasByUserVinculo(Long userId) {
+    if (!userRepository.existsById(userId)) {
+      throw new UserNotFoundException(userId);
+    }
+
+    List<Racha> rachasAsMember = rachaRepository.findByMembersId(userId);
+    List<Racha> rachasAsOwner = rachaRepository.findByOwnerId(userId);
+
+    Set<Racha> allRachas = new HashSet<>(rachasAsMember);
+    allRachas.addAll(rachasAsOwner);
+
+    return new ArrayList<>(allRachas);
   }
 }

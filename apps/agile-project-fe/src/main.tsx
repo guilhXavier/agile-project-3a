@@ -15,11 +15,12 @@ import { Detail } from './app/routes/detail/detail';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Login />}>
-      <Route path="sign-up" element={<SignUp />} />
+    <>
+      <Route path="/" element={<Login />} />
+      <Route path="register" element={<SignUp />} />
       <Route path="listing" element={<Listing />} />
       <Route path="detail/:chipInId" element={<Detail />} />
-    </Route>
+    </>
   )
 );
 

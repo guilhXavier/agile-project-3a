@@ -8,7 +8,10 @@ interface Store {
 }
 
 export const useStore = create<Store>((set) => ({
-  user: null,
-  setUser: (user: User) => set({ user }),
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
+  setUser: (user: User) => {
+    set({ user });
+    localStorage.setItem('user', JSON.stringify(user));
+  },
   logout: () => set({ user: null }),
 }));

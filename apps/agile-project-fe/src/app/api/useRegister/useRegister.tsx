@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { baseAxios } from '..';
 
 export interface UserForm {
-  username: string;
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -20,7 +20,7 @@ export const useRegister = (): UseRegisterReturn => {
   const { mutate, isPending, isSuccess, isError } = useMutation({
     mutationKey: ['register'],
     mutationFn: (userForm: UserForm) =>
-      baseAxios.post('/user/cadastro', userForm),
+      baseAxios.post('/user/signup', userForm),
     onSuccess: (data) => {
       // TODO 27/04 Implement store
       console.log(data);
