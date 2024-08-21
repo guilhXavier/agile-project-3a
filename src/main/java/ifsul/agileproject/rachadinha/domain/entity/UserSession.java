@@ -1,4 +1,4 @@
-package ifsul.agileproject.rachadinha.session;
+package ifsul.agileproject.rachadinha.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -47,5 +47,11 @@ public class UserSession {
 
   public boolean isExpired() {
     return new Timestamp(System.currentTimeMillis()).after(expiresAt);
+  }
+
+  public User getUser() {
+    User user = new User();
+    user.setId(userId);
+    return user;
   }
 }

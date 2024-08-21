@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import ifsul.agileproject.rachadinha.session.UserSession;
-import ifsul.agileproject.rachadinha.session.UserSessionService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +13,10 @@ import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserLoginDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
+import ifsul.agileproject.rachadinha.domain.entity.UserSession;
 import ifsul.agileproject.rachadinha.exceptions.*;
 import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
+import ifsul.agileproject.rachadinha.service.impl.UserSessionServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,12 +30,12 @@ public class UserController {
 
   private final UserServiceImpl userService;
 
-  private final UserSessionService sessionService;
+  private final UserSessionServiceImpl sessionService;
 
   @Operation(summary = "Busca um usuário pelo ID", description = "Retorna os dados públicos de um usuário com base no ID")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "Usuário encontrado"),
-    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+      @ApiResponse(responseCode = "200", description = "Usuário encontrado"),
+      @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
   })
   @GetMapping("{id}")
   public ResponseEntity getUserByID(@PathVariable Long id) {
@@ -47,10 +47,30 @@ public class UserController {
     }
   }
 
+  @Operation(summary = "Busca o usuário logado", description = "Retorna os dados públicos do usuário logado")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Usuário encontrado"),
+      @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+      @ApiResponse(responseCode = "401", description = "Usuário não está logado")
+  })
+  @GetMapping("/me")
+  public ResponseEntity getLoggedUser(@RequestHeader("rachadinha-login-token") String token) {
+    try {
+      UserSession session = sessionService.getSessionByToken(token);
+
+      Optional<User> usuario = userService.findUserById(session.getUserId());
+      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario.get()), HttpStatus.OK);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotLoggedInException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
+  }
+
   @Operation(summary = "Cria um novo usuário", description = "Cria um novo usuário com base nos dados passados no corpo da requisição")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso"),
-    @ApiResponse(responseCode = "400", description = "Email já em uso")
+      @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso"),
+      @ApiResponse(responseCode = "400", description = "Email já em uso")
   })
   @PostMapping("/signup")
   public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
@@ -62,53 +82,52 @@ public class UserController {
     }
   }
 
-  @Operation(summary = "Deleta um usuário", description = "Deleta um usuário com base no ID")
+  @Operation(summary = "Deleta o usuário logado", description = "Deleta o usuário logado")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "Usuário deletado"),
-    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+      @ApiResponse(responseCode = "200", description = "Usuário deletado"),
+      @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+      @ApiResponse(responseCode = "401", description = "Usuário não está logado")
   })
   @DeleteMapping()
-  public ResponseEntity deleteUserByID(@RequestHeader("Authorization") String token) {
+  public ResponseEntity deleteUserByID(@RequestHeader("rachadinha-login-token") String token) {
     try {
-
       UserSession session = sessionService.getSessionByToken(token);
 
-      if(session != null) {
-        userService.deleteUserById(session.getUserId());
-        sessionService.invalidateSession(token);
-      }else{
-        return new ResponseEntity("Acesso inválido", HttpStatus.UNAUTHORIZED);
-      }
+      userService.deleteUserById(session.getUserId());
+      sessionService.invalidateSession(token);
 
       return new ResponseEntity<String>("Usuário deletado", HttpStatus.OK);
     } catch (UserNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotLoggedInException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
     }
   }
 
-  @Operation(summary = "Atualiza um usuário", description = "Atualiza um usuário com base nos dados passados no corpo da requisição")
+  @Operation(summary = "Atualiza os dados do usuário logado", description = "Atualiza os dados do usuário logado com base nos dados passados no corpo da requisição")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "Usuário atualizado"),
-    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+      @ApiResponse(responseCode = "200", description = "Usuário atualizado"),
+      @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+      @ApiResponse(responseCode = "401", description = "Usuário não está logado")
   })
   @PatchMapping()
-  public ResponseEntity updateUser(@RequestBody UserDTO userDTO, @RequestHeader("Authorization") String token) {
+  public ResponseEntity updateUser(@RequestBody UserDTO userDTO, @RequestHeader("rachadinha-login-token") String token) {
     try {
-      if(sessionService.isSessionValid(token)){
-        User usuario = userService.updateUser(userDTO);
-        return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario), HttpStatus.OK);
-      } else{
-        return new ResponseEntity("Acesso inválido", HttpStatus.BAD_REQUEST);
-      }
+      UserSession session = sessionService.getSessionByToken(token);
 
+      User usuario = userService.updateUser(userDTO, session.getUserId());
+
+      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario), HttpStatus.OK);
     } catch (UserNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotLoggedInException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
     }
   }
 
   @Operation(summary = "Busca todos os usuários", description = "Retorna uma lista com todos os usuários cadastrados")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "Usuários encontrados")
+      @ApiResponse(responseCode = "200", description = "Usuários encontrados")
   })
   @GetMapping("/list/all")
   public ResponseEntity<List<UserResponseDTO>> findAll() {
@@ -123,61 +142,76 @@ public class UserController {
 
   @Operation(summary = "Faz login", description = "Faz login com base no email e senha passados no corpo da requisição")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "Login efetuado com sucesso"),
-    @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
-    @ApiResponse(responseCode = "400", description = "Senha incorreta")
+      @ApiResponse(responseCode = "200", description = "Login efetuado com sucesso"),
+      @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+      @ApiResponse(responseCode = "403", description = "Usuário já está logado"),
   })
   @PostMapping("/login")
   public ResponseEntity login(@RequestBody UserLoginDTO userLoginDTO) {
     try {
       User userLogged = userService.login(userLoginDTO.getEmail(), userLoginDTO.getPassword());
 
-      UserSession session = sessionService.findByUserId(userLogged.getId());;
+      UserSession session = sessionService.findByUserId(userLogged.getId());
 
-      if(session == null) {
+      if (session == null) {
         session = new UserSession(userLogged.getId());
         sessionService.createSession(session);
+      } else {
+        throw new UserAlreadyLoggedInException();
       }
 
+      // Adding the token to the response header
       HttpHeaders responseHeaders = new HttpHeaders();
-      responseHeaders.set("Authorization",
-        session.getToken());
+      responseHeaders.set("rachadinha-login-token", session.getToken());
 
       return ResponseEntity.ok()
-        .headers(responseHeaders)
-        .body("Usuário logado.");
+          .headers(responseHeaders)
+          .body("Usuário logado.");
 
     } catch (UserNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     } catch (IncorrectUserPasswordException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+    } catch (UserAlreadyLoggedInException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     }
 
   }
 
-  @Operation(summary = "Define uma nova senha", description = "Define uma nova senha para um usuário com base no ID")
+  @Operation(summary = "Faz logout", description = "Faz logout do usuário logado")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "Senha alterada com sucesso"),
-    @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
-    @ApiResponse(responseCode = "400", description = "Senha original incorreta")
+      @ApiResponse(responseCode = "200", description = "Logout efetuado com sucesso"),
+      @ApiResponse(responseCode = "401", description = "Usuário não está logado")
+  })
+  @PostMapping("/logout")
+  public ResponseEntity logout(@RequestHeader("rachadinha-login-token") String token) {
+    try {
+      sessionService.invalidateSession(token);
+      return new ResponseEntity<String>("Usuário deslogado.", HttpStatus.OK);
+    } catch (UserNotLoggedInException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
+  }
+
+  @Operation(summary = "Define uma nova senha para o usuário logado", description = "Define uma nova senha para o usuário logado com base na senha original e na nova senha passadas nos parâmetros")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Senha alterada com sucesso"),
+      @ApiResponse(responseCode = "400", description = "Senha original incorreta"),
+      @ApiResponse(responseCode = "401", description = "Usuário não está logado")
   })
   @PatchMapping("/resetPass")
-  public ResponseEntity resetPassword(@RequestHeader("Authorization") String token, @RequestParam String oriPass, @RequestParam String newPass){
-    try{
-
+  public ResponseEntity resetPassword(@RequestHeader("rachadinha-login-token") String token, @RequestParam String oriPass,
+      @RequestParam String newPass) {
+    try {
       UserSession session = sessionService.getSessionByToken(token);
 
-      if(session != null){
-        userService.resetPassword(session.getUserId(), oriPass, newPass);
-        return new ResponseEntity<String>("Senha alterada com sucesso.", HttpStatus.OK);
-      } else {
-        return new ResponseEntity("Acesso inválido", HttpStatus.UNAUTHORIZED);
-      }
+      userService.resetPassword(session.getUserId(), oriPass, newPass);
+      return new ResponseEntity<String>("Senha alterada com sucesso.", HttpStatus.OK);
 
-    } catch (UserNotFoundException e){
-      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
-    } catch (IncorrectUserPasswordException e){
+    } catch (IncorrectUserPasswordException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+    } catch (UserNotLoggedInException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
     }
   }
 }
