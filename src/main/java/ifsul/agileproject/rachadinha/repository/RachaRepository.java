@@ -2,7 +2,6 @@ package ifsul.agileproject.rachadinha.repository;
 
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
-import ifsul.agileproject.rachadinha.domain.entity.User;
 
 import java.util.List;
 

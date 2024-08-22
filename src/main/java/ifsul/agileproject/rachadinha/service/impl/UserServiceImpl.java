@@ -89,6 +89,18 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public User updateUser(UserDTO userDTO, Long loggedUserId) {
+    Optional<User> user = userRepository.findByEmail(userDTO.getEmail());
+    if (!user.isPresent()) {
+      throw new UserNotFoundException(userDTO.getEmail());
+    }
+    if (user.get().getId() != loggedUserId) {
+      throw new ForbiddenUserException(loggedUserId);
+    }
+    return updateUser(userDTO);
+  }
+
+  @Override
   public void save(User user) {
     userRepository.save(user);
   }

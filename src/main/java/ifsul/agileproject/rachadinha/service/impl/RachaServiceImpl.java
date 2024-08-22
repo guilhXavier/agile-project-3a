@@ -64,28 +64,28 @@ public class RachaServiceImpl implements RachaService {
   }
 
   @Override
-  public Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha) {
-		if (rachaUpdateDTO.getName() != null) {
-			racha.setName(rachaUpdateDTO.getName());
+  public Racha updateRacha(RachaUpdateDTO updatedRachaDTO, Racha originalRacha) {
+		if (updatedRachaDTO.getName() != null) {
+			originalRacha.setName(updatedRachaDTO.getName());
 		}
-		if (rachaUpdateDTO.getDescription() != null) {
-			racha.setDescription(rachaUpdateDTO.getDescription());
+		if (updatedRachaDTO.getDescription() != null) {
+			originalRacha.setDescription(updatedRachaDTO.getDescription());
 		}
-		if (rachaUpdateDTO.getGoal() != null) {
-			racha.setGoal(rachaUpdateDTO.getGoal());
+		if (updatedRachaDTO.getGoal() != null) {
+			originalRacha.setGoal(updatedRachaDTO.getGoal());
 		}
-		if (rachaUpdateDTO.getPassword() != null) {
-			racha.setPassword(rachaUpdateDTO.getPassword());
+		if (updatedRachaDTO.getPassword() != null) {
+			originalRacha.setPassword(updatedRachaDTO.getPassword());
 		}
-		return rachaRepository.save(racha);
+		return rachaRepository.save(originalRacha);
 	}
 
   @Override
-  public Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha, Long loggedUserId) {
-    if (racha.getOwner().getId() != loggedUserId) {
+  public Racha updateRacha(RachaUpdateDTO updatedRachaDTO, Racha originalRacha, Long loggedUserId) {
+    if (originalRacha.getOwner().getId() != loggedUserId) {
       throw new ForbiddenUserException(loggedUserId);
     }
-    return updateRacha(rachaUpdateDTO, racha);
+    return updateRacha(updatedRachaDTO, originalRacha);
   }
 
   private String generateUniqueInviteLink() {
