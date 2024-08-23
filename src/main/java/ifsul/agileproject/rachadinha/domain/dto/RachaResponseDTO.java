@@ -22,6 +22,7 @@ public class RachaResponseDTO {
 
   public static RachaResponseDTO transformarEmDto(Racha racha) {
     OwnerDTO owner = OwnerDTO.transformaEmDTO(racha.getOwner());
-    return new RachaResponseDTO(racha.getId(), racha.getName(), racha.getDescription(), racha.getGoal(), racha.getBalance(), owner, racha.getStatus(), racha.getCreated_at(), racha.getInviteLink());
+    return new RachaResponseDTO(racha.getId(), racha.getName(), racha.getDescription(), racha.getGoal(),
+        racha.getBalance(), owner, racha.getStatus(), racha.getCreated_at(), racha.getInviteLink());
   }
 }

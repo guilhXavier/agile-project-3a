@@ -6,6 +6,7 @@ import java.util.Optional;
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
+import ifsul.agileproject.rachadinha.domain.entity.User;
 
 public interface RachaService {
 
@@ -30,4 +31,6 @@ public interface RachaService {
 	void removeMemberFromRacha(Long rachaId, Long userId);
 
 	List<Racha> getRachasByUserId(Long userId);
+
+	User getRachaOwner(Long rachaId);
 }

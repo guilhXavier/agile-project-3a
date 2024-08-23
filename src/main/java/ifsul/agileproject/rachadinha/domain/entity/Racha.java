@@ -38,16 +38,8 @@ public class Racha {
   @Column(name = "balance")
   private Double balance;
 
-  @ManyToMany
-  @JoinTable(
-    name = "racha_members",
-    joinColumns = @JoinColumn(name = "racha_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
-  private List<User> members;
-
-  @NonNull
-  @ManyToOne
-  private User owner;
+  @OneToMany(mappedBy = "racha")
+  private List<Payment> members;
 
   @Column(name = "status")
   @Enumerated(EnumType.STRING)
@@ -59,4 +51,8 @@ public class Racha {
 
   @Column(name = "invite_link")
   private String inviteLink;
+
+  public User getOwner() {
+    return members.stream().filter(m -> m.isOwner()).findFirst().get().getUser();
+  }
 }

@@ -1,7 +1,6 @@
 package ifsul.agileproject.rachadinha.domain.entity;
 
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -32,9 +31,6 @@ public class User {
   @NonNull
   private String password;
 
-  @OneToMany(mappedBy = "owner")
-  private Set<Racha> ownRachas;
-
-  @ManyToMany(mappedBy = "members")
-  private List<Racha> rachas;
+  @OneToMany(mappedBy = "user")
+  private List<Payment> rachas;
 }

@@ -248,7 +248,7 @@ public class RachaController {
     }
   }
 
-  @Operation(summary = "Busca os rachas que o usuário logado está participando", description = "Retorna a lista de rachas que o usuário está participando")
+  @Operation(summary = "Busca os rachas que o usuário logado participa ou criou", description = "Retorna uma lista com os rachas que o usuário logado participa ou criou")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Lista encontrada"),
       @ApiResponse(responseCode = "401", description = "Usuário não está logado")
@@ -269,27 +269,6 @@ public class RachaController {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     } catch (UserNotLoggedInException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
-    }
-  }
-
-  @Operation(summary = "Busca os rachas que o usuário logado está participando e que também é dono", description = "Retorna a lista de rachas que o usuário está participando e que também é dono")
-  @ApiResponses(value = {
-      @ApiResponse(responseCode = "200", description = "Lista encontrada"),
-      @ApiResponse(responseCode = "401", description = "Usuário não está logado")
-  })
-  @GetMapping("/list/user/{userId}/all")
-  public ResponseEntity getAllRachasByUserId(@RequestHeader("rachadinha-login-token") String token) {
-    try {
-      UserSession userSession = sessionService.getSessionByToken(token);
-
-      List<Racha> listRachas = rachaService.getAllRachasByUserVinculo(userSession.getUserId());
-
-      List<RachaResponseDTO> listRachasDTO = listRachas.stream()
-          .map(RachaResponseDTO::transformarEmDto)
-          .toList();
-      return new ResponseEntity<List<RachaResponseDTO>>(listRachasDTO, HttpStatus.OK);
-    } catch (UserNotFoundException e) {
-      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
   }
 }
