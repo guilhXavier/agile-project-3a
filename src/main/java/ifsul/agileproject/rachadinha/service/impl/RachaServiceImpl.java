@@ -36,7 +36,8 @@ public class RachaServiceImpl implements RachaService {
 
   @Override
   public User getRachaOwner(Long rachaId) {
-    return rachaRepository.findOwnerByRachaId(rachaId);
+    Racha racha = rachaRepository.findById(rachaId).get();
+    return racha.getOwner();
   }
 
   @Override
