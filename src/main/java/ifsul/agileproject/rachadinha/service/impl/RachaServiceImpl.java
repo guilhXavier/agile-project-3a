@@ -9,6 +9,7 @@ import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Payment;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
+import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.exceptions.*;
 import ifsul.agileproject.rachadinha.mapper.RachaMapper;
@@ -134,6 +135,9 @@ public class RachaServiceImpl implements RachaService {
     Racha racha = rachaRepository.findById(rachaId).get();
     User user = userRepository.findById(userId).get();
     Payment existingPayment = paymentRepository.findByRachaAndUser(racha, user);
+    if (!racha.getStatus().equals(Status.OPEN)) {
+      throw new ClosedRachaException(rachaId);
+    }
     if (existingPayment != null) {
       throw new UserAlreadyInRachaException(userId, rachaId);
     }
@@ -161,6 +165,9 @@ public class RachaServiceImpl implements RachaService {
     Racha racha = rachaRepository.findById(rachaId).get();
     User user = userRepository.findById(userId).get();
     Payment existingPayment = paymentRepository.findByRachaAndUser(racha, user);
+    if (!racha.getStatus().equals(Status.OPEN)) {
+      throw new ClosedRachaException(rachaId);
+    }
     if (existingPayment == null) {
       throw new UserNotInRachaException(userId, rachaId);
     }
