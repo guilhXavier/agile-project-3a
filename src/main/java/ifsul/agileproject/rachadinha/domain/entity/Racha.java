@@ -53,6 +53,11 @@ public class Racha {
   private String inviteLink;
 
   public User getOwner() {
-    return members.stream().filter(m -> m.isOwner()).findFirst().get().getUser();
+    for (Payment payment : members) {
+      if (payment.isOwner()) {
+        return payment.getUser();
+      }
+    }
+    return null;
   }
 }

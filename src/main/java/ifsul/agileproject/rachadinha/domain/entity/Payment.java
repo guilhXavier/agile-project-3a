@@ -1,26 +1,29 @@
 package ifsul.agileproject.rachadinha.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Builder
 @Table(name = "racha_members")
 public class Payment {
     
-    @EmbeddedId
-    private PaymentId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @MapsId("rachaId")
     @JoinColumn(name = "racha_id")
+    @NotNull
     private Racha racha;
 
     @ManyToOne
-    @MapsId("userId")
     @JoinColumn(name = "user_id")
+    @NotNull
     private User user;
 
     @Column(name = "user_said_paid")
@@ -32,4 +35,3 @@ public class Payment {
     @Column(name = "is_owner")
     private boolean isOwner;
 }
-

@@ -18,10 +18,13 @@ import ifsul.agileproject.rachadinha.repository.PaymentRepository;
 import ifsul.agileproject.rachadinha.repository.RachaRepository;
 import ifsul.agileproject.rachadinha.repository.UserRepository;
 import ifsul.agileproject.rachadinha.service.RachaService;
+import ifsul.agileproject.rachadinha.service.UserService;
 
 @Service
 @AllArgsConstructor
 public class RachaServiceImpl implements RachaService {
+
+  private UserService userService;
 
   private RachaRepository rachaRepository;
 
@@ -38,11 +41,32 @@ public class RachaServiceImpl implements RachaService {
 
   @Override
   public Racha saveRacha(RachaRegisterDTO rachaDTO) {
-    if (!userRepository.existsById(rachaDTO.getOwnerId())) {
-      throw new UserNotFoundException(rachaDTO.getOwnerId());
+    Long ownerId = rachaDTO.getOwnerId();
+    if (!userRepository.existsById(ownerId)) {
+      throw new UserNotFoundException(ownerId);
     }
+    User owner = userService.findUserById(ownerId).get();
+
     Racha racha = rachaMapper.apply(rachaDTO);
     racha.setInviteLink(generateUniqueInviteLink());
+
+    rachaRepository.save(racha);
+
+    Payment payment = Payment.builder()
+        .racha(racha)
+        .user(owner)
+        .userSaidPaid(false)
+        .confirmedByOwner(true)
+        .isOwner(true)
+        .build();
+
+    paymentRepository.save(payment);
+
+    if (racha.getMembers() == null) {
+      racha.setMembers(new ArrayList<>());
+    }
+    racha.getMembers().add(payment);
+
     return rachaRepository.save(racha);
   }
 
