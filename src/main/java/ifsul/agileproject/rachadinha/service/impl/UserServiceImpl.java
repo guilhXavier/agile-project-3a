@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     if (userRepository.existsByEmail(userDTO.getEmail())) {
       throw new EmailAlreadyUsedException(userDTO.getEmail());
     }
-    User user = userMapper.apply(userDTO);
+    User user = userMapper.toEntity(userDTO);
     return userRepository.save(user);
   }
 

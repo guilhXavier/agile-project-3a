@@ -1,16 +1,14 @@
 package ifsul.agileproject.rachadinha.mapper;
 
-import java.util.function.Function;
-
 import ifsul.agileproject.rachadinha.domain.dto.PaymentDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Payment;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 
-public class PaymentMapper implements Function<PaymentDTO, Payment> {
+public class PaymentMapper implements Mapper<PaymentDTO, Payment> {
 
     @Override
-    public Payment apply(PaymentDTO dto) {
+    public Payment toEntity(PaymentDTO dto) {
         Racha racha = new Racha();
         racha.setId(dto.getRachaId());
         User user = new User();
@@ -23,5 +21,16 @@ public class PaymentMapper implements Function<PaymentDTO, Payment> {
                 .confirmedByOwner(dto.isConfirmedByOwner())
                 .isOwner(dto.isOwner())
                 .build();
+    }
+
+    @Override
+    public PaymentDTO toDTO(Payment entity) {
+        PaymentDTO paymentDTO = new PaymentDTO();
+        paymentDTO.setRachaId(entity.getRacha().getId());
+        paymentDTO.setUserId(entity.getUser().getId());
+        paymentDTO.setUserSaidPaid(entity.hasUserSaidPaid());
+        paymentDTO.setConfirmedByOwner(entity.isConfirmedByOwner());
+        paymentDTO.setOwner(entity.isOwner());
+        return paymentDTO;
     }
 }

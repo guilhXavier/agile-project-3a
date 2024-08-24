@@ -1,14 +1,13 @@
 package ifsul.agileproject.rachadinha.domain.dto;
 
-import ifsul.agileproject.rachadinha.domain.entity.Racha;
-import ifsul.agileproject.rachadinha.domain.entity.Status;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.Date;
 
+import ifsul.agileproject.rachadinha.domain.entity.Racha;
+import ifsul.agileproject.rachadinha.domain.entity.Status;
+import ifsul.agileproject.rachadinha.mapper.RachaMapper;
+import lombok.Data;
+
 @Data
-@AllArgsConstructor
 public class RachaResponseDTO {
   private Long id;
   private String name;
@@ -20,9 +19,9 @@ public class RachaResponseDTO {
   private Date created_at;
   private String inviteLink;
 
+  @Deprecated
   public static RachaResponseDTO transformarEmDto(Racha racha) {
-    OwnerDTO owner = OwnerDTO.transformaEmDTO(racha.getOwner());
-    return new RachaResponseDTO(racha.getId(), racha.getName(), racha.getDescription(), racha.getGoal(),
-        racha.getBalance(), owner, racha.getStatus(), racha.getCreated_at(), racha.getInviteLink());
+    RachaMapper rachaMapper = new RachaMapper();
+    return rachaMapper.toResponseDTO(racha);
   }
 }

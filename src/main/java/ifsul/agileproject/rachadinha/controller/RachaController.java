@@ -14,6 +14,7 @@ import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.UserSession;
 import ifsul.agileproject.rachadinha.exceptions.*;
+import ifsul.agileproject.rachadinha.mapper.RachaMapper;
 import ifsul.agileproject.rachadinha.service.RachaService;
 import ifsul.agileproject.rachadinha.service.UserSessionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,6 +32,8 @@ public class RachaController {
 
   private final UserSessionService sessionService;
 
+  private final RachaMapper rachaMapper;
+
   @Operation(summary = "Busca um racha pelo ID", description = "Retorna os dados de um racha com base no ID")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Racha encontrado"),
@@ -40,7 +43,7 @@ public class RachaController {
   public ResponseEntity findRachaByID(@PathVariable Long idRacha) {
     try {
       Racha racha = rachaService.findRachaById(idRacha).orElseThrow(() -> new RachaNotFoundException(idRacha));
-      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
+      RachaResponseDTO rachaResponseDTO = rachaMapper.toResponseDTO(racha);
       return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
     } catch (RachaNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
@@ -67,7 +70,7 @@ public class RachaController {
       rachaRegisterDTO.setOwnerId(userSession.getUserId());
 
       Racha racha = rachaService.saveRacha(rachaRegisterDTO);
-      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
+      RachaResponseDTO rachaResponseDTO = rachaMapper.toResponseDTO(racha);
 
       return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.CREATED);
     } catch (UserNotFoundException e) {
@@ -90,8 +93,8 @@ public class RachaController {
       List<Racha> listRachas = rachaService.getRachasByUserId(userSession.getUserId());
 
       List<RachaResponseDTO> listRachasDTO = listRachas.stream()
-          .map(RachaResponseDTO::transformarEmDto)
-          .toList();
+          .map(rachaMapper::toResponseDTO)
+          .collect(Collectors.toList());
 
       return new ResponseEntity<List<RachaResponseDTO>>(listRachasDTO, HttpStatus.OK);
     } catch (UserNotFoundException e) {
@@ -113,7 +116,7 @@ public class RachaController {
 
       List<Racha> rachas = rachaService.findRachaByOwner(userSession.getUserId());
       List<RachaResponseDTO> rachasResponseDto = rachas.stream()
-          .map(RachaResponseDTO::transformarEmDto)
+          .map(rachaMapper::toResponseDTO)
           .collect(Collectors.toList());
       return new ResponseEntity<List<RachaResponseDTO>>(rachasResponseDto, HttpStatus.OK);
 
@@ -133,7 +136,7 @@ public class RachaController {
     List<Racha> rachaList = rachaService.findAll();
 
     List<RachaResponseDTO> listDTO = rachaList.stream()
-        .map(RachaResponseDTO::transformarEmDto)
+        .map(rachaMapper::toResponseDTO)
         .collect(Collectors.toList());
 
     return new ResponseEntity<List<RachaResponseDTO>>(listDTO, HttpStatus.OK);
@@ -183,7 +186,7 @@ public class RachaController {
       Racha racha = rachaService.findRachaById(idRacha).orElseThrow(() -> new RachaNotFoundException(idRacha));
 
       Racha rachaAtualizado = rachaService.updateRacha(rachaUpdateDTO, racha, userSession.getUserId());
-      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(rachaAtualizado);
+      RachaResponseDTO rachaResponseDTO = rachaMapper.toResponseDTO(rachaAtualizado);
 
       return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
 
@@ -271,7 +274,7 @@ public class RachaController {
   public ResponseEntity findByInvite(@PathVariable String invite) {
     try {
       Racha racha = rachaService.findRachaByInvite(invite);
-      RachaResponseDTO rachaResponseDTO = RachaResponseDTO.transformarEmDto(racha);
+      RachaResponseDTO rachaResponseDTO = rachaMapper.toResponseDTO(racha);
       return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
     } catch (RachaNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
@@ -286,7 +289,8 @@ public class RachaController {
       @ApiResponse(responseCode = "403", description = "O racha está fechado ou encerrado")
   })
   @PostMapping("/payment/userSaidPaid")
-  public ResponseEntity userSaidPaid(@RequestHeader("rachadinha-login-token") String token, @RequestParam long idRacha) {
+  public ResponseEntity userSaidPaid(@RequestHeader("rachadinha-login-token") String token,
+      @RequestParam long idRacha) {
     try {
 
       UserSession userSession = sessionService.getSessionByToken(token);
@@ -313,7 +317,8 @@ public class RachaController {
       @ApiResponse(responseCode = "403", description = "O racha está fechado ou encerrado, ou o usuário não é o dono do racha")
   })
   @PostMapping("/payment/confirmedByOwner")
-  public ResponseEntity confirmedByOwner(@RequestHeader("rachadinha-login-token") String token, @RequestParam long idRacha,
+  public ResponseEntity confirmedByOwner(@RequestHeader("rachadinha-login-token") String token,
+      @RequestParam long idRacha,
       @RequestParam long idUser) {
     try {
 

@@ -1,11 +1,9 @@
 package ifsul.agileproject.rachadinha.domain.dto;
 
 import ifsul.agileproject.rachadinha.domain.entity.User;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import ifsul.agileproject.rachadinha.mapper.UserMapper;
 import lombok.Data;
 
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 public class UserResponseDTO {
 
@@ -13,7 +11,9 @@ public class UserResponseDTO {
   private String name;
   private String email;
 
+  @Deprecated
   public static UserResponseDTO transformaEmDTO(User user) {
-    return new UserResponseDTO(user.getId(), user.getName(), user.getEmail());
+    UserMapper userMapper = new UserMapper();
+    return userMapper.toResponseDTO(user);
   }
 }

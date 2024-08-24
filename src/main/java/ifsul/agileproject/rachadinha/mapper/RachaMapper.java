@@ -1,27 +1,24 @@
 package ifsul.agileproject.rachadinha.mapper;
 
 import java.util.Date;
-import java.util.function.Function;
-
-import ifsul.agileproject.rachadinha.domain.entity.Status;
-import ifsul.agileproject.rachadinha.service.UserService;
-import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Component;
 
+import ifsul.agileproject.rachadinha.domain.dto.OwnerDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
+import ifsul.agileproject.rachadinha.domain.entity.Status;
+import ifsul.agileproject.rachadinha.service.UserService;
 
 @Component
-@AllArgsConstructor
-public class RachaMapper implements Function<RachaRegisterDTO, Racha> {
+public class RachaMapper implements Mapper<RachaRegisterDTO, Racha> {
 
   UserService userService;
 
   @Override
-  public Racha apply(RachaRegisterDTO dto) {
-
-    Racha racha = Racha.builder()
+  public Racha toEntity(RachaRegisterDTO dto) {
+    return Racha.builder()
         .name(dto.getName())
         .description(dto.getDescription())
         .password(dto.getPassword())
@@ -30,7 +27,32 @@ public class RachaMapper implements Function<RachaRegisterDTO, Racha> {
         .status(Status.OPEN)
         .created_at(new Date())
         .build();
+  }
 
-    return racha;
+  @Override
+  public RachaRegisterDTO toDTO(Racha entity) {
+    RachaRegisterDTO rachaRegisterDTO = new RachaRegisterDTO();
+    rachaRegisterDTO.setName(entity.getName());
+    rachaRegisterDTO.setDescription(entity.getDescription());
+    rachaRegisterDTO.setGoal(entity.getGoal());
+    rachaRegisterDTO.setPassword(entity.getPassword());
+    return rachaRegisterDTO;
+  }
+
+  public RachaResponseDTO toResponseDTO(Racha entity) {
+    UserMapper userMapper = new UserMapper();
+    OwnerDTO owner = userMapper.toOwnerDTO(entity.getOwner());
+
+    RachaResponseDTO rachaResponseDTO = new RachaResponseDTO();
+    rachaResponseDTO.setId(entity.getId());
+    rachaResponseDTO.setName(entity.getName());
+    rachaResponseDTO.setDescription(entity.getDescription());
+    rachaResponseDTO.setGoal(entity.getGoal());
+    rachaResponseDTO.setBalance(entity.getBalance());
+    rachaResponseDTO.setOwner(owner);
+    rachaResponseDTO.setStatus(entity.getStatus());
+    rachaResponseDTO.setCreated_at(entity.getCreated_at());
+    rachaResponseDTO.setInviteLink(entity.getInviteLink());
+    return rachaResponseDTO;
   }
 }

@@ -15,6 +15,7 @@ import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.domain.entity.UserSession;
 import ifsul.agileproject.rachadinha.exceptions.*;
+import ifsul.agileproject.rachadinha.mapper.UserMapper;
 import ifsul.agileproject.rachadinha.service.UserService;
 import ifsul.agileproject.rachadinha.service.UserSessionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +33,8 @@ public class UserController {
 
   private final UserSessionService sessionService;
 
+  private final UserMapper userMapper;
+
   @Operation(summary = "Busca um usuário pelo ID", description = "Retorna os dados públicos de um usuário com base no ID")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Usuário encontrado"),
@@ -41,7 +44,7 @@ public class UserController {
   public ResponseEntity getUserByID(@PathVariable Long id) {
     try {
       Optional<User> usuario = userService.findUserById(id);
-      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario.get()), HttpStatus.OK);
+      return new ResponseEntity<UserResponseDTO>(userMapper.toResponseDTO(usuario.get()), HttpStatus.OK);
     } catch (UserNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
@@ -59,7 +62,7 @@ public class UserController {
       UserSession session = sessionService.getSessionByToken(token);
 
       Optional<User> usuario = userService.findUserById(session.getUserId());
-      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario.get()), HttpStatus.OK);
+      return new ResponseEntity<UserResponseDTO>(userMapper.toResponseDTO(usuario.get()), HttpStatus.OK);
     } catch (UserNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     } catch (UserNotLoggedInException e) {
@@ -76,7 +79,7 @@ public class UserController {
   public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
     try {
       User usuario = userService.saveUser(userDTO);
-      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
+      return new ResponseEntity<UserResponseDTO>(userMapper.toResponseDTO(usuario), HttpStatus.CREATED);
     } catch (EmailAlreadyUsedException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
@@ -111,13 +114,14 @@ public class UserController {
       @ApiResponse(responseCode = "401", description = "Usuário não está logado")
   })
   @PatchMapping()
-  public ResponseEntity updateUser(@RequestBody UserDTO userDTO, @RequestHeader("rachadinha-login-token") String token) {
+  public ResponseEntity updateUser(@RequestBody UserDTO userDTO,
+      @RequestHeader("rachadinha-login-token") String token) {
     try {
       UserSession session = sessionService.getSessionByToken(token);
 
       User usuario = userService.updateUser(userDTO, session.getUserId());
 
-      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario), HttpStatus.OK);
+      return new ResponseEntity<UserResponseDTO>(userMapper.toResponseDTO(usuario), HttpStatus.OK);
     } catch (UserNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     } catch (UserNotLoggedInException e) {
@@ -134,7 +138,7 @@ public class UserController {
     List<User> userList = userService.findAll();
 
     List<UserResponseDTO> listDTO = userList.stream()
-        .map(UserResponseDTO::transformaEmDTO)
+        .map(userMapper::toResponseDTO)
         .collect(Collectors.toList());
 
     return new ResponseEntity<List<UserResponseDTO>>(listDTO, HttpStatus.OK);
@@ -200,7 +204,8 @@ public class UserController {
       @ApiResponse(responseCode = "401", description = "Usuário não está logado")
   })
   @PatchMapping("/resetPass")
-  public ResponseEntity resetPassword(@RequestHeader("rachadinha-login-token") String token, @RequestParam String oriPass,
+  public ResponseEntity resetPassword(@RequestHeader("rachadinha-login-token") String token,
+      @RequestParam String oriPass,
       @RequestParam String newPass) {
     try {
       UserSession session = sessionService.getSessionByToken(token);

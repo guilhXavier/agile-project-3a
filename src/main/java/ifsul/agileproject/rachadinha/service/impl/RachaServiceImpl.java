@@ -48,7 +48,7 @@ public class RachaServiceImpl implements RachaService {
     }
     User owner = userService.findUserById(ownerId).get();
 
-    Racha racha = rachaMapper.apply(rachaDTO);
+    Racha racha = rachaMapper.toEntity(rachaDTO);
     racha.setInviteLink(generateUniqueInviteLink());
 
     rachaRepository.save(racha);

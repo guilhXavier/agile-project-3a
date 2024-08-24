@@ -1,13 +1,19 @@
 package ifsul.agileproject.rachadinha.domain.dto;
 
 import ifsul.agileproject.rachadinha.domain.entity.User;
+import ifsul.agileproject.rachadinha.mapper.UserMapper;
+import lombok.Data;
 
-public record OwnerDTO(long id, String name, String email) {
+@Data
+public class OwnerDTO {
 
-  public static OwnerDTO transformaEmDTO(User user){
-    if (user == null) {
-      throw new IllegalArgumentException("User não pode ser nulo");
-    }
-    return new OwnerDTO(user.getId(), user.getName(), user.getEmail());
+  private String name;
+  private String email;
+  private String password;
+
+  @Deprecated
+  public static OwnerDTO transformaEmDTO(User user) {
+    UserMapper userMapper = new UserMapper();
+    return userMapper.toOwnerDTO(user);
   }
 }

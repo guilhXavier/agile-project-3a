@@ -34,4 +34,8 @@ public class Payment {
 
     @Column(name = "is_owner")
     private boolean isOwner;
+
+    public boolean hasUserSaidPaid() {
+        return userSaidPaid;
+    }
 }
