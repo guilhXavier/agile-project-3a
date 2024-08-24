@@ -15,8 +15,8 @@ import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.domain.entity.UserSession;
 import ifsul.agileproject.rachadinha.exceptions.*;
-import ifsul.agileproject.rachadinha.service.impl.UserServiceImpl;
-import ifsul.agileproject.rachadinha.service.impl.UserSessionServiceImpl;
+import ifsul.agileproject.rachadinha.service.UserService;
+import ifsul.agileproject.rachadinha.service.UserSessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,9 +28,9 @@ import lombok.AllArgsConstructor;
 @SuppressWarnings("rawtypes")
 public class UserController {
 
-  private final UserServiceImpl userService;
+  private final UserService userService;
 
-  private final UserSessionServiceImpl sessionService;
+  private final UserSessionService sessionService;
 
   @Operation(summary = "Busca um usuário pelo ID", description = "Retorna os dados públicos de um usuário com base no ID")
   @ApiResponses(value = {

@@ -14,8 +14,8 @@ import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.UserSession;
 import ifsul.agileproject.rachadinha.exceptions.*;
-import ifsul.agileproject.rachadinha.service.impl.RachaServiceImpl;
-import ifsul.agileproject.rachadinha.service.impl.UserSessionServiceImpl;
+import ifsul.agileproject.rachadinha.service.RachaService;
+import ifsul.agileproject.rachadinha.service.UserSessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,9 +27,9 @@ import lombok.AllArgsConstructor;
 @SuppressWarnings("rawtypes")
 public class RachaController {
 
-  private final RachaServiceImpl rachaService;
+  private final RachaService rachaService;
 
-  private final UserSessionServiceImpl sessionService;
+  private final UserSessionService sessionService;
 
   @Operation(summary = "Busca um racha pelo ID", description = "Retorna os dados de um racha com base no ID")
   @ApiResponses(value = {
@@ -275,6 +275,63 @@ public class RachaController {
       return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
     } catch (RachaNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @Operation(summary = "Marca que o usuário logado disse que pagou", description = "Marca que o usuário logado disse que pagou em um racha com base no ID passado como parâmetro")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Usuário marcou que pagou com sucesso"),
+      @ApiResponse(responseCode = "404", description = "Racha ou usuário não encontrado"),
+      @ApiResponse(responseCode = "401", description = "Usuário não está logado"),
+      @ApiResponse(responseCode = "403", description = "O racha está fechado ou encerrado")
+  })
+  @PostMapping("/payment/userSaidPaid")
+  public ResponseEntity userSaidPaid(@RequestHeader("rachadinha-login-token") String token, @RequestParam long idRacha) {
+    try {
+
+      UserSession userSession = sessionService.getSessionByToken(token);
+
+      rachaService.userSaidPaid(idRacha, userSession.getUserId());
+      return new ResponseEntity<String>("Usuário marcou que pagou", HttpStatus.OK);
+
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotLoggedInException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
+    } catch (ClosedRachaException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
+    }
+  }
+
+  @Operation(summary = "Marca que o dono do racha confirmou o pagamento", description = "Marca que o dono do racha confirmou o pagamento em um racha com base nos IDs passados como parâmetro")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Dono do racha confirmou o pagamento com sucesso"),
+      @ApiResponse(responseCode = "404", description = "Racha ou usuário não encontrado"),
+      @ApiResponse(responseCode = "401", description = "Usuário não está logado"),
+      @ApiResponse(responseCode = "403", description = "O racha está fechado ou encerrado, ou o usuário não é o dono do racha")
+  })
+  @PostMapping("/payment/confirmedByOwner")
+  public ResponseEntity confirmedByOwner(@RequestHeader("rachadinha-login-token") String token, @RequestParam long idRacha,
+      @RequestParam long idUser) {
+    try {
+
+      UserSession userSession = sessionService.getSessionByToken(token);
+
+      rachaService.confirmedByOwner(idRacha, idUser, userSession.getUserId());
+      return new ResponseEntity<String>("Dono do racha confirmou o pagamento", HttpStatus.OK);
+
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotLoggedInException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
+    } catch (ClosedRachaException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
+    } catch (ForbiddenUserException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     }
   }
 }

@@ -180,4 +180,44 @@ public class RachaServiceImpl implements RachaService {
     }
     return rachaRepository.findByMembersId(userId);
   }
+
+  @Override
+  public void userSaidPaid(Long rachaId, Long userId) {
+    Racha racha = rachaRepository.findById(rachaId).get();
+    User user = userRepository.findById(userId).get();
+    Payment payment = paymentRepository.findByRachaAndUser(racha, user);
+    if (payment == null) {
+      throw new UserNotInRachaException(userId, rachaId);
+    }
+    payment.setUserSaidPaid(true);
+    paymentRepository.save(payment);
+  }
+
+  @Override
+  public void confirmedByOwner(Long rachaId, Long userId) {
+    Racha racha = rachaRepository.findById(rachaId).get();
+    User user = userRepository.findById(userId).get();
+    Payment payment = paymentRepository.findByRachaAndUser(racha, user);
+    if (payment == null) {
+      throw new UserNotInRachaException(userId, rachaId);
+    }
+    if (!payment.isUserSaidPaid()) {
+      payment.setUserSaidPaid(true);
+    }
+    payment.setConfirmedByOwner(true);
+    paymentRepository.save(payment);
+
+    if (racha.getMembers().stream().allMatch(Payment::isUserSaidPaid)) {
+      racha.setStatus(Status.FINISHED);
+      rachaRepository.save(racha);
+    }
+  }
+
+  @Override
+  public void confirmedByOwner(Long rachaId, Long userId, Long loggedUserId) {
+    if (getRachaOwner(rachaId).getId() != loggedUserId) {
+      throw new ForbiddenUserException(loggedUserId);
+    }
+    confirmedByOwner(rachaId, userId);
+  }
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@AllArgsConstructor
+@Data
 @Builder
 @Table(name = "racha_members")
 public class Payment {
@@ -29,13 +31,5 @@ public class Payment {
 
     @Column(name = "is_owner")
     private boolean isOwner;
-
-    public boolean isOwner() {
-        return isOwner;
-    }
-
-    public User getUser() {
-        return user;
-    }
 }
 

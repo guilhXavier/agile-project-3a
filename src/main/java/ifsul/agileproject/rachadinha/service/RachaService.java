@@ -33,4 +33,10 @@ public interface RachaService {
 	List<Racha> getRachasByUserId(Long userId);
 
 	User getRachaOwner(Long rachaId);
+
+	void userSaidPaid(Long rachaId, Long userId);
+
+	void confirmedByOwner(Long rachaId, Long userId);
+
+	void confirmedByOwner(Long rachaId, Long userId, Long loggedUserId);
 }
