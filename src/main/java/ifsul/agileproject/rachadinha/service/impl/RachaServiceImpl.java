@@ -160,7 +160,7 @@ public class RachaServiceImpl implements RachaService {
     User user = userRepository.findById(userId).get();
     Payment existingPayment = paymentRepository.findByRachaAndUser(racha, user);
     if (!racha.getStatus().equals(Status.OPEN)) {
-      throw new ClosedRachaException(rachaId);
+      throw new JoinRachaForbiddenException(rachaId);
     }
     if (existingPayment != null) {
       throw new UserAlreadyInRachaException(userId, rachaId);
@@ -190,10 +190,13 @@ public class RachaServiceImpl implements RachaService {
     User user = userRepository.findById(userId).get();
     Payment existingPayment = paymentRepository.findByRachaAndUser(racha, user);
     if (!racha.getStatus().equals(Status.OPEN)) {
-      throw new ClosedRachaException(rachaId);
+      throw new LeaveRachaForbiddenException(rachaId);
     }
     if (existingPayment == null) {
       throw new UserNotInRachaException(userId, rachaId);
+    }
+    if (existingPayment.isOwner()) {
+      throw new LeaveRachaForbiddenException("O dono do racha não pode sair do racha");
     }
     paymentRepository.delete(existingPayment);
   }

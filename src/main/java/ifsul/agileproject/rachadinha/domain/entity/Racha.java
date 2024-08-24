@@ -41,6 +41,11 @@ public class Racha {
   @OneToMany(mappedBy = "racha")
   private List<Payment> members;
 
+  @Deprecated
+  @ManyToOne
+  @JoinColumn(name = "owner_id")
+  private User owner;
+
   @Column(name = "status")
   @Enumerated(EnumType.STRING)
   @Builder.Default
@@ -58,6 +63,18 @@ public class Racha {
         return payment.getUser();
       }
     }
+    if (owner != null) {
+      return owner;
+    }
     return null;
+  }
+
+  public void setOwner(User owner) {
+    for (Payment payment : members) {
+      if (payment.getUser().equals(owner)) {
+        payment.setOwner(true);
+      }
+    }
+    this.owner = null;
   }
 }

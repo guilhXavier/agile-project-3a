@@ -227,7 +227,7 @@ public class RachaController {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     } catch (UserNotLoggedInException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
-    } catch (ClosedRachaException e) {
+    } catch (LeaveRachaForbiddenException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     }
   }
@@ -257,7 +257,7 @@ public class RachaController {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.CONFLICT);
     } catch (UserNotLoggedInException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
-    } catch (ClosedRachaException e) {
+    } catch (LeaveRachaForbiddenException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     }
   }
@@ -300,7 +300,7 @@ public class RachaController {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     } catch (UserNotLoggedInException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
-    } catch (ClosedRachaException e) {
+    } catch (LeaveRachaForbiddenException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     }
   }
@@ -328,7 +328,7 @@ public class RachaController {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     } catch (UserNotLoggedInException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
-    } catch (ClosedRachaException e) {
+    } catch (LeaveRachaForbiddenException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     } catch (ForbiddenUserException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
