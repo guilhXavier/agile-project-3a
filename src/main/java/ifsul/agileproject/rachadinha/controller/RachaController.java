@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaDetailsDTO;
-import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
-import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.UserSession;
 import ifsul.agileproject.rachadinha.exceptions.*;
@@ -62,14 +60,7 @@ public class RachaController {
     try {
       UserSession userSession = sessionService.getSessionByToken(token);
 
-      RachaRegisterDTO rachaRegisterDTO = new RachaRegisterDTO();
-      rachaRegisterDTO.setName(rachaDTO.getName());
-      rachaRegisterDTO.setDescription(rachaDTO.getDescription());
-      rachaRegisterDTO.setPassword(rachaDTO.getPassword());
-      rachaRegisterDTO.setGoal(rachaDTO.getGoal());
-      rachaRegisterDTO.setOwnerId(userSession.getUserId());
-
-      Racha racha = rachaService.saveRacha(rachaRegisterDTO);
+      Racha racha = rachaService.saveRacha(rachaDTO, userSession.getUserId());
       RachaResponseDTO rachaResponseDTO = rachaMapper.toResponseDTO(racha);
 
       return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.CREATED);
@@ -178,7 +169,7 @@ public class RachaController {
   })
   @PatchMapping("/{idRacha}")
   public ResponseEntity updateRacha(@PathVariable Long idRacha, @RequestHeader("rachadinha-login-token") String token,
-      @RequestBody RachaUpdateDTO rachaUpdateDTO) {
+      @RequestBody RachaDetailsDTO rachaUpdateDTO) {
     try {
 
       UserSession userSession = sessionService.getSessionByToken(token);

@@ -7,6 +7,10 @@ import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.mapper.RachaMapper;
 import lombok.Data;
 
+/**
+ * The default response DTO for Racha entity. It is used to return public
+ * information about a racha and a summary about the owner.
+ */
 @Data
 public class RachaResponseDTO {
   private Long id;

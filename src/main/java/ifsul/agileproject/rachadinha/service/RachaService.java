@@ -3,14 +3,13 @@ package ifsul.agileproject.rachadinha.service;
 import java.util.List;
 import java.util.Optional;
 
-import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
-import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 
 public interface RachaService {
 
-	Racha saveRacha(RachaRegisterDTO rachaDTO);
+	Racha saveRacha(RachaDetailsDTO rachaDTO, Long ownerId);
 
 	Optional<Racha> findRachaById(Long id);
 
@@ -18,9 +17,9 @@ public interface RachaService {
 
 	void deleteRachaById(Long id, Long loggerUserId);
 
-	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha);
+	Racha updateRacha(RachaDetailsDTO rachaDetailsDTO, Racha racha);
 
-	Racha updateRacha(RachaUpdateDTO rachaUpdateDTO, Racha racha, Long loggerUserId);
+	Racha updateRacha(RachaDetailsDTO rachaDetailsDTO, Racha racha, Long loggerUserId);
 
 	Racha findRachaByInvite(String invite);
 

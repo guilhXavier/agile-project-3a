@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class OwnerDTO {
 
+  private Long id;
   private String name;
   private String email;
-  private String password;
 
   @Deprecated
   public static OwnerDTO transformaEmDTO(User user) {

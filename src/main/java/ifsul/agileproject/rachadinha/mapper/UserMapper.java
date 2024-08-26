@@ -1,7 +1,7 @@
 package ifsul.agileproject.rachadinha.mapper;
 
 import ifsul.agileproject.rachadinha.domain.dto.OwnerDTO;
-import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import org.springframework.stereotype.Component;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 @Component
-public class UserMapper implements Mapper<UserDTO, User> {
+public class UserMapper implements Mapper<UserDetailsDTO, User> {
 
   @Override
-  public User toEntity(UserDTO dto) {
+  public User toEntity(UserDetailsDTO dto) {
     return User.builder()
       .name(dto.getName())
       .email(dto.getEmail())
@@ -22,8 +22,8 @@ public class UserMapper implements Mapper<UserDTO, User> {
   }
 
   @Override
-  public UserDTO toDTO(User entity) {
-    UserDTO userDTO = new UserDTO();
+  public UserDetailsDTO toDTO(User entity) {
+    UserDetailsDTO userDTO = new UserDetailsDTO();
     userDTO.setName(entity.getName());
     userDTO.setEmail(entity.getEmail());
     userDTO.setPassword(entity.getPassword());
@@ -32,9 +32,9 @@ public class UserMapper implements Mapper<UserDTO, User> {
 
   public OwnerDTO toOwnerDTO(User entity) {
     OwnerDTO ownerDTO = new OwnerDTO();
+    ownerDTO.setId(entity.getId());
     ownerDTO.setName(entity.getName());
     ownerDTO.setEmail(entity.getEmail());
-    ownerDTO.setPassword(entity.getPassword());
     return ownerDTO;
   }
 

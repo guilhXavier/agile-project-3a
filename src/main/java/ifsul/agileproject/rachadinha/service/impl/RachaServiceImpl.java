@@ -5,8 +5,7 @@ import java.util.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
-import ifsul.agileproject.rachadinha.domain.dto.RachaUpdateDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Payment;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
@@ -41,8 +40,7 @@ public class RachaServiceImpl implements RachaService {
   }
 
   @Override
-  public Racha saveRacha(RachaRegisterDTO rachaDTO) {
-    Long ownerId = rachaDTO.getOwnerId();
+  public Racha saveRacha(RachaDetailsDTO rachaDTO, Long ownerId) {
     if (!userRepository.existsById(ownerId)) {
       throw new UserNotFoundException(ownerId);
     }
@@ -98,7 +96,7 @@ public class RachaServiceImpl implements RachaService {
   }
 
   @Override
-  public Racha updateRacha(RachaUpdateDTO updatedRachaDTO, Racha originalRacha) {
+  public Racha updateRacha(RachaDetailsDTO updatedRachaDTO, Racha originalRacha) {
     if (updatedRachaDTO.getName() != null) {
       originalRacha.setName(updatedRachaDTO.getName());
     }
@@ -115,7 +113,7 @@ public class RachaServiceImpl implements RachaService {
   }
 
   @Override
-  public Racha updateRacha(RachaUpdateDTO updatedRachaDTO, Racha originalRacha, Long loggedUserId) {
+  public Racha updateRacha(RachaDetailsDTO updatedRachaDTO, Racha originalRacha, Long loggedUserId) {
     if (getRachaOwner(originalRacha.getId()).getId() != loggedUserId) {
       throw new ForbiddenUserException(loggedUserId);
     }

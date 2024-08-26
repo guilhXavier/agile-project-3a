@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserLoginDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
@@ -76,9 +76,9 @@ public class UserController {
       @ApiResponse(responseCode = "400", description = "Email já em uso")
   })
   @PostMapping("/signup")
-  public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
+  public ResponseEntity saveUser(@RequestBody UserDetailsDTO userDetailsInput) {
     try {
-      User usuario = userService.saveUser(userDTO);
+      User usuario = userService.saveUser(userDetailsInput);
       return new ResponseEntity<UserResponseDTO>(userMapper.toResponseDTO(usuario), HttpStatus.CREATED);
     } catch (EmailAlreadyUsedException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
@@ -114,12 +114,12 @@ public class UserController {
       @ApiResponse(responseCode = "401", description = "Usuário não está logado")
   })
   @PatchMapping()
-  public ResponseEntity updateUser(@RequestBody UserDTO userDTO,
+  public ResponseEntity updateUser(@RequestBody UserDetailsDTO userDetailsInput,
       @RequestHeader("rachadinha-login-token") String token) {
     try {
       UserSession session = sessionService.getSessionByToken(token);
 
-      User usuario = userService.updateUser(userDTO, session.getUserId());
+      User usuario = userService.updateUser(userDetailsInput, session.getUserId());
 
       return new ResponseEntity<UserResponseDTO>(userMapper.toResponseDTO(usuario), HttpStatus.OK);
     } catch (UserNotFoundException e) {

@@ -4,6 +4,10 @@ import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.mapper.UserMapper;
 import lombok.Data;
 
+/**
+ * The default response DTO for User entity. It is used to return public
+ * information about a user.
+ */
 @Data
 public class UserResponseDTO {
 

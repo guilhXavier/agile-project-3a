@@ -5,19 +5,19 @@ import java.util.Date;
 import org.springframework.stereotype.Component;
 
 import ifsul.agileproject.rachadinha.domain.dto.OwnerDTO;
-import ifsul.agileproject.rachadinha.domain.dto.RachaRegisterDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.service.UserService;
 
 @Component
-public class RachaMapper implements Mapper<RachaRegisterDTO, Racha> {
+public class RachaMapper implements Mapper<RachaDetailsDTO, Racha> {
 
   UserService userService;
 
   @Override
-  public Racha toEntity(RachaRegisterDTO dto) {
+  public Racha toEntity(RachaDetailsDTO dto) {
     return Racha.builder()
         .name(dto.getName())
         .description(dto.getDescription())
@@ -30,8 +30,8 @@ public class RachaMapper implements Mapper<RachaRegisterDTO, Racha> {
   }
 
   @Override
-  public RachaRegisterDTO toDTO(Racha entity) {
-    RachaRegisterDTO rachaRegisterDTO = new RachaRegisterDTO();
+  public RachaDetailsDTO toDTO(Racha entity) {
+    RachaDetailsDTO rachaRegisterDTO = new RachaDetailsDTO();
     rachaRegisterDTO.setName(entity.getName());
     rachaRegisterDTO.setDescription(entity.getDescription());
     rachaRegisterDTO.setGoal(entity.getGoal());
