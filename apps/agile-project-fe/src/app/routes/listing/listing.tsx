@@ -23,6 +23,7 @@ export const Listing: React.FC = () => {
             <p>{chipIn.description}</p>
             <p>{chipIn.goal}</p>
             <p>{chipIn.balance}</p>
+            <p>{chipIn.inviteLink}</p>
           </Card>
         ))}
     </StyledListing>

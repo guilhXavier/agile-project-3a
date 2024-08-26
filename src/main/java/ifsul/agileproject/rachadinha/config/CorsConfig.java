@@ -17,6 +17,7 @@ public class CorsConfig {
           .allowedOrigins("http://localhost:4200")
           .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
           .allowedHeaders("*")
+          .exposedHeaders("rachadinha-login-token")
           .allowCredentials(true);
       }
     };
