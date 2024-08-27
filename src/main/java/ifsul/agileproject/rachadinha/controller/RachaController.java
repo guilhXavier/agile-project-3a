@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
@@ -41,8 +42,8 @@ public class RachaController {
   public ResponseEntity findRachaByID(@PathVariable Long idRacha) {
     try {
       Racha racha = rachaService.findRachaById(idRacha).orElseThrow(() -> new RachaNotFoundException(idRacha));
-      RachaResponseDTO rachaResponseDTO = rachaMapper.toResponseDTO(racha);
-      return new ResponseEntity<RachaResponseDTO>(rachaResponseDTO, HttpStatus.OK);
+      RachaDTO rachaDTO = rachaMapper.toRachaDTO(racha);
+      return new ResponseEntity<RachaDTO>(rachaDTO, HttpStatus.OK);
     } catch (RachaNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }

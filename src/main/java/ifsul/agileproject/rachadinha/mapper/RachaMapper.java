@@ -1,12 +1,17 @@
 package ifsul.agileproject.rachadinha.mapper;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import ifsul.agileproject.rachadinha.domain.dto.MemberDTO;
 import ifsul.agileproject.rachadinha.domain.dto.OwnerDTO;
+import ifsul.agileproject.rachadinha.domain.dto.RachaDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.dto.RachaResponseDTO;
+import ifsul.agileproject.rachadinha.domain.entity.Payment;
 import ifsul.agileproject.rachadinha.domain.entity.Racha;
 import ifsul.agileproject.rachadinha.domain.entity.Status;
 import ifsul.agileproject.rachadinha.service.UserService;
@@ -54,5 +59,25 @@ public class RachaMapper implements Mapper<RachaDetailsDTO, Racha> {
     rachaResponseDTO.setCreated_at(entity.getCreated_at());
     rachaResponseDTO.setInviteLink(entity.getInviteLink());
     return rachaResponseDTO;
+  }
+  
+  public RachaDTO toRachaDTO(Racha entity) {
+    RachaDTO rachaDTO = new RachaDTO();
+    rachaDTO.setId(entity.getId());
+    rachaDTO.setName(entity.getName());
+    rachaDTO.setDescription(entity.getDescription());
+    rachaDTO.setGoal(entity.getGoal());
+    rachaDTO.setStatus(entity.getStatus());
+    rachaDTO.setCreated_at(entity.getCreated_at());
+    rachaDTO.setInviteLink(entity.getInviteLink());
+    rachaDTO.setMembers(mapMembers(entity.getMembers()));
+    return rachaDTO;
+  }
+
+  private List<MemberDTO> mapMembers(List<Payment> members) {
+    PaymentMapper paymentMapper = new PaymentMapper();
+    return members.stream()
+                  .map(paymentMapper::toMemberDTO)
+                  .collect(Collectors.toList());
   }
 }
