@@ -12,6 +12,7 @@ import { Field, useForm } from '../../hooks/useForm/useForm';
 import Input from '../input/input';
 import { useCreateChipIn } from '../../api/useCreateChipIn/useCreateChipIn';
 import { useStore } from '../../store';
+import { useJoinChipIn } from '../../api/useJoinChipIn/useJoinChipIn';
 
 const schema = {
   name: {
@@ -100,7 +101,7 @@ export const SideMenu: React.FC = () => {
     'name' | 'description' | 'totalValue' | 'password'
   >(schema);
 
-  const joinForm = useForm<'code'>({
+  const joinForm = useForm<'code' | 'pass'>({
     code: {
       type: Field.Text,
       validation: {
@@ -108,9 +109,18 @@ export const SideMenu: React.FC = () => {
         message: 'Código é obrigatório',
       },
     },
+    pass: {
+      type: Field.Password,
+      validation: {
+        predicate: (value: string) => value.length > 5,
+        message: 'Senha é obrigatória e deve ter mais de 5 dígitos',
+      },
+    },
   });
 
   const { createChipIn } = useCreateChipIn();
+
+  const { joinChipIn } = useJoinChipIn(joinForm.get('code'));
 
   const renderJoinDialog = () => (
     <Dialog
@@ -118,14 +128,8 @@ export const SideMenu: React.FC = () => {
       isVisible={isJoinDialogOpen}
       handleClose={() => setIsJoinDialogOpen(!isJoinDialogOpen)}
       onConfirm={() => {
-        if (isValid) {
-          createChipIn({
-            name: get('name'),
-            description: get('description'),
-            goal: Number(get('totalValue')),
-            password: get('password'),
-            ownerId: Number(ownerId),
-          });
+        if (joinForm.isValid) {
+          joinChipIn(joinForm.get('pass'));
           reset();
         }
       }}
@@ -139,6 +143,16 @@ export const SideMenu: React.FC = () => {
         onInput={(e) => joinForm.set('code', e.currentTarget.value)}
         isValid={joinForm.validation.get('code')?.isValid}
         validationMessage={joinForm.validation.get('code')?.message}
+      />
+      <Input
+        id="pass"
+        inputType="password"
+        label="Senha"
+        placeholder="Senha do racha"
+        value={joinForm.get('pass')}
+        onInput={(e) => joinForm.set('pass', e.currentTarget.value)}
+        isValid={joinForm.validation.get('pass')?.isValid}
+        validationMessage={joinForm.validation.get('pass')?.message}
       />
     </Dialog>
   );

@@ -18,7 +18,7 @@ export const useFindChipInsByOwnerId = (
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ['findChipInsByOwnerId', ownerId],
     queryFn: (): Promise<AxiosResponse<Array<ChipIn>>> =>
-      baseAxios.get(`/racha/list/owner`, {
+      baseAxios.get(`/racha/list/user/${ownerId}/all`, {
         headers: { 'rachadinha-login-token': token },
       }),
     enabled: !!ownerId,
