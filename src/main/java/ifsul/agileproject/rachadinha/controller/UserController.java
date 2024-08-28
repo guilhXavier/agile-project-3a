@@ -76,7 +76,18 @@ public class UserController {
   public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
     try {
       User usuario = userService.saveUser(userDTO);
-      return new ResponseEntity<UserResponseDTO>(UserResponseDTO.transformaEmDTO(usuario), HttpStatus.CREATED);
+
+      UserSession session = new UserSession(usuario.getId());
+
+      sessionService.createSession(session);
+
+
+      HttpHeaders responseHeaders = new HttpHeaders();
+      responseHeaders.set("rachadinha-login-token", session.getToken());
+
+      return ResponseEntity.status(HttpStatus.CREATED)
+        .headers(responseHeaders)
+        .body(UserResponseDTO.transformaEmDTO(usuario));
     } catch (EmailAlreadyUsedException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }

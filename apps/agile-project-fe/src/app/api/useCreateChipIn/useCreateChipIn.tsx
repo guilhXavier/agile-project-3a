@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import { baseAxios } from '..';
+import { baseAxios, queryClient } from '..';
+import { useStore } from '../../store';
 
 export interface ChipInForm {
   name: string;
@@ -16,10 +17,19 @@ export interface UseCreateChipIn {
 }
 
 export const useCreateChipIn = (): UseCreateChipIn => {
+  const { token } = useStore();
+
   const { mutate, isSuccess, isError } = useMutation({
     mutationKey: ['chipIn'],
     mutationFn: (chipInForm: ChipInForm) =>
-      baseAxios.post('/racha/create', chipInForm),
+      baseAxios.post('/racha/create', chipInForm, {
+        headers: {
+          'rachadinha-login-token': token,
+        },
+      }),
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: ['findChipInsByOwnerId'] });
+    },
   });
 
   return { createChipIn: mutate, isSuccess, isError };

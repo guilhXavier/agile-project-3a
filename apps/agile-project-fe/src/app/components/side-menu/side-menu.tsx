@@ -12,6 +12,7 @@ import { Field, useForm } from '../../hooks/useForm/useForm';
 import Input from '../input/input';
 import { useCreateChipIn } from '../../api/useCreateChipIn/useCreateChipIn';
 import { useStore } from '../../store';
+import { useJoinChipIn } from '../../api/useJoinChipIn/useJoinChipIn';
 
 const schema = {
   name: {
@@ -93,11 +94,68 @@ export const SideMenu: React.FC = () => {
   const [isCreateDialogOpen, setIsCreateDialogOpen] =
     React.useState<boolean>(false);
 
-  const { validation, get, set, isValid } = useForm<
+  const [isJoinDialogOpen, setIsJoinDialogOpen] =
+    React.useState<boolean>(false);
+
+  const { validation, get, set, isValid, reset } = useForm<
     'name' | 'description' | 'totalValue' | 'password'
   >(schema);
 
+  const joinForm = useForm<'code' | 'pass'>({
+    code: {
+      type: Field.Text,
+      validation: {
+        predicate: (value: string) => value.length > 0,
+        message: 'Código é obrigatório',
+      },
+    },
+    pass: {
+      type: Field.Password,
+      validation: {
+        predicate: (value: string) => value.length > 5,
+        message: 'Senha é obrigatória e deve ter mais de 5 dígitos',
+      },
+    },
+  });
+
   const { createChipIn } = useCreateChipIn();
+
+  const { joinChipIn } = useJoinChipIn(joinForm.get('code'));
+
+  const renderJoinDialog = () => (
+    <Dialog
+      title="Juntar-se a um racha"
+      isVisible={isJoinDialogOpen}
+      handleClose={() => setIsJoinDialogOpen(!isJoinDialogOpen)}
+      onConfirm={() => {
+        if (joinForm.isValid) {
+          joinChipIn(joinForm.get('pass'));
+          reset();
+        }
+      }}
+    >
+      <Input
+        id="code"
+        inputType="text"
+        label="Código"
+        placeholder="Código do racha"
+        value={joinForm.get('code')}
+        onInput={(e) => joinForm.set('code', e.currentTarget.value)}
+        isValid={joinForm.validation.get('code')?.isValid}
+        validationMessage={joinForm.validation.get('code')?.message}
+      />
+      <Input
+        id="pass"
+        inputType="password"
+        label="Senha"
+        placeholder="Senha do racha"
+        value={joinForm.get('pass')}
+        onInput={(e) => joinForm.set('pass', e.currentTarget.value)}
+        isValid={joinForm.validation.get('pass')?.isValid}
+        validationMessage={joinForm.validation.get('pass')?.message}
+      />
+    </Dialog>
+  );
 
   const renderCreateDialog = () => (
     <Dialog
@@ -113,6 +171,7 @@ export const SideMenu: React.FC = () => {
             password: get('password'),
             ownerId: Number(ownerId),
           });
+          reset();
         }
       }}
     >
@@ -160,6 +219,7 @@ export const SideMenu: React.FC = () => {
   return (
     <StyledSideMenu isExpanded={isExpanded}>
       {createPortal(renderCreateDialog(), document.body)}
+      {createPortal(renderJoinDialog(), document.body)}
       {!isExpanded && (
         <MenuIcon
           fontSize="medium"
@@ -173,9 +233,9 @@ export const SideMenu: React.FC = () => {
         />
       )}
       <div className="action-icons">
-        <div className="icon">
+        <div className="icon" onClick={() => setIsJoinDialogOpen(true)}>
           <AttachMoneyIcon fontSize="medium" />
-          {isExpanded && <span>Rachas</span>}
+          {isExpanded && <span>Juntar-se</span>}
         </div>
         <div className="icon">
           <MenuBookIcon fontSize="medium" />
