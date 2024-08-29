@@ -171,7 +171,7 @@ public class RachaServiceImpl implements RachaService {
         .racha(racha)
         .user(user)
         .userSaidPaid(false)
-        .confirmedByOwner(true)
+        .confirmedByOwner(false)
         .isOwner(false)
         .build();
     paymentRepository.save(payment);
