@@ -27,6 +27,7 @@ export interface UseForm<T> {
   validation: Map<string, Validation>;
   get: (key: T) => string;
   set: (key: T, value: string) => void;
+  reset: () => void;
   isValid: boolean;
 }
 
@@ -89,5 +90,18 @@ export const useForm = <T>(schema: Schema): UseForm<T> => {
     setForm(newForm);
   };
 
-  return { form, validation, get, set, isValid };
+  const reset = () => {
+    const resetForm = new Map<T, string>();
+    const resetValidation = new Map<string, Validation>();
+
+    form.forEach((_, key) => {
+      resetForm.set(key, '');
+      resetValidation.set(key as string, { isValid: true, message: '' });
+    });
+
+    setForm(resetForm);
+    setValidation(resetValidation);
+  };
+
+  return { form, validation, get, set, isValid, reset };
 };
