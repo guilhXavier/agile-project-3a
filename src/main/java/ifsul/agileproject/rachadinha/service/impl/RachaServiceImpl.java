@@ -220,6 +220,7 @@ public class RachaServiceImpl implements RachaService {
     }
     payment.setUserSaidPaid(true);
     paymentRepository.save(payment);
+    updateBalance(racha);
   }
 
   @Override
@@ -254,6 +255,15 @@ public class RachaServiceImpl implements RachaService {
     int totalMembros = racha.getMembers().size();
     double portionPerMember = racha.getGoal() / totalMembros;
     racha.setPortionPerMember(portionPerMember);
+    rachaRepository.save(racha);
+  }
+
+  public void updateBalance(Racha racha) {
+    long totalPagamentos = racha.getMembers().stream()
+      .filter(Payment::isUserSaidPaid)
+      .count();
+    double balanceAtualizado = totalPagamentos * racha.getPortionPerMember();
+    racha.setBalance(balanceAtualizado);
     rachaRepository.save(racha);
   }
 }

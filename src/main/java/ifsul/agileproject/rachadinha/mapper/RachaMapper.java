@@ -68,6 +68,7 @@ public class RachaMapper implements Mapper<RachaDetailsDTO, Racha> {
     rachaDTO.setName(entity.getName());
     rachaDTO.setDescription(entity.getDescription());
     rachaDTO.setGoal(entity.getGoal());
+    rachaDTO.setBalance(entity.getBalance());
     rachaDTO.setPortionPerMember(entity.getPortionPerMember());
     rachaDTO.setStatus(entity.getStatus());
     rachaDTO.setCreated_at(entity.getCreated_at());
