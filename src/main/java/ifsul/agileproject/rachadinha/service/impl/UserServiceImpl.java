@@ -1,6 +1,6 @@
 package ifsul.agileproject.rachadinha.service.impl;
 
-import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 import ifsul.agileproject.rachadinha.exceptions.*;
 import ifsul.agileproject.rachadinha.mapper.UserMapper;
@@ -23,11 +23,11 @@ public class UserServiceImpl implements UserService {
   private final UserMapper userMapper;
 
   @Override
-  public User saveUser(UserDTO userDTO) {
+  public User saveUser(UserDetailsDTO userDTO) {
     if (userRepository.existsByEmail(userDTO.getEmail())) {
       throw new EmailAlreadyUsedException(userDTO.getEmail());
     }
-    User user = userMapper.apply(userDTO);
+    User user = userMapper.toEntity(userDTO);
     return userRepository.save(user);
   }
 
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User updateUser(UserDTO userDTO) {
+  public User updateUser(UserDetailsDTO userDTO) {
     Optional<User> user = userRepository.findByEmail(userDTO.getEmail());
 
     Predicate<String> isNotEmpty = (value) -> !value.isEmpty();
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User updateUser(UserDTO userDTO, Long loggedUserId) {
+  public User updateUser(UserDetailsDTO userDTO, Long loggedUserId) {
     Optional<User> user = userRepository.findByEmail(userDTO.getEmail());
     if (!user.isPresent()) {
       throw new UserNotFoundException(userDTO.getEmail());
