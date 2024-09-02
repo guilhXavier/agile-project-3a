@@ -1,13 +1,13 @@
 package ifsul.agileproject.rachadinha.service;
 
-import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-  User saveUser(UserDTO userDTO);
+  User saveUser(UserDetailsDTO userDTO);
 
   Optional<User> findUserById(Long id);
 
@@ -19,9 +19,9 @@ public interface UserService {
 
   Optional<User> findUserByEmail(String email);
 
-  User updateUser(UserDTO userDTO);
+  User updateUser(UserDetailsDTO userDTO);
 
-  User updateUser(UserDTO userDTO, Long loggedUserId);
+  User updateUser(UserDetailsDTO userDTO, Long loggedUserId);
 
   void save(User user);
 

@@ -38,15 +38,15 @@ public class Racha {
   @Column(name = "balance")
   private Double balance;
 
-  @ManyToMany
-  @JoinTable(
-    name = "racha_members",
-    joinColumns = @JoinColumn(name = "racha_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
-  private List<User> members;
+  @Column(name = "portion")
+  private Double portionPerMember;
 
-  @NonNull
+  @OneToMany(mappedBy = "racha")
+  private List<Payment> members;
+
+  @Deprecated
   @ManyToOne
+  @JoinColumn(name = "owner_id")
   private User owner;
 
   @Column(name = "status")
@@ -59,4 +59,25 @@ public class Racha {
 
   @Column(name = "invite_link")
   private String inviteLink;
+
+  public User getOwner() {
+    for (Payment payment : members) {
+      if (payment.isOwner()) {
+        return payment.getUser();
+      }
+    }
+    if (owner != null) {
+      return owner;
+    }
+    return null;
+  }
+
+  public void setOwner(User owner) {
+    for (Payment payment : members) {
+      if (payment.getUser().equals(owner)) {
+        payment.setOwner(true);
+      }
+    }
+    this.owner = null;
+  }
 }
