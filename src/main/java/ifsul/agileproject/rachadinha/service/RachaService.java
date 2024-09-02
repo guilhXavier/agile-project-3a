@@ -13,6 +13,8 @@ public interface RachaService {
 
 	Optional<Racha> findRachaById(Long id);
 
+	Racha getRachaPage(Long idRacha, Long userId);
+
 	List<Racha> findAll();
 
 	void deleteRachaById(Long id, Long loggerUserId);
@@ -39,7 +41,7 @@ public interface RachaService {
 
 	void confirmedByOwner(Long rachaId, Long userId, Long loggedUserId);
 
-  void calcularPortionPerMember(Racha racha);
+	void updateBalanceAndPortion(Racha racha);
 
-  void updateBalance(Racha racha);
+	void closeRacha(long idRacha, Long userId);
 }

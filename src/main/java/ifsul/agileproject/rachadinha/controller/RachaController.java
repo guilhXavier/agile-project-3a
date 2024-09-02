@@ -36,16 +36,27 @@ public class RachaController {
   @Operation(summary = "Busca um racha pelo ID", description = "Retorna os dados de um racha com base no ID")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Racha encontrado"),
-      @ApiResponse(responseCode = "404", description = "Racha não encontrado")
+      @ApiResponse(responseCode = "404", description = "Racha não encontrado"),
+      @ApiResponse(responseCode = "401", description = "Usuário não está logado"),
+      @ApiResponse(responseCode = "403", description = "Usuário não tem permissão para acessar os dados do racha")
   })
   @GetMapping("{idRacha}")
-  public ResponseEntity findRachaByID(@PathVariable Long idRacha) {
+  public ResponseEntity findRachaByID(@PathVariable Long idRacha,
+      @RequestHeader("rachadinha-login-token") String token) {
     try {
-      Racha racha = rachaService.findRachaById(idRacha).orElseThrow(() -> new RachaNotFoundException(idRacha));
+      UserSession userSession = sessionService.getSessionByToken(token);
+
+      Racha racha = rachaService.getRachaPage(idRacha, userSession.getUserId());
       RachaDTO rachaDTO = rachaMapper.toRachaDTO(racha);
       return new ResponseEntity<RachaDTO>(rachaDTO, HttpStatus.OK);
     } catch (RachaNotFoundException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotLoggedInException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
+    } catch (ForbiddenUserException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     }
   }
 
@@ -327,6 +338,32 @@ public class RachaController {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
     } catch (LeaveRachaForbiddenException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
+    } catch (ForbiddenUserException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
+    }
+  }
+
+  @Operation(summary = "O dono pode marcar que o racha está fechado", description = "Marca que o racha está fechado para novos membros")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Racha fechado com sucesso"),
+      @ApiResponse(responseCode = "404", description = "Racha não encontrado"),
+      @ApiResponse(responseCode = "401", description = "Usuário não está logado"),
+      @ApiResponse(responseCode = "403", description = "O racha está encerrado ou o usuário não é o dono do racha")
+  })
+  @PostMapping("/close")
+  public ResponseEntity closeRacha(@RequestHeader("rachadinha-login-token") String token,
+      @RequestParam long idRacha) {
+    try {
+
+      UserSession userSession = sessionService.getSessionByToken(token);
+
+      rachaService.closeRacha(idRacha, userSession.getUserId());
+      return new ResponseEntity<String>("Racha fechado", HttpStatus.OK);
+
+    } catch (RachaNotFoundException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.NOT_FOUND);
+    } catch (UserNotLoggedInException e) {
+      return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
     } catch (ForbiddenUserException e) {
       return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getMessage()), HttpStatus.FORBIDDEN);
     }
