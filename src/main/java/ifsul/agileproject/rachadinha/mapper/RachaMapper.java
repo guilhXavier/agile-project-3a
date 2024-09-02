@@ -53,6 +53,7 @@ public class RachaMapper implements Mapper<RachaDetailsDTO, Racha> {
     rachaResponseDTO.setName(entity.getName());
     rachaResponseDTO.setDescription(entity.getDescription());
     rachaResponseDTO.setGoal(entity.getGoal());
+    rachaResponseDTO.setPortionPerMember(entity.getPortionPerMember());
     rachaResponseDTO.setBalance(entity.getBalance());
     rachaResponseDTO.setOwner(owner);
     rachaResponseDTO.setStatus(entity.getStatus());
@@ -60,13 +61,14 @@ public class RachaMapper implements Mapper<RachaDetailsDTO, Racha> {
     rachaResponseDTO.setInviteLink(entity.getInviteLink());
     return rachaResponseDTO;
   }
-  
+
   public RachaDTO toRachaDTO(Racha entity) {
     RachaDTO rachaDTO = new RachaDTO();
     rachaDTO.setId(entity.getId());
     rachaDTO.setName(entity.getName());
     rachaDTO.setDescription(entity.getDescription());
     rachaDTO.setGoal(entity.getGoal());
+    rachaDTO.setPortionPerMember(entity.getPortionPerMember());
     rachaDTO.setStatus(entity.getStatus());
     rachaDTO.setCreated_at(entity.getCreated_at());
     rachaDTO.setInviteLink(entity.getInviteLink());

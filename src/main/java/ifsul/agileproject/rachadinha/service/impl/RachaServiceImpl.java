@@ -175,6 +175,9 @@ public class RachaServiceImpl implements RachaService {
         .isOwner(false)
         .build();
     paymentRepository.save(payment);
+
+    calcularPortionPerMember(racha);
+
   }
 
   @Override
@@ -245,5 +248,12 @@ public class RachaServiceImpl implements RachaService {
       throw new ForbiddenUserException(loggedUserId);
     }
     confirmedByOwner(rachaId, userId);
+  }
+
+  public void calcularPortionPerMember(Racha racha) {
+    int totalMembros = racha.getMembers().size();
+    double portionPerMember = racha.getGoal() / totalMembros;
+    racha.setPortionPerMember(portionPerMember);
+    rachaRepository.save(racha);
   }
 }

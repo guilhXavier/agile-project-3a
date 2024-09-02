@@ -38,4 +38,6 @@ public interface RachaService {
 	void confirmedByOwner(Long rachaId, Long userId);
 
 	void confirmedByOwner(Long rachaId, Long userId, Long loggedUserId);
+
+  void calcularPortionPerMember(Racha racha);
 }
