@@ -1,6 +1,6 @@
 package ifsul.agileproject.rachadinha.controller;
 
-import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserLoginDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
@@ -79,13 +79,13 @@ public class UserControllerTest {
 
     @Test
     public void testSaveUser() throws Exception {
-        UserDTO userDTO = new UserDTO();
+        UserDetailsDTO userDTO = new UserDetailsDTO();
         userDTO.setName("Diego");
         userDTO.setEmail("Diego@Diego");
         userDTO.setPassword("123");
 
-        User user = new User(1L, "Diego", "Diego@Diego", "123", null, null);
-        when(userService.saveUser(any(UserDTO.class))).thenReturn(user);
+        User user = new User(1L, "Diego", "Diego@Diego", "123", null);
+        when(userService.saveUser(any(userDTO.class))).thenReturn(user);
 
         mockMvc.perform(post("/user/cadastro")
                 .contentType("application/json")
