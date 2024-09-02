@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import ifsul.agileproject.rachadinha.domain.dto.RachaDetailsDTO;
@@ -17,7 +16,6 @@ import ifsul.agileproject.rachadinha.mapper.RachaMapper;
 import ifsul.agileproject.rachadinha.repository.PaymentRepository;
 import ifsul.agileproject.rachadinha.repository.RachaRepository;
 import ifsul.agileproject.rachadinha.repository.UserRepository;
-import ifsul.agileproject.rachadinha.service.UserService;
 import ifsul.agileproject.rachadinha.service.impl.RachaServiceImpl;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -61,7 +59,7 @@ public class RachaServiceImplTest {
     }
 
     @Test
-    public void testGetRachaOwner_Success() {
+    public void testGetRachaOwnerSucess() {
 
         Racha racha = mock(Racha.class);
         User owner = mock(User.class);
@@ -75,7 +73,7 @@ public class RachaServiceImplTest {
     }
 
     @Test
-    public void testSaveRacha_UserNotFound() {
+    public void testSaveRachaButUserNotFound() {
         RachaDetailsDTO rachaDTO = mock(RachaDetailsDTO.class);
         when(userRepository.existsById(1L)).thenReturn(false);
 
@@ -83,7 +81,7 @@ public class RachaServiceImplTest {
     }
 
     @Test
-    public void testSaveRacha_Success() {
+    public void testSaveRachaSuccess() {
         RachaDetailsDTO rachaDTO = mock(RachaDetailsDTO.class);
         User owner = mock(User.class);
         Racha racha = mock(Racha.class);
@@ -106,14 +104,14 @@ public class RachaServiceImplTest {
     }
 
     @Test
-    public void testFindRachaById_RachaNotFound() {
+    public void testFindRachaByIdButRachaNotFound() {
         when(rachaRepository.existsById(1L)).thenReturn(false);
 
         assertThrows(RachaNotFoundException.class, () -> rachaService.findRachaById(1L));
     }
 
     @Test
-    public void testFindRachaById_Success() {
+    public void testFindRachaByIdSuccess() {
         Racha racha = mock(Racha.class);
         when(rachaRepository.existsById(1L)).thenReturn(true);
         when(rachaRepository.findById(1L)).thenReturn(Optional.of(racha));
@@ -125,7 +123,7 @@ public class RachaServiceImplTest {
     }
 
     @Test
-    public void testDeleteRachaById_ForbiddenUser() {
+    public void testDeleteRachaByIdForbiddenUser() {
         Racha racha = mock(Racha.class);
         User owner = mock(User.class);
         when(rachaRepository.existsById(1L)).thenReturn(true);
@@ -138,7 +136,7 @@ public class RachaServiceImplTest {
     }
 
     @Test
-    public void testDeleteRachaById_Success() {
+    public void testDeleteRachaByIdSuccess() {
         Racha racha = mock(Racha.class);
         User owner = mock(User.class);
         when(rachaRepository.existsById(1L)).thenReturn(true);
@@ -153,7 +151,7 @@ public class RachaServiceImplTest {
     }
 
     @Test
-    public void testAddMemberToRacha_UserAlreadyInRacha() {
+    public void testAddMemberToRachaUserAlreadyInRacha() {
         Racha racha = mock(Racha.class);
         User user = mock(User.class);
         Payment payment = mock(Payment.class);
@@ -168,7 +166,7 @@ public class RachaServiceImplTest {
     }
 
     @Test
-    public void testAddMemberToRacha_Success() {
+    public void testAddMemberToRachaSuccess() {
         Racha racha = mock(Racha.class);
         User user = mock(User.class);
 
@@ -185,7 +183,7 @@ public class RachaServiceImplTest {
     }
 
     @Test
-    void testAddMemberToRacha_IncorrectPassword_ShouldThrowException() {
+    void testAddMemberToRachaIncorrectPasswordShouldThrowException() {
         Racha racha = mock(Racha.class);
         when(rachaRepository.findById(1L)).thenReturn(Optional.of(racha));
         when(userRepository.findById(1L)).thenReturn(Optional.of(mock(User.class)));

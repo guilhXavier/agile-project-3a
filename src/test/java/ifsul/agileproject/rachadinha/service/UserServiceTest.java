@@ -54,7 +54,7 @@ class UserServiceTest {
     }
 
     @Test
-    void saveUser_ShouldSaveUser_WhenEmailNotUsed() {
+    void saveUserShouldSaveUserWhenEmailNotUsed() {
         when(userRepository.existsByEmail(userDTO.getEmail())).thenReturn(false);
         when(userMapper.toEntity(userDTO)).thenReturn(user);
         when(userRepository.save(any(User.class))).thenReturn(user);
@@ -67,7 +67,7 @@ class UserServiceTest {
     }
 
     @Test
-    void saveUser_ShouldThrowException_WhenEmailAlreadyUsed() {
+    void saveUserShouldThrowExceptionWhenEmailAlreadyUsed() {
         when(userRepository.existsByEmail(userDTO.getEmail())).thenReturn(true);
 
         assertThrows(EmailAlreadyUsedException.class, () -> userService.saveUser(userDTO));
@@ -75,7 +75,7 @@ class UserServiceTest {
     }
 
     @Test
-    void findUserById_ShouldReturnUser_WhenUserExists() {
+    void findUserByIdShouldReturnUserWhenUserExists() {
         when(userRepository.existsById(user.getId())).thenReturn(true);
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
 
@@ -86,14 +86,14 @@ class UserServiceTest {
     }
 
     @Test
-    void findUserById_ShouldThrowException_WhenUserDoesNotExist() {
+    void findUserByIdShouldThrowExceptionWhenUserDoesNotExist() {
         when(userRepository.existsById(user.getId())).thenReturn(false);
 
         assertThrows(UserNotFoundException.class, () -> userService.findUserById(user.getId()));
     }
 
     @Test
-    void deleteUserById_ShouldDeleteUser_WhenUserExists() {
+    void deleteUserByIdShouldDeleteUserWhenUserExists() {
         when(userRepository.existsById(user.getId())).thenReturn(true);
 
         userService.deleteUserById(user.getId());
@@ -102,7 +102,7 @@ class UserServiceTest {
     }
 
     @Test
-    void deleteUserById_ShouldThrowException_WhenUserDoesNotExist() {
+    void deleteUserByIdShouldThrowExceptionWhenUserDoesNotExist() {
         when(userRepository.existsById(user.getId())).thenReturn(false);
 
         assertThrows(UserNotFoundException.class, () -> userService.deleteUserById(user.getId()));
@@ -110,7 +110,7 @@ class UserServiceTest {
     }
 
     @Test
-    void login_ShouldReturnUser_WhenCredentialsAreCorrect() {
+    void loginShouldReturnUserWhenCredentialsAreCorrect() {
         when(userRepository.existsByEmail(user.getEmail())).thenReturn(true);
         when(userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword())).thenReturn(user);
 
@@ -121,14 +121,14 @@ class UserServiceTest {
     }
 
     @Test
-    void login_ShouldThrowException_WhenEmailDoesNotExist() {
+    void loginShouldThrowExceptionWhenEmailDoesNotExist() {
         when(userRepository.existsByEmail(user.getEmail())).thenReturn(false);
 
         assertThrows(UserNotFoundException.class, () -> userService.login(user.getEmail(), user.getPassword()));
     }
 
     @Test
-    void login_ShouldThrowException_WhenPasswordIsIncorrect() {
+    void loginShouldThrowExceptionWhenPasswordIsIncorrect() {
         when(userRepository.existsByEmail(user.getEmail())).thenReturn(true);
         when(userRepository.findByEmailAndPassword(user.getEmail(), "wrong pass")).thenReturn(null);
 
@@ -136,7 +136,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUser_ShouldUpdateUser_WhenUserExists() {
+    void updateUserShouldUpdateUserWhenUserExists() {
         when(userRepository.findByEmail(userDTO.getEmail())).thenReturn(Optional.of(user));
         when(userRepository.save(any(User.class))).thenReturn(user);
 
@@ -148,7 +148,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUser_ShouldThrowException_WhenUserDoesNotExist() {
+    void updateUserShouldThrowExceptionWhenUserDoesNotExist() {
         when(userRepository.findByEmail(userDTO.getEmail())).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundException.class, () -> userService.updateUser(userDTO));
@@ -156,7 +156,7 @@ class UserServiceTest {
     }
 
     @Test
-    void resetPassword_ShouldUpdatePassword_WhenOriginalPasswordIsCorrect() {
+    void resetPasswordShouldUpdatePasswordWhenOriginalPasswordIsCorrect() {
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
         when(userRepository.save(any(User.class))).thenReturn(user);
 
@@ -168,7 +168,7 @@ class UserServiceTest {
     }
 
     @Test
-    void resetPassword_ShouldThrowException_WhenOriginalPasswordIsIncorrect() {
+    void resetPasswordShouldThrowExceptionWhenOriginalPasswordIsIncorrect() {
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
 
         assertThrows(IncorrectUserPasswordException.class,
@@ -177,7 +177,7 @@ class UserServiceTest {
     }
 
     @Test
-    void resetPassword_ShouldThrowException_WhenUserDoesNotExist() {
+    void resetPasswordShouldThrowExceptionWhenUserDoesNotExist() {
         when(userRepository.findById(user.getId())).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundException.class,
@@ -185,7 +185,7 @@ class UserServiceTest {
     }
 
     @Test
-    void findAllUsers_ShouldReturnAllUsers() {
+    void findAllUsersShouldReturnAllUsers() {
         User anotherUser = new User();
         anotherUser.setId(2L);
         anotherUser.setName("Test2");
@@ -202,7 +202,7 @@ class UserServiceTest {
     }
 
     @Test
-    void findUserByEmail_ShouldReturnUser_WhenEmailExists() {
+    void findUserByEmailShouldReturnUserWhenEmailExists() {
         when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
 
         Optional<User> foundUser = userService.findUserByEmail(user.getEmail());
@@ -212,7 +212,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUser_ShouldUpdateUser_WhenUserExistsAndLoggedUserIsOwner() {
+    void updateUserShouldUpdateUserWhenUserExistsAndLoggedUserIsOwner() {
         Long loggedUserId = 1L;
 
         User existingUser = new User();
@@ -237,7 +237,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUser_ShouldThrowUserNotFoundException_WhenUserDoesNotExist() {
+    void updateUserShouldThrowUserNotFoundExceptionWhenUserDoesNotExist() {
         Long loggedUserId = 1L;
 
         UserDetailsDTO userDTO = new UserDetailsDTO();
@@ -251,7 +251,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUser_ShouldThrowForbiddenUserException_WhenLoggedUserIsNotOwner() {
+    void updateUserShouldThrowForbiddenUserExceptionWhenLoggedUserIsNotOwner() {
 
         Long loggedUserId = 1L;
 
