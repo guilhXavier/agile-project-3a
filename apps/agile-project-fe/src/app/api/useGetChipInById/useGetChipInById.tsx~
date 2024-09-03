@@ -1,0 +1,10 @@
+import { useQuery } from "@tanstack/react-query"
+import { baseAxios } from ".."
+
+export const useGetChipInById = (id: string) => {
+
+  const x = useQuery({
+    queryKey: ['chipIn', id],
+    queryFn: () => baseAxios.get(`/chip-ins/${id}`)
+  })
+}
