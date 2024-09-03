@@ -1,97 +1,52 @@
-# Rachadinha
+<div align="center">
+<img src="resources/logomarca.png" alt="Logo do projeto" width="360px"></div>
 
-<!-- ![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge) -->
-![GitHub language count](https://img.shields.io/github/languages/count/guilhXavier/agile-project-3a?style=for-the-badge)
+Rachadinha is a project that aims to facilitate the division of bills among friends, family, and colleagues. The application allows users to create groups and add expenses, which are automatically divided among the group members.
 
-<img src="imagem-if.png" alt="Exemplo imagem">
+> Rachadinha é um projeto que visa facilitar a divisão de contas entre amigos, familiares e colegas de trabalho. A aplicação permite que os usuários criem grupos e adicionem despesas, que são automaticamente divididas entre os membros do grupo.
 
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
+![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template)
+![GitHub language count](https://img.shields.io/github/languages/count/guilhXavier/agile-project-3a)
+![Concluded in September 2024](https://img.shields.io/badge/Concluded%20in-September%202024-blue)
+![PRs not accepted, sorry](https://img.shields.io/badge/PRs-not%20accepted%2C%20sorry-red)
+![Issue count](https://img.shields.io/github/issues/guilhXavier/agile-project-3a)
+![Merged PR count](https://img.shields.io/github/issues-pr-closed/guilhXavier/agile-project-3a)
 
-### Ajustes e melhorias
+## Contributors
 
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+We are a team of students from IFSul Sapucaia do Sul who developed this project as part of the discipline of Computer Systems Project. The team members are:
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+> Somos uma equipe de estudantes do IFSul Sapucaia do Sul que desenvolveu este projeto como parte da disciplina de Projeto de Sistemas Computacionais. Os membros da equipe são:
 
-## 💻 Pré-requisitos
+## Implementation
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
+The project is implemented in Java, using the Spring Boot framework. The frontend is developed in TypeScript, using the Angular framework.
 
-- Você instalou a versão mais recente de `<linguagem / dependência / requeridos>`
-- Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
-- Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
+> O projeto é implementado em Java, utilizando o framework Spring Boot. O frontend é desenvolvido em TypeScript, utilizando o framework Angular.
 
-## 🚀 Instalando Rachadinha
+## Installation
 
-Para instalar o Rachadinha, siga estas etapas:
+To install the project, you need to have Java and Node.js installed on your machine. Then, clone the repository. You can run the backend running the file `RachadinhaApplication.java` and the frontend 
 
-Linux e macOS:
+> Para instalar o projeto, você precisa ter o Java e o Node.js instalados em sua máquina. Em seguida, clone o repositório. Você pode executar o backend executando o arquivo `RachadinhaApplication.java` e o frontend
 
-```
-<comando_de_instalação>
-```
+## Testing
 
-Windows:
+To test the project, you can run the tests in the `src/test` directory. The tests are implemented using JUnit and Jasmine. You can interact with the API using Swagger, which is available at `http://localhost:8080/swagger-ui.html`.
 
-```
-<comando_de_instalação>
-```
+> Para testar o projeto, você pode executar os testes no diretório `src/test`. Os testes são implementados usando JUnit e Jasmine. Você pode interagir com a API usando o Swagger, que está disponível em `http://localhost:8080/swagger-ui.html`.
 
-## ☕ Usando o Rachadinha
+## Usage
 
-Para usar Rachadinha, siga estas etapas:
+After running the backend and frontend, you can access the application at `http://localhost:4200`. You can create groups, add expenses, and see the expenses divided among the group members.
 
-```
-<exemplo_de_uso>
-```
+> Após executar o backend e o frontend, você pode acessar a aplicação em `http://localhost:4200`. Você pode criar grupos, adicionar despesas e ver as despesas divididas entre os membros do grupo.
 
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
+<div align="center">
+<img src="resources\rachadinha web - loginPage.png" alt="Login page" width="520px"></div>
 
-## 📫 Contribuindo para o Rachadinha
+## License
 
-Para contribuir com Rachadinha, siga estas etapas:
+The license is still under discussion. For now, the project is not open source.
 
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin rachadinha / <local>`
-5. Crie a solicitação de pull.
-
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
-
-## 🤝 Colaboradores
-
-Agradecemos às seguintes pessoas que contribuíram para este projeto:
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="#" title="defina o titulo do link">
-        <img src="https://s2.glbimg.com/FUcw2usZfSTL6yCCGj3L3v3SpJ8=/smart/e.glbimg.com/og/ed/f/original/2019/04/25/zuckerberg_podcast.jpg" width="100px;" alt="Foto do Mark Zuckerberg"/><br>
-        <sub>
-          <b>Mark Zuckerberg</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="#" title="defina o titulo do link">
-        <img src="https://miro.medium.com/max/360/0*1SkS3mSorArvY9kS.jpg" width="100px;" alt="Foto do Steve Jobs"/><br>
-        <sub>
-          <b>Steve Jobs</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
-
-## 😄 Seja um dos contribuidores
-
-Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
-
-## 📝 Licença
-
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+> A licença ainda está em discussão. Por enquanto, o projeto não é de código aberto.
