@@ -19,7 +19,7 @@ export const Detail: React.FC = () => {
     <Card key={member.userId}>
       <div>{member.userName}</div>
       {member.isOwner && 'Dono'}
-      {member.isPaid ? 'Pago' : 'Não pago'}
+      {member.userSaidPaid ? 'Pago' : 'Não pago'}
     </Card>
   );
 

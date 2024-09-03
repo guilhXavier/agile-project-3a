@@ -16,7 +16,7 @@ export interface Member {
   userName: string;
   email: string;
   balance: number;
-  isPaid: boolean;
+  userSaidPaid: boolean;
   isConfirmedByOwner: boolean;
   isOwner: boolean;
 }
