@@ -4,15 +4,24 @@ export interface ChipIn {
   description: string;
   goal: number;
   balance: number;
-  status: string;
+  portionPerMember: number;
+  status: Status;
   createdAt: string;
   inviteLink: string;
-  owner: {
-    id: number;
-    name: string;
-    email: string;
-  };
+  members: Array<Member>;
 }
+
+export interface Member {
+  userId: string;
+  userName: string;
+  email: string;
+  balance: number;
+  isPaid: boolean;
+  isConfirmedByOwner: boolean;
+  isOwner: boolean;
+}
+
+export type Status = 'OPEN' | 'CLOSED' | 'FINISHED';
 
 export interface User {
   id: string;

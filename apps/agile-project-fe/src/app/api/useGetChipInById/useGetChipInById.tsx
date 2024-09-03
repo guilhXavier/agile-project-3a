@@ -16,7 +16,7 @@ export const useGetChipInById = (id: string): UseGetChipInReturn => {
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ['chipIn', id],
     queryFn: (): Promise<AxiosResponse<ChipIn>> =>
-      baseAxios.get(`/chip-ins/${id}`, {
+      baseAxios.get(`/racha/${id}`, {
         headers: { 'rachadinha-login-token': token },
       }),
     enabled: !!id,
