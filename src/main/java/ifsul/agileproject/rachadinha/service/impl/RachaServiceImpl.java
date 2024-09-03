@@ -77,6 +77,21 @@ public class RachaServiceImpl implements RachaService {
     return rachaRepository.findById(id);
   }
 
+  @Override
+  public Racha getRachaPage(Long idRacha, Long userId) {
+    if (!rachaRepository.existsById(idRacha)) {
+      throw new RachaNotFoundException(idRacha);
+    }
+    if (!userRepository.existsById(userId)) {
+      throw new UserNotFoundException(userId);
+    }
+    Racha racha = rachaRepository.findById(idRacha).get();
+    if (racha.getMembers().stream().noneMatch(payment -> payment.getUser().getId() == userId)) {
+      throw new UserNotInRachaException(userId, idRacha);
+    }
+    return racha;
+  }
+
   public List<Racha> findAll() {
     return rachaRepository.findAll();
   }
@@ -171,10 +186,12 @@ public class RachaServiceImpl implements RachaService {
         .racha(racha)
         .user(user)
         .userSaidPaid(false)
-        .confirmedByOwner(true)
+        .confirmedByOwner(false)
         .isOwner(false)
         .build();
     paymentRepository.save(payment);
+
+    updateBalanceAndPortion(racha);
   }
 
   @Override
@@ -217,6 +234,8 @@ public class RachaServiceImpl implements RachaService {
     }
     payment.setUserSaidPaid(true);
     paymentRepository.save(payment);
+
+    updateBalanceAndPortion(racha);
   }
 
   @Override
@@ -233,7 +252,7 @@ public class RachaServiceImpl implements RachaService {
     payment.setConfirmedByOwner(true);
     paymentRepository.save(payment);
 
-    if (racha.getMembers().stream().allMatch(Payment::isUserSaidPaid)) {
+    if (racha.getBalance() >= racha.getGoal()) {
       racha.setStatus(Status.FINISHED);
       rachaRepository.save(racha);
     }
@@ -245,5 +264,30 @@ public class RachaServiceImpl implements RachaService {
       throw new ForbiddenUserException(loggedUserId);
     }
     confirmedByOwner(rachaId, userId);
+  }
+
+  @Override
+  public void updateBalanceAndPortion(Racha racha) {
+    int totalMembros = racha.getMembers().size();
+    double portionPerMember = racha.getGoal() / totalMembros;
+    racha.setPortionPerMember(portionPerMember);
+
+    long totalPagamentos = racha.getMembers().stream()
+      .filter(Payment::isConfirmedByOwner)
+      .count();
+    double balanceAtualizado = totalPagamentos * portionPerMember;
+    racha.setBalance(balanceAtualizado);
+
+    rachaRepository.save(racha);
+  }
+
+  @Override
+  public void closeRacha(long idRacha, Long userId) {
+    Racha racha = rachaRepository.findById(idRacha).get();
+    if (racha.getOwner().getId() != userId) {
+      throw new ForbiddenUserException(userId);
+    }
+    racha.setStatus(Status.CLOSED);
+    rachaRepository.save(racha);
   }
 }

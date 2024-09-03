@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFindChipInsByOwnerId } from '../../api/useFindChipInsByOwnerId/useFindChipInsByOwnerId';
 import { useStore } from '../../store';
 import { ChipIn } from '../../types';
@@ -9,6 +10,8 @@ import { StyledListing } from './listing.styled';
 export const Listing: React.FC = () => {
   const userId = useStore((state) => state.user?.id);
 
+  const navigate = useNavigate();
+
   const { data, isLoading, isSuccess } = useFindChipInsByOwnerId(userId || '1');
 
   return (
@@ -18,11 +21,17 @@ export const Listing: React.FC = () => {
       {isLoading && <p>Loading...</p>}
       {isSuccess &&
         data?.data?.map((chipIn: ChipIn) => (
-          <Card key={chipIn.id}>
+          <Card
+            key={chipIn.id}
+            onClick={(): void => {
+              navigate(`/detail/${chipIn.id}`);
+            }}
+          >
             <h2>{chipIn.name}</h2>
             <p>{chipIn.description}</p>
             <p>{chipIn.goal}</p>
             <p>{chipIn.balance}</p>
+            <p>{chipIn.inviteLink}</p>
           </Card>
         ))}
     </StyledListing>

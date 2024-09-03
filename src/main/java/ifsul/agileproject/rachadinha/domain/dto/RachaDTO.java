@@ -12,6 +12,8 @@ public class RachaDTO {
 	private String name;
 	private String description;
 	private Double goal;
+  private Double balance;
+  private Double portionPerMember;
 	private Status status;
 	private Date created_at;
 	private String inviteLink;

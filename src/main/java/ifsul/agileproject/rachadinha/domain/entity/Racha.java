@@ -38,6 +38,9 @@ public class Racha {
   @Column(name = "balance")
   private Double balance;
 
+  @Column(name = "portion")
+  private Double portionPerMember;
+
   @OneToMany(mappedBy = "racha")
   private List<Payment> members;
 

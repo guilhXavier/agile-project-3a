@@ -17,6 +17,7 @@ public class RachaResponseDTO {
   private String name;
   private String description;
   private Double goal;
+  private Double portionPerMember;
   private Double balance;
   private OwnerDTO owner;
   private Status status;

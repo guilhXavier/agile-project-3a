@@ -1,6 +1,6 @@
 package ifsul.agileproject.rachadinha.controller;
 
-import ifsul.agileproject.rachadinha.domain.dto.UserDTO;
+import ifsul.agileproject.rachadinha.domain.dto.UserDetailsDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserLoginDTO;
 import ifsul.agileproject.rachadinha.domain.dto.UserResponseDTO;
 import ifsul.agileproject.rachadinha.domain.entity.User;
@@ -48,9 +48,9 @@ public class UserControllerTest {
     public void testGetUserByID() {
         User user = new User();
         user.setId((long) 55);
-        user.setName("DiegoTeste");
-        user.setEmail("DiegoTeste");
-        user.setPassword("DiegoTeste");
+        user.setName("Test");
+        user.setEmail("Test");
+        user.setPassword("Test");
         user.setRachas(new ArrayList<>());
 
         when(userService.findUserById(anyLong())).thenReturn(Optional.of(user));
@@ -58,8 +58,8 @@ public class UserControllerTest {
         ResponseEntity<UserResponseDTO> response = userController.getUserByID((long) 55);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("DiegoTeste", response.getBody().getName());
-        assertEquals("DiegoTeste", response.getBody().getEmail());
+        assertEquals("Test", response.getBody().getName());
+        assertEquals("Test", response.getBody().getEmail());
     }
 
     @Test
@@ -79,22 +79,22 @@ public class UserControllerTest {
 
     @Test
     public void testSaveUser() throws Exception {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setName("Diego");
-        userDTO.setEmail("Diego@Diego");
-        userDTO.setPassword("123");
+        UserDetailsDTO userDTO = new UserDetailsDTO();
+        userDTO.setName("Test");
+        userDTO.setEmail("Test");
+        userDTO.setPassword("pass");
 
-        User user = new User(1L, "Diego", "Diego@Diego", "123", null, null);
-        when(userService.saveUser(any(UserDTO.class))).thenReturn(user);
+        User user = new User(1L, "Test", "Test", "pass", null);
+        when(userService.saveUser(any(userDTO.class))).thenReturn(user);
 
         mockMvc.perform(post("/user/cadastro")
                 .contentType("application/json")
-                .content("{ \"name\": \"Diego\", \"email\": \"Diego@Diego\", \"password\": \"123\" }"))
+                .content("{ \"name\": \"Diego\", \"email\": \"Test\", \"password\": \"pass\" }"))
                 .andExpect(status().isCreated());
 
         ResponseEntity<UserResponseDTO> response = userController.saveUser(userDTO);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("Diego", response.getBody().getName());
+        assertEquals("Test", response.getBody().getName());
     }
    
     
