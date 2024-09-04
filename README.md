@@ -4,20 +4,23 @@
 
 Rachadinha is a project that aims to facilitate the division of bills among friends, family, and colleagues. The application allows users to create groups and add expenses, which are automatically divided among the group members.
 
+"Racha" is a Brazilian slang term for "splitting the bill". It is a common practice in Brazil for friends to divide the bill when dining out or having drinks. "Rachadinha" is a diminutive form of "racha" and is not intended to remind you of any political scandals, as you may find when searching for the term on Google (😅).
+
 > Rachadinha é um projeto que visa facilitar a divisão de contas entre amigos, familiares e colegas de trabalho. A aplicação permite que os usuários criem grupos e adicionem despesas, que são automaticamente divididas entre os membros do grupo.
+
+> "Racha" é uma gíria brasileira para "dividir a conta". É uma prática comum no Brasil para amigos dividirem a conta ao sair para jantar ou tomar algo. "Rachadinha" é uma forma diminutiva de "racha" e não foi pensada para lembrar você de nenhum escândalo político, como aqueles que você pode encontrar ao pesquisar o termo no Google (😅).
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template)
 ![GitHub language count](https://img.shields.io/github/languages/count/guilhXavier/agile-project-3a)
-![Concluded in September 2024](https://img.shields.io/badge/Concluded%20in-September%202024-blue)
 ![PRs not accepted, sorry](https://img.shields.io/badge/PRs-not%20accepted%2C%20sorry-red)
 ![Issue count](https://img.shields.io/github/issues/guilhXavier/agile-project-3a)
 ![Merged PR count](https://img.shields.io/github/issues-pr-closed/guilhXavier/agile-project-3a)
 
 ## Contributors
 
-We are a team of students from IFSul Sapucaia do Sul who developed this project as part of the discipline of Computer Systems Project. The team members are:
+We are a team of students from IFSul Sapucaia do Sul who developed this project as part of the discipline of Computer Systems Project. We used [Scrum](https://www.scrum.org/resources/what-scrum-module) as our project management methodology during the discipline - that ended in September 2024 - and how we'll develop in the future is yet to be discussed. These are the team members:
 
-> Somos uma equipe de estudantes do IFSul Sapucaia do Sul que desenvolveu este projeto como parte da disciplina de Projeto de Sistemas Computacionais. Os membros da equipe são:
+> Somos uma equipe de estudantes do IFSul Sapucaia do Sul que desenvolveu este projeto como parte da disciplina de Projeto de Sistemas Computacionais. Utilizamos o [Scrum](https://www.scrum.org/resources/what-scrum-module) como metodologia de gerenciamento de projetos durante a disciplina - que terminou em setembro de 2024 - e como desenvolveremos no futuro ainda está para ser discutido. Estes são os membros da equipe:
 
 <div align="center">
     <img src="resources/team-members.png" alt="Membros da equipe" width="720px">
@@ -38,6 +41,10 @@ We are a team of students from IFSul Sapucaia do Sul who developed this project 
     * Matheus Moraes [(LinkedIn)](https://www.linkedin.com/in/matheusde-moraes/)
     * Michele Oliveira [(LinkedIn)](https://www.linkedin.com/in/michelle-g-oliveira/)
     * Nicoly Ribeiro [(LinkedIn)](https://www.linkedin.com/in/nicoly-ribeiro04/)
+
+We were guided by the amazing professor Rodrigo Remor Oliveira, and you should follow him on [LinkedIn](https://www.linkedin.com/in/rodrigoremor/) as he posts about his projects and research.
+
+> Fomos guiados pelo incrível professor Rodrigo Remor Oliveira, e você deveria segui-lo no [LinkedIn](https://www.linkedin.com/in/rodrigoremor/) pois ele posta sobre seus projetos e pesquisas.
     
 ## Implementation
 
