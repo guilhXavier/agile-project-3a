@@ -2,6 +2,10 @@
     <img src="resources/logomarca.png" alt="Logo do projeto" width="360px">
 </div>
 
+Essa linha foi adicionada como parte do projeto de extensão
+
+Mais alguma coisa
+
 Rachadinha is a project that aims to facilitate the division of bills among friends, family, and colleagues. The application allows users to create groups and add expenses, which are automatically divided among the group members.
 
 "Racha" is a Brazilian slang term for "splitting the bill". It is a common practice in Brazil for friends to divide the bill when dining out or having drinks. "Rachadinha" is a diminutive form of "racha" and is not intended to remind you of any political scandals, as you may find when searching for the term on Google (😅).
@@ -45,7 +49,7 @@ We are a team of students from IFSul Sapucaia do Sul who developed this project 
 We were guided by the amazing professor Rodrigo Remor Oliveira, and you should follow him on [LinkedIn](https://www.linkedin.com/in/rodrigoremor/) as he posts about his projects and research.
 
 > Fomos guiados pelo incrível professor Rodrigo Remor Oliveira, e você deveria segui-lo no [LinkedIn](https://www.linkedin.com/in/rodrigoremor/) pois ele posta sobre seus projetos e pesquisas.
-    
+
 ## Implementation
 
 The project is implemented in Java, using the Spring Boot framework. The frontend is developed in TypeScript e React.
